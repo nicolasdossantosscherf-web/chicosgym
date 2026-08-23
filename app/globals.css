@@ -1,26 +1,211 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-ink: #0a0a0a;
+  --color-carbon: #141414;
+  --color-carbon-2: #1c1c1c;
+  --color-line: rgba(237, 237, 237, 0.09);
+  --color-orange: #f26522;
+  --color-orange-2: #ff8a4d;
+  --color-gold: #f5a623;
+  --color-offwhite: #ededed;
+  --color-turf: #1e2b22;
+  --font-display: "Bebas Neue", "Arial Narrow", sans-serif;
+  --font-body: "Inter", "Helvetica Neue", Arial, sans-serif;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-ink: var(--color-ink);
+  --color-carbon: var(--color-carbon);
+  --color-carbon-2: var(--color-carbon-2);
+  --color-line: var(--color-line);
+  --color-orange: var(--color-orange);
+  --color-orange-2: var(--color-orange-2);
+  --color-gold: var(--color-gold);
+  --color-offwhite: var(--color-offwhite);
+  --color-turf: var(--color-turf);
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: auto;
+  background: var(--color-ink);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-ink);
+  color: var(--color-offwhite);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--color-orange);
+  color: var(--color-ink);
+}
+
+@media (pointer: fine) {
+  .has-custom-cursor,
+  .has-custom-cursor a,
+  .has-custom-cursor button {
+    cursor: none;
+  }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-ink);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-carbon-2);
+  border: 2px solid var(--color-ink);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-orange);
+}
+
+/* ---------------------------------------------------------------------- */
+/* Grão cinematográfico + textura de concreto sutil                       */
+/* ---------------------------------------------------------------------- */
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+}
+
+/* ---------------------------------------------------------------------- */
+/* Motivo "losango de luz" — usado em divisores e no herói                */
+/* ---------------------------------------------------------------------- */
+.diamond {
+  width: 0.5rem;
+  height: 0.5rem;
+  flex: none;
+  transform: rotate(45deg);
+  background: var(--color-orange);
+  box-shadow: 0 0 12px 1px var(--color-orange);
+}
+
+.diamond-lg {
+  width: 1.1rem;
+  height: 1.1rem;
+  flex: none;
+  transform: rotate(45deg);
+  background: var(--color-orange);
+  box-shadow: 0 0 18px 2px var(--color-orange);
+}
+
+.diamond-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2.5rem;
+}
+
+.hairline {
+  border-color: var(--color-line);
+}
+
+.text-gradient-ember {
+  background: linear-gradient(90deg, var(--color-gold), var(--color-orange) 60%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.surface-carbon {
+  background: var(--color-carbon);
+  border: 1px solid var(--color-line);
+}
+
+/* Tratamento de cor unificado para as fotos reais — aproxima o grading
+   cinematográfico descrito no projeto (mais contraste, leve dessaturação,
+   puxando pro laranja/dourado da marca) sem precisar editar cada arquivo. */
+.photo-grade {
+  filter: saturate(0.88) contrast(1.12) brightness(0.97) sepia(0.06) hue-rotate(-6deg);
+}
+
+/* Variante usada na Equipe: preto-e-branco em repouso, cor (com o mesmo
+   grading) no hover do card. Combinada à mão porque o filter shorthand não
+   compõe com a utility "grayscale" do Tailwind quando usados juntos. */
+.photo-grade-mono {
+  filter: grayscale(1) saturate(0.88) contrast(1.12) brightness(0.97) sepia(0.06) hue-rotate(-6deg);
+  transition: filter 0.5s ease;
+}
+.group:hover .photo-grade-mono {
+  filter: saturate(0.88) contrast(1.12) brightness(0.97) sepia(0.06) hue-rotate(-6deg);
+}
+
+/* Placeholder fotográfico — usado enquanto as fotos reais não chegam */
+.photo-placeholder {
+  position: relative;
+  background:
+    radial-gradient(120% 140% at 15% 0%, rgba(242, 101, 34, 0.28), transparent 55%),
+    radial-gradient(120% 140% at 100% 100%, rgba(245, 166, 35, 0.18), transparent 50%),
+    linear-gradient(155deg, #1a1a1a 0%, #0c0c0c 70%);
+  overflow: hidden;
+}
+
+.photo-placeholder::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    135deg,
+    rgba(237, 237, 237, 0.05) 0px,
+    rgba(237, 237, 237, 0.05) 1px,
+    transparent 1px,
+    transparent 14px
+  );
+  opacity: 0.5;
+}
+
+.reveal-up {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal-up.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-up {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+@keyframes hero-zoom {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.12);
+  }
+}
+
+.animate-hero-zoom {
+  animation: hero-zoom 22s ease-out forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-hero-zoom {
+    animation: none;
+  }
 }
