@@ -6,7 +6,7 @@
 export const brand = {
   name: "Chico's Gym",
   founded: 2022,
-  tagline: "Treine na escuridão. Evolua na luz.",
+  tagline: "Disciplina que constrói. Resultado que transforma.",
   // Frase real da placa de horários na entrada da academia.
   motto: "Disciplina não tem horário, a Chico's Gym também não.",
   logo: "/images/brand/logo.jpg",
@@ -46,6 +46,12 @@ export const sitePages: SitePage[] = [
     image: "/images/tour/piso-treino.jpg",
   },
   {
+    href: "/maquinas",
+    label: "Máquinas",
+    description: "Catálogo de equipamentos por grupo muscular, com dicas de uso.",
+    icon: "LayoutGrid",
+  },
+  {
     href: "/historia",
     label: "Nossa História",
     description: "De galpão abandonado a referência da região, ano a ano.",
@@ -62,6 +68,12 @@ export const sitePages: SitePage[] = [
     label: "Modalidades",
     description: "Musculação, funcional, spinning, cardio e mais.",
     icon: "Dumbbell",
+  },
+  {
+    href: "/treino",
+    label: "Monte seu Treino",
+    description: "Responda 3 perguntas e receba uma sugestão de treino na hora.",
+    icon: "Wand2",
   },
   {
     href: "/planos",
@@ -310,4 +322,121 @@ export const testimonials: Testimonial[] = [
     since: "aluno desde 2022",
     quote: "Acompanho a Chico's Gym desde o primeiro mês aberta. O crescimento da estrutura é visível.",
   },
+]
+
+export type Machine = {
+  id: string
+  name: string
+  category: "Superior" | "Inferior" | "Core" | "Cardio" | "Peso Livre"
+  muscle: string
+  tip: string
+  image?: string
+}
+
+export const machineCategories = ["Superior", "Inferior", "Core", "Cardio", "Peso Livre"] as const
+
+// Catálogo de equipamentos — nomes e descrições genéricas de um parque de
+// musculação padrão. Ainda sem foto real de cada máquina da Chico's Gym.
+export const machines: Machine[] = [
+  { id: "supino-maquina", name: "Supino Máquina", category: "Superior", muscle: "Peitoral", tip: "Mantenha os ombros para trás e desça até a altura do peito, sem travar o cotovelo no topo." },
+  { id: "puxada-alta", name: "Puxada Alta (Pulley)", category: "Superior", muscle: "Costas", tip: "Puxe levando os cotovelos para baixo e para trás, sem balançar o tronco." },
+  { id: "desenvolvimento-ombros", name: "Desenvolvimento de Ombros", category: "Superior", muscle: "Ombros", tip: "Empurre o peso sem hiperestender a lombar; controle a descida." },
+  { id: "remada-baixa", name: "Remada Baixa", category: "Superior", muscle: "Costas", tip: "Coluna neutra, puxando o cabo até o abdômen e apertando as escápulas." },
+  { id: "rosca-biceps", name: "Rosca Direta", category: "Superior", muscle: "Bíceps", tip: "Evite balançar o corpo — o movimento deve vir só do cotovelo." },
+  { id: "triceps-pulley", name: "Tríceps Pulley", category: "Superior", muscle: "Tríceps", tip: "Cotovelos fixos ao lado do corpo durante toda a extensão." },
+  { id: "leg-press", name: "Leg Press 45°", category: "Inferior", muscle: "Quadríceps e Glúteos", tip: "Não trave os joelhos no topo; pés na largura dos ombros." },
+  { id: "cadeira-extensora", name: "Cadeira Extensora", category: "Inferior", muscle: "Quadríceps", tip: "Suba controlado e pause um instante no topo antes de descer." },
+  { id: "mesa-flexora", name: "Mesa Flexora", category: "Inferior", muscle: "Posterior de Coxa", tip: "Evite elevar o quadril do banco durante a flexão." },
+  { id: "cadeira-abdutora", name: "Cadeira Abdutora", category: "Inferior", muscle: "Glúteos", tip: "Movimento controlado, sem usar impulso do tronco." },
+  { id: "panturrilha-em-pe", name: "Panturrilha em Pé", category: "Inferior", muscle: "Panturrilha", tip: "Amplitude completa: alongue bem embaixo e suba até a ponta do pé." },
+  { id: "banco-abdominal", name: "Banco Abdominal", category: "Core", muscle: "Abdômen", tip: "O movimento vem do tronco, não do pescoço." },
+  { id: "mesa-lombar", name: "Mesa Lombar", category: "Core", muscle: "Lombar", tip: "Suba até alinhar a coluna, sem hiperestender além da linha reta." },
+  { id: "esteira", name: "Esteira", category: "Cardio", muscle: "Cardiovascular", tip: "Comece com 3-5 min de caminhada leve antes de acelerar o ritmo." },
+  { id: "bike-ergometrica", name: "Bike Ergométrica", category: "Cardio", muscle: "Cardiovascular", tip: "Ajuste o banco na altura do quadril para não sobrecarregar o joelho." },
+  { id: "eliptico", name: "Elíptico", category: "Cardio", muscle: "Cardiovascular", tip: "Postura ereta, apoiando pouco peso nos braços." },
+  { id: "barra-livre", name: "Barra Olímpica", category: "Peso Livre", muscle: "Corpo todo", tip: "Em agachamento e levantamento terra, mantenha a coluna neutra do início ao fim." },
+  { id: "halteres", name: "Halteres", category: "Peso Livre", muscle: "Corpo todo", tip: "Escolha uma carga em que as últimas repetições fiquem desafiadoras, mas com boa execução." },
+]
+
+export type MuscleGroup = "peito" | "costas" | "pernas" | "ombros" | "bracos" | "core" | "cardio"
+
+export type WorkoutExercise = { name: string; group: MuscleGroup }
+
+// Banco de exercícios usado pelo gerador de "Monte seu Treino" — a lógica de
+// montagem do treino fica em components/workout-builder.tsx.
+export const exercisePool: WorkoutExercise[] = [
+  { name: "Supino reto", group: "peito" },
+  { name: "Supino inclinado", group: "peito" },
+  { name: "Crucifixo", group: "peito" },
+  { name: "Puxada alta", group: "costas" },
+  { name: "Remada baixa", group: "costas" },
+  { name: "Remada curvada", group: "costas" },
+  { name: "Agachamento", group: "pernas" },
+  { name: "Leg press", group: "pernas" },
+  { name: "Cadeira extensora", group: "pernas" },
+  { name: "Mesa flexora", group: "pernas" },
+  { name: "Panturrilha em pé", group: "pernas" },
+  { name: "Desenvolvimento de ombros", group: "ombros" },
+  { name: "Elevação lateral", group: "ombros" },
+  { name: "Rosca direta", group: "bracos" },
+  { name: "Tríceps pulley", group: "bracos" },
+  { name: "Prancha", group: "core" },
+  { name: "Abdominal supra", group: "core" },
+  { name: "Esteira ou bike", group: "cardio" },
+]
+
+export type FaqItem = { question: string; answer: string }
+
+export const faqs: FaqItem[] = [
+  {
+    question: "Preciso pagar taxa de adesão?",
+    answer: "Depende do plano escolhido — confira as condições na página de Planos ou fale com a recepção antes de matricular.",
+  },
+  {
+    question: "Os planos têm fidelidade?",
+    answer:
+      "O plano mensal não tem fidelidade. Trimestral, semestral e anual seguem o período do próprio contrato, com condições de cancelamento previstas nele.",
+  },
+  {
+    question: "Posso congelar minha matrícula?",
+    answer: "Sim — cada plano inclui um número de dias de congelamento (veja em Planos). Dias extras podem ser negociados na recepção.",
+  },
+  {
+    question: "O que levar no primeiro dia?",
+    answer: "Roupa de treino, tênis fechado, garrafa de água e uma toalha. Chegue 15 minutos antes para fazer seu cadastro.",
+  },
+  {
+    question: "Tem horário de pico?",
+    answer: "Geralmente entre 18h e 20h. Se prefere mais espaço, manhã e início de tarde costumam ser mais tranquilos.",
+  },
+  {
+    question: "O personal trainer está incluso na mensalidade?",
+    answer: "A avaliação física inicial está inclusa em todos os planos. Acompanhamento contínuo com personal trainer é um serviço à parte — fale com a equipe.",
+  },
+]
+
+export type ScheduleSlot = { day: string; time: string; modality: string }
+
+// Grade de horários — ainda um modelo de referência, não a grade oficial da
+// Chico's Gym. Ajustar aqui assim que a academia confirmar os horários reais.
+export const classSchedule: ScheduleSlot[] = [
+  { day: "Segunda", time: "06h00", modality: "Spinning" },
+  { day: "Segunda", time: "19h00", modality: "Funcional" },
+  { day: "Terça", time: "07h00", modality: "Funcional" },
+  { day: "Terça", time: "18h30", modality: "Spinning" },
+  { day: "Quarta", time: "06h00", modality: "Spinning" },
+  { day: "Quarta", time: "19h00", modality: "Funcional" },
+  { day: "Quinta", time: "07h00", modality: "Funcional" },
+  { day: "Quinta", time: "18h30", modality: "Spinning" },
+  { day: "Sexta", time: "06h00", modality: "Spinning" },
+  { day: "Sábado", time: "09h30", modality: "Funcional" },
+]
+
+export type ResultItem = { id: string; caption: string; image?: string }
+
+export const results: ResultItem[] = [
+  { id: "r1", caption: "Transformações da nossa comunidade" },
+  { id: "r2", caption: "Resultado de quem treina sério" },
+  { id: "r3", caption: "Antes e depois dos nossos alunos" },
+  { id: "r4", caption: "Histórias reais, em breve aqui" },
 ]

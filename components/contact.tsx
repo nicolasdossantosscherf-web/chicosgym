@@ -7,6 +7,7 @@ import { brand } from "@/lib/data"
 import { SectionHeading } from "./section-heading"
 import { Reveal } from "./reveal"
 import { Magnetic } from "./magnetic"
+import { LocationMap } from "./location-map"
 
 export function Contact() {
   const [name, setName] = useState("")
@@ -107,6 +108,7 @@ export function Contact() {
                 </div>
               </div>
             </div>
+            <LocationMap />
           </Reveal>
         </div>
       </div>

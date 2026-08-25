@@ -21,7 +21,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Chico's Gym — Treine na escuridão. Evolua na luz.",
+  title: "Chico's Gym — Disciplina que constrói. Resultado que transforma.",
   description:
     "Chico's Gym: academia industrial com musculação, funcional, spinning e personal trainer. Agende seu treino experimental.",
 };

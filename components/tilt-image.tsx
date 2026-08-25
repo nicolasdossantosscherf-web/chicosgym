@@ -64,8 +64,19 @@ export function TiltImage({
           className={`object-cover ${desaturate ? "photo-grade-mono" : "photo-grade"}`}
         />
       ) : (
-        <div className="photo-placeholder absolute inset-0 flex items-end p-5">
-          {label && <span className="text-xs uppercase tracking-[0.2em] text-offwhite/50">{label}</span>}
+        <div className="photo-placeholder absolute inset-0 flex flex-col items-center justify-center gap-3 p-5">
+          <Image
+            src="/images/brand/logo.jpg"
+            alt="Chico's Gym"
+            width={200}
+            height={200}
+            className="h-16 w-16 rounded-full opacity-90 sm:h-20 sm:w-20"
+          />
+          {label && (
+            <span className="absolute bottom-5 left-5 text-xs uppercase tracking-[0.2em] text-offwhite/50">
+              {label}
+            </span>
+          )}
         </div>
       )}
       <div

@@ -64,14 +64,14 @@ export function Hero() {
           <SplitReveal
             as="h1"
             mode="char"
-            text="TREINE NA ESCURIDÃO."
+            text="DISCIPLINA CONSTRÓI."
             className="font-display text-[16vw] uppercase leading-[0.86] tracking-tight text-offwhite sm:text-[11vw] md:text-[7.2vw]"
           />
           <SplitReveal
             as="h1"
             mode="char"
             delay={260}
-            text="EVOLUA NA LUZ."
+            text="RESULTADO TRANSFORMA."
             className="font-display text-[16vw] uppercase leading-[0.86] tracking-tight text-gradient-ember sm:text-[11vw] md:text-[7.2vw]"
           />
 

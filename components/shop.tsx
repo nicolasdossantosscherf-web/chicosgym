@@ -1,4 +1,4 @@
-import { ShoppingBag } from "lucide-react"
+import Image from "next/image"
 import { products, brand } from "@/lib/data"
 import { SectionHeading } from "./section-heading"
 import { Reveal } from "./reveal"
@@ -24,7 +24,13 @@ export function Shop() {
                 className="group flex h-full flex-col overflow-hidden rounded-sm border border-line bg-ink"
               >
                 <div className="photo-placeholder relative flex aspect-square items-center justify-center">
-                  <ShoppingBag size={32} className="text-offwhite/25 transition-colors group-hover:text-orange" />
+                  <Image
+                    src="/images/brand/logo.jpg"
+                    alt="Chico's Gym"
+                    width={200}
+                    height={200}
+                    className="h-16 w-16 rounded-full opacity-90 transition-opacity group-hover:opacity-100"
+                  />
                 </div>
                 <div className="flex flex-1 flex-col gap-1 p-5">
                   <span className="text-[10px] uppercase tracking-[0.2em] text-offwhite/40">{product.category}</span>
