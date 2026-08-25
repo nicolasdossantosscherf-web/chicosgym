@@ -4,7 +4,7 @@ import { Faq } from "@/components/faq";
 
 export const metadata: Metadata = {
   title: "Contato — Chico's Gym",
-  description: "Endereço, horários de funcionamento e um jeito rápido de falar com a Chico's Gym.",
+  description: "Um jeito rápido de falar com a Chico's Gym e tirar suas dúvidas.",
 };
 
 export default function ContatoPage() {

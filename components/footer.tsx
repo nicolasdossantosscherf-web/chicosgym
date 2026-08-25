@@ -38,7 +38,7 @@ export function Footer() {
           <div>
             <h4 className="text-xs font-semibold uppercase tracking-[0.2em] text-offwhite/40">Navegação</h4>
             <ul className="mt-4 flex flex-col gap-2.5 text-sm text-offwhite/60">
-              {sitePages.slice(0, 4).map((link) => (
+              {sitePages.slice(0, 5).map((link) => (
                 <li key={link.href}>
                   <Link href={link.href} className="hover:text-orange">
                     {link.label}
@@ -51,7 +51,7 @@ export function Footer() {
           <div>
             <h4 className="text-xs font-semibold uppercase tracking-[0.2em] text-offwhite/40">Academia</h4>
             <ul className="mt-4 flex flex-col gap-2.5 text-sm text-offwhite/60">
-              {sitePages.slice(4).map((link) => (
+              {sitePages.slice(5).map((link) => (
                 <li key={link.href}>
                   <Link href={link.href} className="hover:text-orange">
                     {link.label}

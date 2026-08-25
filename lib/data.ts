@@ -6,7 +6,7 @@
 export const brand = {
   name: "Chico's Gym",
   founded: 2022,
-  tagline: "Disciplina que constrói. Resultado que transforma.",
+  tagline: "Onde disciplina vira resultado.",
   // Frase real da placa de horários na entrada da academia.
   motto: "Disciplina não tem horário, a Chico's Gym também não.",
   logo: "/images/brand/logo.jpg",
@@ -39,23 +39,17 @@ export type SitePage = {
 // de navegação da Home. Trocar aqui atualiza a navegação inteira.
 export const sitePages: SitePage[] = [
   {
+    href: "/historia",
+    label: "Nossa História",
+    description: "De galpão abandonado a referência da região, ano a ano.",
+    icon: "History",
+  },
+  {
     href: "/academia",
     label: "A Academia",
     description: "Conheça o espaço: piso de treino, cardio, musculação e spinning.",
     icon: "Building2",
     image: "/images/tour/piso-treino.jpg",
-  },
-  {
-    href: "/maquinas",
-    label: "Máquinas",
-    description: "Catálogo de equipamentos por grupo muscular, com dicas de uso.",
-    icon: "LayoutGrid",
-  },
-  {
-    href: "/historia",
-    label: "Nossa História",
-    description: "De galpão abandonado a referência da região, ano a ano.",
-    icon: "History",
   },
   {
     href: "/equipe",
@@ -70,16 +64,16 @@ export const sitePages: SitePage[] = [
     icon: "Dumbbell",
   },
   {
+    href: "/maquinas",
+    label: "Máquinas",
+    description: "Catálogo de equipamentos por grupo muscular, com dicas de uso.",
+    icon: "LayoutGrid",
+  },
+  {
     href: "/treino",
     label: "Monte seu Treino",
     description: "Responda 3 perguntas e receba uma sugestão de treino na hora.",
     icon: "Wand2",
-  },
-  {
-    href: "/planos",
-    label: "Planos",
-    description: "Compare os planos e veja quanto você economiza.",
-    icon: "Wallet",
   },
   {
     href: "/loja",
@@ -88,10 +82,22 @@ export const sitePages: SitePage[] = [
     icon: "ShoppingBag",
   },
   {
+    href: "/planos",
+    label: "Planos e Serviços",
+    description: "Compare os planos e veja quanto você economiza.",
+    icon: "Wallet",
+  },
+  {
+    href: "/local",
+    label: "Local e Horários",
+    description: "Endereço, mapa e horário de funcionamento da Chico's Gym.",
+    icon: "MapPin",
+  },
+  {
     href: "/contato",
     label: "Contato",
-    description: "Endereço, horários e um jeito rápido de falar com a gente.",
-    icon: "MapPin",
+    description: "Um jeito rápido de falar com a gente e tirar dúvidas.",
+    icon: "MessageCircle",
   },
 ]
 
