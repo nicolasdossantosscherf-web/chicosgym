@@ -1,6 +1,5 @@
 "use client"
 
-import dynamic from "next/dynamic"
 import Image from "next/image"
 import { useEffect, useRef } from "react"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
@@ -10,11 +9,9 @@ import { Magnetic } from "./magnetic"
 import { brand } from "@/lib/data"
 import { useReducedMotion } from "@/lib/use-reduced-motion"
 
-const HeroScene = dynamic(() => import("./hero-scene").then((m) => m.HeroScene), { ssr: false })
-
 export function Hero() {
   const sectionRef = useRef<HTMLDivElement>(null)
-  const scrollProgress = useRef(0)
+  const glowRef = useRef<HTMLDivElement>(null)
   const reduced = useReducedMotion()
 
   useEffect(() => {
@@ -27,7 +24,10 @@ export function Hero() {
       end: "bottom top",
       scrub: true,
       onUpdate: (self) => {
-        scrollProgress.current = self.progress
+        const glow = glowRef.current
+        if (!glow) return
+        glow.style.opacity = String(0.35 + self.progress * 0.5)
+        glow.style.transform = `translate(-50%, -50%) scale(${1 + self.progress * 0.7})`
       },
     })
     return () => {
@@ -48,11 +48,16 @@ export function Hero() {
             className="photo-grade animate-hero-zoom object-cover object-center"
           />
         </div>
-        <div className="absolute inset-0">
-          {!reduced ? (
-            <HeroScene scrollRef={scrollProgress} />
-          ) : null}
-        </div>
+
+        {!reduced && (
+          <div
+            ref={glowRef}
+            aria-hidden="true"
+            className="glow-ember pointer-events-none absolute left-1/2 top-1/2 h-[70vmax] w-[70vmax] -translate-x-1/2 -translate-y-1/2"
+            style={{ opacity: 0.35 }}
+          />
+        )}
+
         <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/40 to-ink/20" />
         <div className="absolute inset-0 bg-gradient-to-r from-ink/80 via-ink/20 to-transparent" />
 

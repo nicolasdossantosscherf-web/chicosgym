@@ -209,3 +209,28 @@ body {
     animation: none;
   }
 }
+
+/* Brilho ambiente do hero — luz laranja suave que respira sozinha e
+   intensifica levemente conforme o scroll (ver components/hero.tsx). */
+.glow-ember {
+  background: radial-gradient(
+    circle,
+    rgba(242, 101, 34, 0.55) 0%,
+    rgba(245, 166, 35, 0.28) 32%,
+    transparent 68%
+  );
+  filter: blur(48px);
+  animation: glow-drift 16s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+@keyframes glow-drift {
+  0%,
+  100% {
+    margin: 0;
+  }
+  50% {
+    margin-left: 4vw;
+    margin-top: -3vh;
+  }
+}
