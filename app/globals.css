@@ -1,5 +1,17 @@
 @import "tailwindcss";
 
+/* Reveal de texto por caractere para conteúdo já visível no primeiro
+   viewport (ex.: título do hero) — ver components/split-reveal.tsx
+   (prop "immediate"). Pura CSS, começa sozinha ao pintar o elemento. */
+@keyframes char-reveal {
+  from {
+    transform: translateY(110%);
+  }
+  to {
+    transform: translateY(0%);
+  }
+}
+
 :root {
   --color-ink: #0a0a0a;
   --color-carbon: #141414;
