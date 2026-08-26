@@ -3,7 +3,6 @@
 import Image from "next/image"
 import Link from "next/link"
 import { ArrowDown } from "lucide-react"
-import { SplitReveal } from "./split-reveal"
 import { Magnetic } from "./magnetic"
 import { brand } from "@/lib/data"
 import { useReducedMotion } from "@/lib/use-reduced-motion"
@@ -39,21 +38,11 @@ export function Hero() {
           Academia · Est. {brand.founded}
         </span>
 
-        <SplitReveal
-          as="h1"
-          mode="char"
-          immediate
-          text="ONDE DISCIPLINA"
-          className="font-display text-[16vw] uppercase leading-[0.86] tracking-tight text-offwhite sm:text-[11vw] md:text-[7.2vw]"
-        />
-        <SplitReveal
-          as="h1"
-          mode="char"
-          immediate
-          delay={220}
-          text="VIRA RESULTADO."
-          className="font-display text-[16vw] uppercase leading-[0.86] tracking-tight text-gradient-ember sm:text-[11vw] md:text-[7.2vw]"
-        />
+        <h1 className="font-display text-[16vw] uppercase leading-[0.86] tracking-tight text-offwhite sm:text-[11vw] md:text-[7.2vw]">
+          ONDE DISCIPLINA
+          <br />
+          <span className="text-gradient-ember">VIRA RESULTADO.</span>
+        </h1>
 
         <p className="mt-6 max-w-md text-sm text-offwhite/60 md:text-base">
           Estrutura industrial, equipamentos completos e uma equipe pronta para te levar mais longe. Bem-vindo à
