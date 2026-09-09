@@ -10,10 +10,11 @@ export const brand = {
   // Frase real da placa de horários na entrada da academia.
   motto: "Disciplina não tem horário, a Chico's Gym também não.",
   logo: "/images/brand/logo.jpg",
-  whatsapp: "5555999990000", // placeholder — trocar pelo WhatsApp real
-  whatsappDisplay: "(55) 99999-0000",
-  email: "contato@chicosgym.com.br",
-  address: "Av. Placeholder, 000 — Três de Maio, RS", // trocar pelo endereço real
+  whatsapp: "5555999470965",
+  whatsappDisplay: "(55) 9 9947-0965",
+  email: "chicosgymtm@gmail.com",
+  // Endereço real, confirmado pela academia — "ao lado da Trapus" é o ponto de referência que eles mesmos usam.
+  address: "Rua Rio de Janeiro, 192, Centro, Três de Maio - RS, 98910-000 (ao lado da Trapus)",
   // Horários reais, tirados da placa fixada na entrada da academia.
   hours: [
     { label: "Segunda a sexta", value: "05h às 00h (sem fechar ao meio-dia)" },
@@ -21,9 +22,7 @@ export const brand = {
     { label: "Domingos", value: "16h-19h" },
   ],
   socials: [
-    { label: "Instagram", href: "#", icon: "Camera" },
-    { label: "TikTok", href: "#", icon: "Music2" },
-    { label: "Google", href: "#", icon: "Star" },
+    { label: "Instagram", href: "https://www.instagram.com/_chicosgym", icon: "Camera" },
   ],
 }
 
@@ -258,36 +257,36 @@ export type Plan = {
   features: string[]
 }
 
-// Valores placeholder — aguardando tabela oficial da Chico's Gym (seção 8 do documento).
+// Tabela real, confirmada pela Chico's Gym.
 export const plans: Plan[] = [
   {
     id: "mensal",
     label: "Mensal",
     months: 1,
-    monthlyPrice: 129.9,
-    features: ["Acesso completo à academia", "App de treino", "Avaliação física inicial"],
-  },
-  {
-    id: "trimestral",
-    label: "Trimestral",
-    months: 3,
-    monthlyPrice: 114.9,
-    features: ["Tudo do plano mensal", "1 aula experimental de spinning", "Congelamento de 7 dias"],
+    monthlyPrice: 150,
+    features: ["Renova todo mês", "Sem taxa de matrícula", "Acesso completo à academia"],
   },
   {
     id: "semestral",
     label: "Semestral",
     months: 6,
-    monthlyPrice: 104.9,
-    highlight: true,
-    features: ["Tudo do plano trimestral", "Reavaliação física a cada 60 dias", "Congelamento de 15 dias"],
+    monthlyPrice: 135,
+    features: ["Sem taxa de matrícula", "Acesso completo à academia"],
   },
   {
     id: "anual",
     label: "Anual",
     months: 12,
-    monthlyPrice: 89.9,
-    features: ["Tudo do plano semestral", "2 convites mensais para amigos", "Congelamento de 30 dias"],
+    monthlyPrice: 120,
+    highlight: true,
+    features: ["Sem taxa de matrícula", "Acesso completo à academia"],
+  },
+  {
+    id: "grupo",
+    label: "Grupo",
+    months: 12,
+    monthlyPrice: 100,
+    features: ["Valor por pessoa, em grupos de 3", "Sem taxa de matrícula", "Acesso completo à academia"],
   },
 ]
 
@@ -396,16 +395,12 @@ export type FaqItem = { question: string; answer: string }
 export const faqs: FaqItem[] = [
   {
     question: "Preciso pagar taxa de adesão?",
-    answer: "Depende do plano escolhido — confira as condições na página de Planos ou fale com a recepção antes de matricular.",
+    answer: "Não — a Chico's Gym não cobra taxa de matrícula em nenhum plano.",
   },
   {
-    question: "Os planos têm fidelidade?",
+    question: "Vocês têm parceria com nutricionista e massoterapeuta?",
     answer:
-      "O plano mensal não tem fidelidade. Trimestral, semestral e anual seguem o período do próprio contrato, com condições de cancelamento previstas nele.",
-  },
-  {
-    question: "Posso congelar minha matrícula?",
-    answer: "Sim — cada plano inclui um número de dias de congelamento (veja em Planos). Dias extras podem ser negociados na recepção.",
+      "Sim — alunos ganham desconto em nutricionista e massoterapeuta parceiros, com atendimento presencial na própria academia.",
   },
   {
     question: "O que levar no primeiro dia?",

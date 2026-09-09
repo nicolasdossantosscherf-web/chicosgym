@@ -19,7 +19,7 @@ export function Pricing() {
         <SectionHeading
           eyebrow="Planos"
           title="Escolha seu ritmo de treino"
-          description="Valores de referência para validar o layout — a tabela oficial da Chico's Gym substitui estes números antes da publicação."
+          description="Sem taxa de matrícula em nenhum plano. Alunos ainda ganham desconto em nutricionista e massoterapeuta parceiros, com atendimento presencial na própria academia."
         />
 
         <div className="mt-14 grid grid-cols-1 gap-5 lg:grid-cols-4">
