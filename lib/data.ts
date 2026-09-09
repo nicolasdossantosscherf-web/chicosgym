@@ -290,6 +290,24 @@ export const plans: Plan[] = [
   },
 ]
 
+export type Partner = {
+  id: string
+  name: string
+  description: string
+  logo?: string
+}
+
+// Parcerias confirmadas pela Chico's Gym — só o nome ainda é certo; os
+// detalhes de cada benefício chegam conforme a academia for confirmando.
+export const partners: Partner[] = [
+  {
+    id: "wizard",
+    name: "Wizard by Pearson",
+    description: "Detalhes da parceria em breve.",
+    logo: "/images/partners/wizard.png",
+  },
+]
+
 export type Product = {
   id: string
   title: string
