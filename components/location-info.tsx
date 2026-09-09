@@ -19,8 +19,8 @@ export function LocationInfo() {
           <Reveal className="flex flex-col gap-6">
             <div className="relative aspect-[4/3] overflow-hidden rounded-sm border border-line">
               <Image
-                src="/images/contact/entrada-noite.jpg"
-                alt="Entrada da Chico's Gym à noite"
+                src="/images/tour/fachada.jpg"
+                alt="Fachada da Chico's Gym"
                 fill
                 sizes="(min-width: 1024px) 50vw, 100vw"
                 className="photo-grade object-cover"

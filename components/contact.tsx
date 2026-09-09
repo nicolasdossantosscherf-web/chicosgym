@@ -1,7 +1,7 @@
 "use client"
 
 import { FormEvent, useState } from "react"
-import { Send } from "lucide-react"
+import { Camera, Send } from "lucide-react"
 import { brand } from "@/lib/data"
 import { SectionHeading } from "./section-heading"
 import { Reveal } from "./reveal"
@@ -11,6 +11,8 @@ export function Contact() {
   const [name, setName] = useState("")
   const [phone, setPhone] = useState("")
   const [goal, setGoal] = useState("")
+  const instagram = brand.socials.find((social) => social.label === "Instagram")
+  const instagramHandle = instagram ? `@${instagram.href.replace(/\/$/, "").split("/").pop()}` : ""
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
@@ -75,6 +77,21 @@ export function Contact() {
             </Magnetic>
           </form>
         </Reveal>
+
+        {instagram && (
+          <Reveal delay={160}>
+            <a
+              href={instagram.href}
+              target="_blank"
+              rel="noreferrer"
+              data-cursor-hover
+              className="mt-8 flex items-center justify-center gap-2 text-sm font-semibold uppercase tracking-[0.2em] text-offwhite/60 transition-colors hover:text-orange"
+            >
+              <Camera size={16} />
+              Siga no Instagram {instagramHandle}
+            </a>
+          </Reveal>
+        )}
       </div>
     </section>
   )
