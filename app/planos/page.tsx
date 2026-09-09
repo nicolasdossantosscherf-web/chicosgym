@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Pricing } from "@/components/pricing";
-import { Partners } from "@/components/partners";
 
 export const metadata: Metadata = {
   title: "Planos — Chico's Gym",
@@ -11,7 +10,6 @@ export default function PlanosPage() {
   return (
     <main className="pt-24 md:pt-28">
       <Pricing />
-      <Partners />
     </main>
   );
 }

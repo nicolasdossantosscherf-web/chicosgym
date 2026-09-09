@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Contact } from "@/components/contact";
+import { Partners } from "@/components/partners";
 import { Faq } from "@/components/faq";
 
 export const metadata: Metadata = {
@@ -11,6 +12,7 @@ export default function ContatoPage() {
   return (
     <main className="pt-24 md:pt-28">
       <Contact />
+      <Partners />
       <Faq />
     </main>
   );

@@ -295,16 +295,24 @@ export type Partner = {
   name: string
   description: string
   logo?: string
+  faqs?: FaqItem[]
 }
 
 // Parcerias confirmadas pela Chico's Gym — só o nome ainda é certo; os
-// detalhes de cada benefício chegam conforme a academia for confirmando.
+// detalhes de cada benefício (e as perguntas específicas de cada parceiro)
+// chegam conforme a academia for confirmando.
 export const partners: Partner[] = [
   {
     id: "wizard",
     name: "Wizard by Pearson",
     description: "Detalhes da parceria em breve.",
     logo: "/images/partners/wizard.png",
+    faqs: [
+      {
+        question: "Qual é o benefício da parceria com a Wizard?",
+        answer: "Ainda não confirmado — assim que a academia definir as condições, atualizamos aqui.",
+      },
+    ],
   },
 ]
 
