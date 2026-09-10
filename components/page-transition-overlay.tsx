@@ -94,7 +94,7 @@ export function PageTransitionOverlay() {
       <motion.div
         className="absolute inset-[-20%]"
         style={{
-          background: "linear-gradient(115deg, transparent 40%, rgba(245,166,35,0.22) 50%, transparent 60%)",
+          background: "linear-gradient(115deg, transparent 40%, rgba(244,246,248,0.22) 50%, transparent 60%)",
         }}
         initial={false}
         animate={{ opacity: active ? [0, 1, 0] : 0, x: active ? ["-30%", "30%"] : "0%" }}
@@ -112,7 +112,7 @@ export function PageTransitionOverlay() {
             width: d.size,
             height: d.size,
             transformStyle: "preserve-3d",
-            boxShadow: "0 0 24px 2px rgba(242,101,34,0.55)",
+            boxShadow: "0 0 24px 2px rgba(185,192,198,0.55)",
           }}
           initial={false}
           animate={{

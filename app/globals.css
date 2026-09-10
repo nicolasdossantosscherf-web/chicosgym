@@ -17,9 +17,10 @@
   --color-carbon: #141414;
   --color-carbon-2: #1c1c1c;
   --color-line: rgba(237, 237, 237, 0.09);
-  --color-orange: #f26522;
-  --color-orange-2: #ff8a4d;
-  --color-gold: #f5a623;
+  /* TESTE — paleta metálica prata/cromada no lugar do laranja da marca. */
+  --color-orange: #b9c0c6;
+  --color-orange-2: #e8ebed;
+  --color-gold: #f4f6f8;
   --color-offwhite: #ededed;
   --color-turf: #1e2b22;
   --font-display: "Bebas Neue", "Arial Narrow", sans-serif;
@@ -132,7 +133,8 @@ body {
 }
 
 .text-gradient-ember {
-  background: linear-gradient(90deg, var(--color-gold), var(--color-orange) 60%);
+  /* TESTE — bandas claro/escuro simulando reflexo de metal cromado. */
+  background: linear-gradient(100deg, #eef1f3 0%, #aab0b6 22%, #f8fafb 45%, #8f9499 68%, #e8ebed 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -165,8 +167,8 @@ body {
 .photo-placeholder {
   position: relative;
   background:
-    radial-gradient(120% 140% at 15% 0%, rgba(242, 101, 34, 0.28), transparent 55%),
-    radial-gradient(120% 140% at 100% 100%, rgba(245, 166, 35, 0.18), transparent 50%),
+    radial-gradient(120% 140% at 15% 0%, rgba(185, 192, 198, 0.28), transparent 55%),
+    radial-gradient(120% 140% at 100% 100%, rgba(244, 246, 248, 0.18), transparent 50%),
     linear-gradient(155deg, #1a1a1a 0%, #0c0c0c 70%);
   overflow: hidden;
 }
@@ -227,8 +229,8 @@ body {
 .glow-ember {
   background: radial-gradient(
     circle,
-    rgba(242, 101, 34, 0.55) 0%,
-    rgba(245, 166, 35, 0.28) 32%,
+    rgba(185, 192, 198, 0.55) 0%,
+    rgba(244, 246, 248, 0.28) 32%,
     transparent 68%
   );
   filter: blur(48px);

@@ -14,7 +14,7 @@ export function FloatingWhatsapp() {
           rel="noreferrer"
           data-cursor-hover
           aria-label="Falar no WhatsApp"
-          className="flex h-14 w-14 items-center justify-center rounded-full bg-orange text-ink shadow-[0_8px_30px_rgba(242,101,34,0.45)] transition-colors hover:bg-gold"
+          className="flex h-14 w-14 items-center justify-center rounded-full bg-orange text-ink shadow-[0_8px_30px_rgba(185,192,198,0.45)] transition-colors hover:bg-gold"
         >
           <MessageCircle size={24} />
         </a>
