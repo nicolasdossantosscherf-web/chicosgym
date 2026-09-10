@@ -18,9 +18,9 @@
   --color-carbon-2: #1c1c1c;
   --color-line: rgba(237, 237, 237, 0.09);
   /* TESTE — paleta metálica prata/cromada no lugar do laranja da marca. */
-  --color-orange: #b9c0c6;
-  --color-orange-2: #e8ebed;
-  --color-gold: #f4f6f8;
+  --color-orange: #cdd3d8;
+  --color-orange-2: #eef1f3;
+  --color-gold: #ffffff;
   --color-offwhite: #ededed;
   --color-turf: #1e2b22;
   --font-display: "Bebas Neue", "Arial Narrow", sans-serif;
@@ -103,13 +103,15 @@ body {
 /* ---------------------------------------------------------------------- */
 /* Motivo "losango de luz" — usado em divisores e no herói                */
 /* ---------------------------------------------------------------------- */
+/* TESTE — gradiente facetado (bandas claras/escuras) pra ler como metal
+   polido de verdade, não um quadrado cinza chapado. */
 .diamond {
   width: 0.5rem;
   height: 0.5rem;
   flex: none;
   transform: rotate(45deg);
-  background: var(--color-orange);
-  box-shadow: 0 0 12px 1px var(--color-orange);
+  background: linear-gradient(135deg, #ffffff 0%, #7d8288 32%, #f2f4f5 55%, #3a3d40 78%, #ffffff 100%);
+  box-shadow: 0 0 14px 2px rgba(255, 255, 255, 0.65);
 }
 
 .diamond-lg {
@@ -117,8 +119,8 @@ body {
   height: 1.1rem;
   flex: none;
   transform: rotate(45deg);
-  background: var(--color-orange);
-  box-shadow: 0 0 18px 2px var(--color-orange);
+  background: linear-gradient(135deg, #ffffff 0%, #7d8288 32%, #f2f4f5 55%, #3a3d40 78%, #ffffff 100%);
+  box-shadow: 0 0 22px 3px rgba(255, 255, 255, 0.6);
 }
 
 .diamond-row {
@@ -132,9 +134,31 @@ body {
   border-color: var(--color-line);
 }
 
+/* TESTE — dá brilho/detalhe de metal polido pros botões e selos sólidos
+   (bg-orange), mantendo o tom claro pra não perder contraste com o
+   texto escuro (text-ink) que fica em cima. Não afeta bg-orange/NN
+   (fundos translúcidos atrás de ícones), que continuam lisos. */
+.bg-orange {
+  background-image: linear-gradient(135deg, #ffffff 0%, #dde1e4 24%, #ffffff 48%, #b8bec3 68%, #f2f4f5 86%, #ffffff 100%);
+}
+.hover\:bg-gold:hover {
+  background-image: linear-gradient(135deg, #ffffff 0%, #f0f2f3 50%, #ffffff 100%);
+}
+
 .text-gradient-ember {
-  /* TESTE — bandas claro/escuro simulando reflexo de metal cromado. */
-  background: linear-gradient(100deg, #eef1f3 0%, #aab0b6 22%, #f8fafb 45%, #8f9499 68%, #e8ebed 100%);
+  /* TESTE — contraste bem mais forte (quase preto a branco) pra ler como
+     reflexo de cromo de verdade, não um cinza uniforme. */
+  background: linear-gradient(
+    100deg,
+    #ffffff 0%,
+    #4a4d50 14%,
+    #f5f7f8 28%,
+    #1c1e20 42%,
+    #ffffff 58%,
+    #6b6f73 72%,
+    #f5f7f8 86%,
+    #2b2d2f 100%
+  );
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -167,8 +191,8 @@ body {
 .photo-placeholder {
   position: relative;
   background:
-    radial-gradient(120% 140% at 15% 0%, rgba(185, 192, 198, 0.28), transparent 55%),
-    radial-gradient(120% 140% at 100% 100%, rgba(244, 246, 248, 0.18), transparent 50%),
+    radial-gradient(120% 140% at 15% 0%, rgba(255, 255, 255, 0.32), transparent 55%),
+    radial-gradient(120% 140% at 100% 100%, rgba(255, 255, 255, 0.2), transparent 50%),
     linear-gradient(155deg, #1a1a1a 0%, #0c0c0c 70%);
   overflow: hidden;
 }
@@ -229,8 +253,8 @@ body {
 .glow-ember {
   background: radial-gradient(
     circle,
-    rgba(185, 192, 198, 0.55) 0%,
-    rgba(244, 246, 248, 0.28) 32%,
+    rgba(255, 255, 255, 0.65) 0%,
+    rgba(255, 255, 255, 0.3) 32%,
     transparent 68%
   );
   filter: blur(48px);

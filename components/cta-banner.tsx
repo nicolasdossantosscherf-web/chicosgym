@@ -6,7 +6,7 @@ import { Reveal } from "./reveal"
 export function CtaBanner() {
   return (
     <section className="relative overflow-hidden bg-ink py-24">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(185,192,198,0.16),transparent_60%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.2),transparent_60%)]" />
       <div className="relative mx-auto flex max-w-4xl flex-col items-center gap-6 px-6 text-center">
         <Reveal>
           <span className="diamond-lg inline-block" />

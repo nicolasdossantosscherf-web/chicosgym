@@ -94,7 +94,7 @@ export function PageTransitionOverlay() {
       <motion.div
         className="absolute inset-[-20%]"
         style={{
-          background: "linear-gradient(115deg, transparent 40%, rgba(244,246,248,0.22) 50%, transparent 60%)",
+          background: "linear-gradient(115deg, transparent 40%, rgba(255,255,255,0.3) 50%, transparent 60%)",
         }}
         initial={false}
         animate={{ opacity: active ? [0, 1, 0] : 0, x: active ? ["-30%", "30%"] : "0%" }}
@@ -105,14 +105,15 @@ export function PageTransitionOverlay() {
       {DIAMONDS.map((d, i) => (
         <motion.span
           key={i}
-          className="absolute bg-orange"
+          className="absolute"
           style={{
             top: d.top,
             left: d.left,
             width: d.size,
             height: d.size,
             transformStyle: "preserve-3d",
-            boxShadow: "0 0 24px 2px rgba(185,192,198,0.55)",
+            background: "linear-gradient(135deg, #ffffff 0%, #7d8288 32%, #f2f4f5 55%, #3a3d40 78%, #ffffff 100%)",
+            boxShadow: "0 0 24px 2px rgba(255,255,255,0.6)",
           }}
           initial={false}
           animate={{
