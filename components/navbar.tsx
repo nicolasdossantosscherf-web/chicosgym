@@ -6,6 +6,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Menu, X } from "lucide-react"
 import { Magnetic } from "./magnetic"
+import { CartButton } from "./cart-button"
 import { brand, sitePages } from "@/lib/data"
 
 const HOME_LINK = { href: "/", label: "Início" }
@@ -62,6 +63,8 @@ export function Navbar() {
               </a>
             </Magnetic>
           </div>
+
+          <CartButton />
 
           <button
             type="button"

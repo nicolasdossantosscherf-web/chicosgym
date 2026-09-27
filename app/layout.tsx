@@ -8,6 +8,7 @@ import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { FloatingWhatsapp } from "@/components/floating-whatsapp";
 import { PageTransitionOverlay } from "@/components/page-transition-overlay";
+import { CartDrawer } from "@/components/cart-drawer";
 
 const bebasNeue = Bebas_Neue({
   variable: "--font-display",
@@ -41,6 +42,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           {children}
           <Footer />
           <FloatingWhatsapp />
+          <CartDrawer />
         </SmoothScrollProvider>
       </body>
     </html>

@@ -344,6 +344,21 @@ export type Product = {
   variants?: ProductVariant[]
 }
 
+// Formas de pagamento aceitas na loja. Só o cartão de crédito usa o preço
+// parcelado do produto; as outras usam o preço à vista.
+export const shopPaymentMethods = [
+  { id: "pix", label: "Pix", installments: false },
+  { id: "credito", label: "Cartão de crédito (parcelado)", installments: true },
+  { id: "debito", label: "Cartão de débito", installments: false },
+  { id: "dinheiro", label: "Dinheiro", installments: false },
+] as const
+
+export type ShopPaymentMethodId = (typeof shopPaymentMethods)[number]["id"]
+
+// Entrega é provisória — a academia pode tirar essa opção depois (aí basta
+// remover a opção "entrega" no carrinho).
+export const shopDeliveryFee = 10
+
 // Produtos reais à venda na academia, enviados pela Chico's Gym.
 export const products: Product[] = [
   {
