@@ -402,6 +402,7 @@ export const products: Product[] = [
     variants: [
       { id: "original", label: "Original", swatch: "#e0283a" },
       { id: "original-zero", label: "Original Zero Açúcar", swatch: "#f2f2f2" },
+      { id: "limonada-zero", label: "Limonada Zero Açúcar", swatch: "#2d4fa8" },
       { id: "extreme", label: "Extreme", swatch: "#1a1a1a" },
       { id: "melancia", label: "Melancia", swatch: "#f0445a" },
       { id: "tropical", label: "Tropical", swatch: "#f7d417" },
