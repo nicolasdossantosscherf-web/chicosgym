@@ -355,10 +355,6 @@ export const shopPaymentMethods = [
 
 export type ShopPaymentMethodId = (typeof shopPaymentMethods)[number]["id"]
 
-// Entrega é provisória — a academia pode tirar essa opção depois (aí basta
-// remover a opção "entrega" no carrinho).
-export const shopDeliveryFee = 10
-
 // Produtos reais à venda na academia, enviados pela Chico's Gym.
 export const products: Product[] = [
   {

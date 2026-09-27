@@ -3,16 +3,15 @@
 import { ChangeEvent, FormEvent, InputHTMLAttributes, ReactNode, useEffect, useRef, useState } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { ArrowLeft, Check, Minus, Plus, ShoppingBag, Trash2, X } from "lucide-react"
-import { brand, shopDeliveryFee, shopPaymentMethods, type ShopPaymentMethodId } from "@/lib/data"
+import { ArrowLeft, Check, MapPin, Minus, Plus, ShoppingBag, Trash2, X } from "lucide-react"
+import { brand, shopPaymentMethods, type ShopPaymentMethodId } from "@/lib/data"
 import { cartActions, formatBRL, resolveCartItem, unitPrice, useCart } from "@/lib/cart"
 import { lenisStore } from "@/lib/lenis-store"
 import { ProductImage } from "./product-image"
 
 type Step = "cart" | "checkout" | "sent"
-type Delivery = "retirada" | "entrega"
 
-const EMPTY_FORM = { name: "", phone: "", street: "", number: "", complement: "", district: "" }
+const EMPTY_FORM = { name: "", phone: "" }
 
 function Field({ label, error, ...props }: { label: string; error?: string } & InputHTMLAttributes<HTMLInputElement>) {
   return (
@@ -55,7 +54,6 @@ export function CartDrawer() {
   const closeRef = useRef<HTMLButtonElement>(null)
   const [step, setStep] = useState<Step>("cart")
   const [form, setForm] = useState(EMPTY_FORM)
-  const [delivery, setDelivery] = useState<Delivery>("retirada")
   const [payment, setPayment] = useState<ShopPaymentMethodId>("pix")
   const [showErrors, setShowErrors] = useState(false)
 
@@ -86,11 +84,9 @@ export function CartDrawer() {
     lines.reduce((sum, l) => sum + unitPrice(l.product, installments) * l.item.qty, 0)
 
   const method = shopPaymentMethods.find((m) => m.id === payment) ?? shopPaymentMethods[0]
-  const subtotal = subtotalFor(method.installments)
+  const total = subtotalFor(method.installments)
   const cashSubtotal = subtotalFor(false)
   const cardSubtotal = subtotalFor(true)
-  const fee = delivery === "entrega" ? shopDeliveryFee : 0
-  const total = subtotal + fee
 
   const view: Step = step === "sent" ? "sent" : lines.length === 0 ? "cart" : step
 
@@ -98,9 +94,6 @@ export function CartDrawer() {
   const errors = {
     name: form.name.trim() ? undefined : "Informe seu nome",
     phone: phoneDigits.length >= 10 ? undefined : "Informe um WhatsApp com DDD",
-    street: delivery === "entrega" && !form.street.trim() ? "Informe a rua" : undefined,
-    number: delivery === "entrega" && !form.number.trim() ? "Informe o número" : undefined,
-    district: delivery === "entrega" && !form.district.trim() ? "Informe o bairro" : undefined,
   }
   const hasErrors = Object.values(errors).some(Boolean)
   const fieldError = (key: keyof typeof errors) => (showErrors ? errors[key] : undefined)
@@ -120,14 +113,6 @@ export function CartDrawer() {
       return
     }
 
-    const address = [
-      `${form.street.trim()}, ${form.number.trim()}`,
-      form.complement.trim() ? `(${form.complement.trim()})` : null,
-      `— ${form.district.trim()}`,
-    ]
-      .filter(Boolean)
-      .join(" ")
-
     const message = [
       "*Novo pedido — Loja Chico's Gym*",
       "",
@@ -137,19 +122,13 @@ export function CartDrawer() {
         return `• ${l.item.qty}x ${l.product.title}${variant} — ${lineTotal}`
       }),
       "",
-      `Subtotal: ${formatBRL(subtotal)}`,
-      delivery === "entrega" ? `Entrega: ${formatBRL(fee)}` : null,
       `*Total: ${formatBRL(total)}*`,
-      "",
       `*Pagamento:* ${method.label}`,
-      `*Recebimento:* ${delivery === "entrega" ? "Entrega" : "Retirada na academia"}`,
-      delivery === "entrega" ? `*Endereço:* ${address}` : null,
+      "*Retirada na academia*",
       "",
       `*Nome:* ${form.name.trim()}`,
       `*WhatsApp:* ${form.phone.trim()}`,
-    ]
-      .filter((line) => line !== null)
-      .join("\n")
+    ].join("\n")
 
     window.open(`https://wa.me/${brand.whatsapp}?text=${encodeURIComponent(message)}`, "_blank")
     setStep("sent")
@@ -300,7 +279,7 @@ export function CartDrawer() {
                   ou {formatBRL(cardSubtotal)} no cartão parcelado
                 </p>
               )}
-              <p className="text-xs text-offwhite/40">Pagamento e entrega você escolhe na próxima etapa.</p>
+              <p className="text-xs text-offwhite/40">A forma de pagamento você escolhe na próxima etapa.</p>
               <button
                 type="button"
                 onClick={() => {
@@ -349,49 +328,15 @@ export function CartDrawer() {
               </div>
 
               <div className="flex flex-col gap-3">
-                <SectionTitle>Recebimento</SectionTitle>
-                <div className="grid grid-cols-2 gap-2">
-                  <Choice active={delivery === "retirada"} onClick={() => setDelivery("retirada")}>
-                    Retirada na academia
-                    <span className="mt-1 text-[11px] normal-case tracking-normal text-offwhite/50">Grátis</span>
-                  </Choice>
-                  <Choice active={delivery === "entrega"} onClick={() => setDelivery("entrega")}>
-                    Entrega
-                    <span className="mt-1 text-[11px] normal-case tracking-normal text-offwhite/50">
-                      + {formatBRL(shopDeliveryFee)}
-                    </span>
-                  </Choice>
+                <SectionTitle>Retirada</SectionTitle>
+                <div className="flex items-start gap-3 rounded-sm border border-line bg-ink p-3 text-sm text-offwhite/70">
+                  <MapPin size={16} className="mt-0.5 shrink-0 text-orange" />
+                  <span>
+                    Retire seu pedido na academia:
+                    <span className="mt-1 block text-offwhite/50">{brand.address}</span>
+                  </span>
                 </div>
               </div>
-
-              {delivery === "entrega" && (
-                <div className="flex flex-col gap-3">
-                  <SectionTitle>Endereço de entrega</SectionTitle>
-                  <Field
-                    label="Rua *"
-                    value={form.street}
-                    onChange={setField("street")}
-                    autoComplete="address-line1"
-                    error={fieldError("street")}
-                  />
-                  <div className="grid grid-cols-2 gap-3">
-                    <Field
-                      label="Número *"
-                      inputMode="numeric"
-                      value={form.number}
-                      onChange={setField("number")}
-                      error={fieldError("number")}
-                    />
-                    <Field label="Complemento" value={form.complement} onChange={setField("complement")} />
-                  </div>
-                  <Field
-                    label="Bairro *"
-                    value={form.district}
-                    onChange={setField("district")}
-                    error={fieldError("district")}
-                  />
-                </div>
-              )}
 
               <div className="flex flex-col gap-3">
                 <SectionTitle>Pagamento</SectionTitle>
@@ -406,18 +351,10 @@ export function CartDrawer() {
             </div>
 
             <footer className="flex flex-col gap-2 border-t border-line px-6 py-5 text-sm">
-              <div className="flex justify-between text-offwhite/60">
-                <span>Subtotal {method.installments ? "(parcelado)" : "(à vista)"}</span>
-                <span>{formatBRL(subtotal)}</span>
-              </div>
-              {delivery === "entrega" && (
-                <div className="flex justify-between text-offwhite/60">
-                  <span>Entrega</span>
-                  <span>{formatBRL(fee)}</span>
-                </div>
-              )}
               <div className="flex items-baseline justify-between">
-                <span className="text-offwhite">Total</span>
+                <span className="text-offwhite">
+                  Total <span className="text-offwhite/50">{method.installments ? "(parcelado)" : "(à vista)"}</span>
+                </span>
                 <span className="font-display text-3xl text-orange">{formatBRL(total)}</span>
               </div>
               {showErrors && hasErrors && (

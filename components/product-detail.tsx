@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from "react"
 import Link from "next/link"
-import { ArrowLeft, Check, MessageCircle, ShoppingBag, Store, Truck } from "lucide-react"
-import { shopDeliveryFee, type Product } from "@/lib/data"
+import { ArrowLeft, Check, MessageCircle, ShoppingBag, Store } from "lucide-react"
+import type { Product } from "@/lib/data"
 import { cartActions, formatBRL } from "@/lib/cart"
 import { ProductImage } from "./product-image"
 
@@ -123,14 +123,10 @@ export function ProductDetail({ product }: { product: Product }) {
               </button>
             </div>
 
-            <ul className="grid grid-cols-1 gap-3 border-t border-line pt-6 text-sm text-offwhite/60 sm:grid-cols-3">
+            <ul className="grid grid-cols-1 gap-3 border-t border-line pt-6 text-sm text-offwhite/60 sm:grid-cols-2">
               <li className="flex items-start gap-2">
                 <Store size={16} className="mt-0.5 shrink-0 text-orange" />
-                Retirada na academia sem custo
-              </li>
-              <li className="flex items-start gap-2">
-                <Truck size={16} className="mt-0.5 shrink-0 text-orange" />
-                Entrega por + {formatBRL(shopDeliveryFee)}
+                Retirada na academia
               </li>
               <li className="flex items-start gap-2">
                 <MessageCircle size={16} className="mt-0.5 shrink-0 text-orange" />
