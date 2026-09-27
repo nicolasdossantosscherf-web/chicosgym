@@ -3,7 +3,7 @@ import { Shop } from "@/components/shop";
 
 export const metadata: Metadata = {
   title: "Loja — Chico's Gym",
-  description: "Suplementos, vestuário e acessórios da Chico's Gym.",
+  description: "Produtos da Chico's Gym à venda na academia.",
 };
 
 export default function LojaPage() {

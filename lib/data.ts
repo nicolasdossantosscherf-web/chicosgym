@@ -77,7 +77,7 @@ export const sitePages: SitePage[] = [
   {
     href: "/loja",
     label: "Loja",
-    description: "Suplementos, vestuário e acessórios da Chico's Gym.",
+    description: "Produtos da Chico's Gym à venda na academia.",
     icon: "ShoppingBag",
   },
   {
@@ -316,19 +316,222 @@ export const partners: Partner[] = [
   },
 ]
 
+export type ProductVariant = {
+  id: string
+  label: string
+  swatch: string
+  // Foto própria dessa variação (troca a foto do card ao selecionar).
+  image?: string
+  // Posição (0 = mais à esquerda) dessa variação na foto do produto, quando
+  // a foto mostra todas lado a lado — ver Product.imageSlots.
+  imageSlot?: number
+}
+
 export type Product = {
   id: string
   title: string
   category: string
-  price: string
+  description?: string
+  image?: string
+  // Preço à vista / Pix.
+  price: number
+  // Preço parcelado — quando existe, o card deixa o cliente escolher entre os dois.
+  priceInstallments?: number
+  // Quantos itens aparecem lado a lado na foto (pra destacar a variação escolhida).
+  imageSlots?: number
+  // Ex.: "Cor", "Sabor".
+  variantLabel?: string
+  variants?: ProductVariant[]
 }
 
+// Produtos reais à venda na academia, enviados pela Chico's Gym.
 export const products: Product[] = [
-  { id: "whey", title: "Whey Protein 900g", category: "Suplementos", price: "R$ 149,90" },
-  { id: "creatina", title: "Creatina 300g", category: "Suplementos", price: "R$ 79,90" },
-  { id: "camiseta", title: "Camiseta Chico's Gym", category: "Vestuário", price: "R$ 69,90" },
-  { id: "coqueteleira", title: "Coqueteleira 600ml", category: "Acessórios", price: "R$ 34,90" },
-  { id: "garrafa", title: "Garrafa Térmica 1L", category: "Acessórios", price: "R$ 59,90" },
+  {
+    id: "garrafa-inteligente",
+    title: "Garrafa Inteligente",
+    category: "Acessórios",
+    description: "500 ml, com a logo da Chico's Gym gravada.",
+    image: "/images/shop/garrafa-inteligente.webp",
+    price: 85.9,
+    priceInstallments: 99.9,
+    imageSlots: 2,
+    variantLabel: "Cor",
+    variants: [
+      { id: "preto", label: "Preto", swatch: "#111111", imageSlot: 0 },
+      { id: "branco", label: "Branco", swatch: "#f2f2f2", imageSlot: 1 },
+    ],
+  },
+  {
+    id: "sache-panic",
+    title: "Sachê Pré-Treino Panic",
+    category: "Suplementos",
+    description: "Adaptogen Science · dose única de 10 g · sabor maçã verde.",
+    price: 10,
+  },
+  {
+    id: "sache-dila-pump",
+    title: "Sachê Pré-Treino Dila Pump",
+    category: "Suplementos",
+    description: "Sem cafeína · Adaptogen Science · sachê de 10,6 g · sabor kiwi.",
+    price: 10,
+  },
+  {
+    id: "dose-whey-joypro",
+    title: "Dose de Whey JoyPro",
+    category: "Suplementos",
+    description: "Shark Pro · sachê de 33 g.",
+    price: 15,
+    imageSlots: 2,
+    variantLabel: "Sabor",
+    variants: [
+      { id: "brigadeiro", label: "Brigadeiro", swatch: "#6b3e2e", imageSlot: 0 },
+      { id: "morango-framboesa", label: "Iogurte de morango com framboesa", swatch: "#e2383f", imageSlot: 1 },
+    ],
+  },
+  {
+    id: "energetico-fire-night",
+    title: "Energético Fire Night",
+    category: "Bebidas",
+    description: "Lata de 473 ml.",
+    price: 10,
+    variantLabel: "Sabor",
+    variants: [
+      { id: "original", label: "Original", swatch: "#e0283a" },
+      { id: "original-zero", label: "Original Zero Açúcar", swatch: "#f2f2f2" },
+      { id: "extreme", label: "Extreme", swatch: "#1a1a1a" },
+      { id: "melancia", label: "Melancia", swatch: "#f0445a" },
+      { id: "tropical", label: "Tropical", swatch: "#f7d417" },
+      { id: "pera", label: "Pera", swatch: "#e6e86a" },
+      { id: "maca-verde", label: "Maçã Verde", swatch: "#6cc93a" },
+      { id: "banana", label: "Banana", swatch: "#f3b23a" },
+    ],
+  },
+  {
+    id: "hipercalorico-shark-mass",
+    title: "Hipercalórico Shark Mass",
+    category: "Suplementos",
+    description: "Shark Pro · 3 kg · sabor chocolate.",
+    price: 149.9,
+    priceInstallments: 169.9,
+  },
+  {
+    id: "whey-high-protein",
+    title: "Whey High Protein",
+    category: "Suplementos",
+    description: "Absolut Nutrition · 900 g · sabor chocolate · sem soja.",
+    price: 119.9,
+    priceInstallments: 139.9,
+  },
+  {
+    id: "whey-joypro-900",
+    title: "Whey JoyPro",
+    category: "Suplementos",
+    description: "Shark Pro · 900 g · 20 g de proteína por dose · zero glúten · zero adição de açúcar.",
+    price: 159.9,
+    priceInstallments: 179.9,
+    variantLabel: "Sabor",
+    variants: [
+      { id: "brigadeiro", label: "Brigadeiro", swatch: "#8a4a3c" },
+      { id: "leite", label: "Leite", swatch: "#f5f5f5" },
+      { id: "morango-framboesa", label: "Iogurte de morango com framboesa", swatch: "#e8405a" },
+    ],
+  },
+  {
+    id: "energetico-monster",
+    title: "Energético Monster",
+    category: "Bebidas",
+    description: "Ultra Strawberry Dreams · sem açúcar.",
+    price: 14,
+  },
+  {
+    id: "pre-treino-agent-orange",
+    title: "Pré-Treino Agent Orange",
+    category: "Bebidas",
+    description: "New Millen · lata de 269 ml · zero açúcar.",
+    price: 14,
+    imageSlots: 2,
+    variantLabel: "Sabor",
+    variants: [
+      { id: "tangerina-morango", label: "Tangerina com morango", swatch: "#f26a1b", imageSlot: 0 },
+      { id: "maca-verde", label: "Maçã verde", swatch: "#7cc242", imageSlot: 1 },
+    ],
+  },
+  {
+    id: "itts-sero",
+    title: "Itts Sero",
+    category: "Bebidas",
+    description: "Lata de 269 ml · zero açúcar.",
+    price: 10,
+    imageSlots: 3,
+    variantLabel: "Sabor",
+    variants: [
+      { id: "cereja-laranja", label: "Cereja com laranja", swatch: "#c8203a", imageSlot: 0 },
+      { id: "manga-pessego", label: "Manga com pêssego", swatch: "#f5c518", imageSlot: 1 },
+      { id: "framboesa-limao", label: "Framboesa com limão", swatch: "#d6307a", imageSlot: 2 },
+    ],
+  },
+  {
+    id: "isotonico",
+    title: "Isotônico",
+    category: "Bebidas",
+    description: "Garrafa de 500 ml.",
+    price: 10,
+    imageSlots: 2,
+    variantLabel: "Opção",
+    variants: [
+      { id: "powerade-frutas-tropicais", label: "Powerade frutas tropicais", swatch: "#e8322b", imageSlot: 0 },
+      { id: "gatorade-limao", label: "Gatorade limão", swatch: "#e6ece8", imageSlot: 1 },
+    ],
+  },
+  {
+    id: "yopro",
+    title: "YoPro",
+    category: "Bebidas",
+    description: "Danone · shake de 250 ml · 15 g de proteína · zero adição de açúcares.",
+    price: 14,
+    imageSlots: 2,
+    variantLabel: "Sabor",
+    variants: [
+      { id: "chocolate", label: "Chocolate", swatch: "#7a4a36", imageSlot: 0 },
+      { id: "morango", label: "Morango", swatch: "#e0283a", imageSlot: 1 },
+    ],
+  },
+  {
+    id: "yopro-recovery-boost",
+    title: "YoPro+ Recovery Boost",
+    category: "Bebidas",
+    description: "Danone · shake de 250 ml · 23 g de proteína · 5 g de BCAAs · sabor chocolate.",
+    price: 17,
+  },
+  {
+    id: "agua-mineral",
+    title: "Água Mineral",
+    category: "Bebidas",
+    description: "Água mineral natural · garrafa de 500 ml.",
+    price: 4,
+    imageSlots: 2,
+    variantLabel: "Tipo",
+    variants: [
+      { id: "com-gas", label: "Com gás", swatch: "#1d3f8f", imageSlot: 0 },
+      { id: "sem-gas", label: "Sem gás", swatch: "#3aa0e0", imageSlot: 1 },
+    ],
+  },
+  {
+    id: "creatina-creapepto",
+    title: "Creatina Creapepto",
+    category: "Suplementos",
+    description: "Performance Nutrition · 300 g · 99,9% creatina monoidratada.",
+    price: 109.9,
+    priceInstallments: 119.9,
+  },
+  {
+    id: "pre-treino-insane-clown",
+    title: "Pré-Treino Insane Clown",
+    category: "Suplementos",
+    description: "Demons Lab · 210 g · 30 doses.",
+    price: 159.9,
+    priceInstallments: 179.9,
+  },
 ]
 
 export type Testimonial = {
