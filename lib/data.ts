@@ -103,7 +103,6 @@ export const sitePages: SitePage[] = [
 export const stats = [
   { value: 4, suffix: "+", label: "Anos de história" },
   { value: 800, suffix: "+", label: "Alunos ativos" },
-  { value: 7, suffix: "", label: "Modalidades" },
   { value: 4.9, suffix: "", label: "Avaliação no Google", decimals: 1 },
 ]
 

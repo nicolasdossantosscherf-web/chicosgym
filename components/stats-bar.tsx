@@ -44,7 +44,7 @@ function CountUp({ target, decimals = 0, suffix = "" }: { target: number; decima
 export function StatsBar() {
   return (
     <section className="relative border-y border-line bg-carbon">
-      <div className="mx-auto grid max-w-7xl grid-cols-2 gap-8 px-6 py-12 md:grid-cols-4 md:px-10">
+      <div className="mx-auto grid max-w-7xl grid-cols-3 gap-4 px-6 py-12 sm:gap-8 md:px-10">
         {stats.map((stat) => (
           <div key={stat.label} className="flex flex-col items-center gap-1 text-center md:items-start md:text-left">
             <span className="font-display text-4xl text-gradient-ember sm:text-5xl">
