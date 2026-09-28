@@ -28,9 +28,7 @@ function PartnerVisual({ partner }: { partner: Partner }) {
 }
 
 function PartnerRow({ partner, index }: { partner: Partner; index: number }) {
-  const message = partner.bookable
-    ? `Olá! Vi no site a parceria com ${partner.name} (${partner.role}) e quero agendar um horário.`
-    : `Olá! Quero saber mais sobre a parceria com ${partner.name}.`
+  const message = `Olá! Vi no site a parceria com ${partner.name} (${partner.role}) e quero agendar um horário.`
 
   return (
     <article className="grid grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-16">
@@ -78,18 +76,20 @@ function PartnerRow({ partner, index }: { partner: Partner; index: number }) {
         )}
 
         <div className="flex flex-wrap items-center gap-5">
-          <Magnetic>
-            <a
-              href={`https://wa.me/${brand.whatsapp}?text=${encodeURIComponent(message)}`}
-              target="_blank"
-              rel="noreferrer"
-              data-cursor-hover
-              className="inline-flex items-center gap-2 rounded-sm bg-orange px-6 py-3.5 text-xs font-semibold uppercase tracking-[0.2em] text-ink transition-colors hover:bg-gold"
-            >
-              <MessageCircle size={14} />
-              {partner.bookable ? "Agendar pelo WhatsApp" : "Saber mais pelo WhatsApp"}
-            </a>
-          </Magnetic>
+          {partner.bookable && (
+            <Magnetic>
+              <a
+                href={`https://wa.me/${brand.whatsapp}?text=${encodeURIComponent(message)}`}
+                target="_blank"
+                rel="noreferrer"
+                data-cursor-hover
+                className="inline-flex items-center gap-2 rounded-sm bg-orange px-6 py-3.5 text-xs font-semibold uppercase tracking-[0.2em] text-ink transition-colors hover:bg-gold"
+              >
+                <MessageCircle size={14} />
+                Agendar pelo WhatsApp
+              </a>
+            </Magnetic>
+          )}
           {partner.instagram && (
             <a
               href={`https://www.instagram.com/${partner.instagram}`}

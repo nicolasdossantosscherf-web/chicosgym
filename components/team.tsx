@@ -1,5 +1,4 @@
-import { MessageCircle } from "lucide-react"
-import { team, brand } from "@/lib/data"
+import { team } from "@/lib/data"
 import { SectionHeading } from "./section-heading"
 import { Reveal } from "./reveal"
 import { TiltImage } from "./tilt-image"
@@ -35,18 +34,6 @@ export function Team() {
                     <span className="text-[11px] uppercase tracking-[0.15em] text-offwhite/45">{member.cref}</span>
                   )}
                   {member.description && <p className="mt-2 text-sm text-offwhite/60">{member.description}</p>}
-                  <a
-                    href={`https://wa.me/${brand.whatsapp}?text=${encodeURIComponent(
-                      `Olá! Gostaria de falar com ${member.name}.`
-                    )}`}
-                    target="_blank"
-                    rel="noreferrer"
-                    data-cursor-hover
-                    className="mt-auto inline-flex items-center gap-2 pt-4 text-xs font-semibold uppercase tracking-[0.15em] text-offwhite/70 transition-colors hover:text-orange"
-                  >
-                    <MessageCircle size={14} />
-                    Falar no WhatsApp
-                  </a>
                 </div>
               </div>
             </Reveal>

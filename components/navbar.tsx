@@ -5,7 +5,6 @@ import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Menu, X } from "lucide-react"
-import { Magnetic } from "./magnetic"
 import { CartButton } from "./cart-button"
 import { brand, sitePages } from "@/lib/data"
 
@@ -49,21 +48,7 @@ export function Navbar() {
           </span>
         </Link>
 
-        <div className="flex items-center gap-4">
-          <div className="hidden sm:block">
-            <Magnetic>
-              <a
-                href={`https://wa.me/${brand.whatsapp}`}
-                target="_blank"
-                rel="noreferrer"
-                data-cursor-hover
-                className="inline-flex items-center rounded-sm bg-orange px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.2em] text-ink transition-colors hover:bg-gold"
-              >
-                Matricule-se
-              </a>
-            </Magnetic>
-          </div>
-
+        <div className="flex items-center gap-6">
           <CartButton />
 
           <button

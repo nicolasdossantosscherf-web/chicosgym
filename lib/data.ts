@@ -31,7 +31,6 @@ export type SitePage = {
   label: string
   description: string
   icon: string
-  image?: string
 }
 
 // Estrutura de páginas do site — usada pelo menu, rodapé e pela grade
@@ -44,23 +43,10 @@ export const sitePages: SitePage[] = [
     icon: "History",
   },
   {
-    href: "/academia",
-    label: "A Academia",
-    description: "Conheça o espaço: piso de treino, cardio, musculação e spinning.",
-    icon: "Building2",
-    image: "/images/tour/piso-treino.jpg",
-  },
-  {
     href: "/equipe",
     label: "Equipe",
     description: "Os profissionais que treinam junto com você todos os dias.",
     icon: "Users",
-  },
-  {
-    href: "/maquinas",
-    label: "Máquinas",
-    description: "Catálogo de equipamentos por grupo muscular, com dicas de uso.",
-    icon: "LayoutGrid",
   },
   {
     href: "/treino",
@@ -102,61 +88,9 @@ export const sitePages: SitePage[] = [
 
 export const stats = [
   { value: 4, suffix: "+", label: "Anos de história" },
-  { value: 800, suffix: "+", label: "Alunos ativos" },
+  // Número aproximado informado pela academia.
+  { value: 300, suffix: "", label: "Alunos ativos" },
   { value: 4.9, suffix: "", label: "Avaliação no Google", decimals: 1 },
-]
-
-export type TourArea = {
-  id: string
-  title: string
-  description: string
-  equipment: string[]
-  image?: string
-}
-
-export const tourAreas: TourArea[] = [
-  {
-    id: "fachada",
-    title: "Fachada",
-    description:
-      "Letreiro circular iluminado e entrada com grama sintética — o cartão de visitas da Chico's Gym.",
-    equipment: ["Letreiro luminoso", "Recepção", "Estacionamento"],
-    image: "/images/tour/fachada.jpg",
-  },
-  {
-    id: "piso-treino",
-    title: "Piso de Treino",
-    description:
-      "Pé-direito alto, galpão industrial pintado de preto e iluminação em losango guiando o espaço inteiro.",
-    equipment: ["Racks", "Halteres", "Estações de força", "Piso emborrachado"],
-    image: "/images/tour/piso-treino.jpg",
-  },
-  {
-    id: "cardio-musculacao",
-    title: "Cardio & Musculação",
-    description: "Esteiras, bikes e máquinas de musculação lado a lado, em layout de circuito.",
-    equipment: ["Esteiras", "Bikes ergométricas", "Estações de força", "Leg press"],
-    image: "/images/tour/cardio-musculacao.jpg",
-  },
-  {
-    id: "spinning",
-    title: "Spinning",
-    description: "Bikes de spinning sob a mesma iluminação cênica em losango do restante da academia.",
-    equipment: ["Bikes de spinning", "Iluminação cênica"],
-    image: "/images/tour/spinning.jpg",
-  },
-  {
-    id: "peso-livre",
-    title: "Peso Livre",
-    description: "Barras, anilhas e halteres organizados por faixa de peso para treino livre.",
-    equipment: ["Barras olímpicas", "Anilhas", "Kettlebells"],
-  },
-  {
-    id: "vestiarios",
-    title: "Vestiários",
-    description: "Armários individuais e acabamento em concreto e metal, no mesmo padrão do resto da academia.",
-    equipment: ["Armários", "Chuveiros"],
-  },
 ]
 
 export type TimelineItem = {
@@ -654,40 +588,6 @@ export const testimonials: Testimonial[] = [
     since: "aluno desde 2022",
     quote: "Acompanho a Chico's Gym desde o primeiro mês aberta. O crescimento da estrutura é visível.",
   },
-]
-
-export type Machine = {
-  id: string
-  name: string
-  category: "Superior" | "Inferior" | "Core" | "Cardio" | "Peso Livre"
-  muscle: string
-  tip: string
-  image?: string
-}
-
-export const machineCategories = ["Superior", "Inferior", "Core", "Cardio", "Peso Livre"] as const
-
-// Catálogo de equipamentos — nomes e descrições genéricas de um parque de
-// musculação padrão. Ainda sem foto real de cada máquina da Chico's Gym.
-export const machines: Machine[] = [
-  { id: "supino-maquina", name: "Supino Máquina", category: "Superior", muscle: "Peitoral", tip: "Mantenha os ombros para trás e desça até a altura do peito, sem travar o cotovelo no topo." },
-  { id: "puxada-alta", name: "Puxada Alta (Pulley)", category: "Superior", muscle: "Costas", tip: "Puxe levando os cotovelos para baixo e para trás, sem balançar o tronco." },
-  { id: "desenvolvimento-ombros", name: "Desenvolvimento de Ombros", category: "Superior", muscle: "Ombros", tip: "Empurre o peso sem hiperestender a lombar; controle a descida." },
-  { id: "remada-baixa", name: "Remada Baixa", category: "Superior", muscle: "Costas", tip: "Coluna neutra, puxando o cabo até o abdômen e apertando as escápulas." },
-  { id: "rosca-biceps", name: "Rosca Direta", category: "Superior", muscle: "Bíceps", tip: "Evite balançar o corpo — o movimento deve vir só do cotovelo." },
-  { id: "triceps-pulley", name: "Tríceps Pulley", category: "Superior", muscle: "Tríceps", tip: "Cotovelos fixos ao lado do corpo durante toda a extensão." },
-  { id: "leg-press", name: "Leg Press 45°", category: "Inferior", muscle: "Quadríceps e Glúteos", tip: "Não trave os joelhos no topo; pés na largura dos ombros." },
-  { id: "cadeira-extensora", name: "Cadeira Extensora", category: "Inferior", muscle: "Quadríceps", tip: "Suba controlado e pause um instante no topo antes de descer." },
-  { id: "mesa-flexora", name: "Mesa Flexora", category: "Inferior", muscle: "Posterior de Coxa", tip: "Evite elevar o quadril do banco durante a flexão." },
-  { id: "cadeira-abdutora", name: "Cadeira Abdutora", category: "Inferior", muscle: "Glúteos", tip: "Movimento controlado, sem usar impulso do tronco." },
-  { id: "panturrilha-em-pe", name: "Panturrilha em Pé", category: "Inferior", muscle: "Panturrilha", tip: "Amplitude completa: alongue bem embaixo e suba até a ponta do pé." },
-  { id: "banco-abdominal", name: "Banco Abdominal", category: "Core", muscle: "Abdômen", tip: "O movimento vem do tronco, não do pescoço." },
-  { id: "mesa-lombar", name: "Mesa Lombar", category: "Core", muscle: "Lombar", tip: "Suba até alinhar a coluna, sem hiperestender além da linha reta." },
-  { id: "esteira", name: "Esteira", category: "Cardio", muscle: "Cardiovascular", tip: "Comece com 3-5 min de caminhada leve antes de acelerar o ritmo." },
-  { id: "bike-ergometrica", name: "Bike Ergométrica", category: "Cardio", muscle: "Cardiovascular", tip: "Ajuste o banco na altura do quadril para não sobrecarregar o joelho." },
-  { id: "eliptico", name: "Elíptico", category: "Cardio", muscle: "Cardiovascular", tip: "Postura ereta, apoiando pouco peso nos braços." },
-  { id: "barra-livre", name: "Barra Olímpica", category: "Peso Livre", muscle: "Corpo todo", tip: "Em agachamento e levantamento terra, mantenha a coluna neutra do início ao fim." },
-  { id: "halteres", name: "Halteres", category: "Peso Livre", muscle: "Corpo todo", tip: "Escolha uma carga em que as últimas repetições fiquem desafiadoras, mas com boa execução." },
 ]
 
 export type MuscleGroup = "peito" | "costas" | "pernas" | "ombros" | "bracos" | "core" | "cardio"

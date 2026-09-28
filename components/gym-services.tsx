@@ -1,11 +1,8 @@
 import Link from "next/link"
 import * as Icons from "lucide-react"
-import { brand, gymServices } from "@/lib/data"
+import { gymServices } from "@/lib/data"
 import { SectionHeading } from "./section-heading"
 import { Reveal } from "./reveal"
-
-const linkClass =
-  "mt-auto inline-flex items-center gap-2 pt-2 text-xs font-semibold uppercase tracking-[0.15em] text-offwhite/70 transition-colors hover:text-orange"
 
 export function GymServices() {
   return (
@@ -28,31 +25,21 @@ export function GymServices() {
                   </div>
                   <h3 className="font-display text-xl uppercase tracking-wide text-offwhite">{service.title}</h3>
                   <p className="text-sm leading-relaxed text-offwhite/60">{service.description}</p>
-                  {service.partnerId ? (
-                    <Link href="/parcerias" data-cursor-hover className={linkClass}>
+                  {service.partnerId && (
+                    <Link
+                      href="/parcerias"
+                      data-cursor-hover
+                      className="mt-auto inline-flex items-center gap-2 pt-2 text-xs font-semibold uppercase tracking-[0.15em] text-offwhite/70 transition-colors hover:text-orange"
+                    >
                       Ver parceria
                       <Icons.ArrowUpRight size={14} />
                     </Link>
-                  ) : (
-                    <a
-                      href={`https://wa.me/${brand.whatsapp}?text=${encodeURIComponent(
-                        `Olá! Quero saber mais sobre: ${service.title}`
-                      )}`}
-                      target="_blank"
-                      rel="noreferrer"
-                      data-cursor-hover
-                      className={linkClass}
-                    >
-                      <Icons.MessageCircle size={14} />
-                      Falar no WhatsApp
-                    </a>
                   )}
                 </div>
               </Reveal>
             )
           })}
         </div>
-
       </div>
     </section>
   )
