@@ -199,35 +199,55 @@ export type TeamMember = {
   id: string
   name: string
   role: string
-  specialty: string
+  description?: string
   cref?: string
   image?: string
 }
 
+// Equipe real, enviada pela Chico's Gym. As imagens são ilustrações
+// provisórias até chegarem as fotos de cada um.
 export const team: TeamMember[] = [
   {
-    id: "chico",
-    name: 'Francisco "Chico" Almeida',
-    role: "Fundador & Head Coach",
-    specialty: "Musculação e Powerlifting",
+    id: "charles-kercher",
+    name: "Charles Kercher",
+    role: "Instrutor / Treinador",
+    cref: "CREF 041241-G/RS",
+    description: "Atendimento geral na academia, instrução de alunos e personal.",
+    image: "/images/team/charles-kercher.webp",
   },
   {
-    id: "bruno",
-    name: "Bruno Ramires",
-    role: "Personal Trainer",
-    specialty: "Treino Funcional e HIIT",
+    id: "julie-lima",
+    name: "Julie Lima",
+    role: "Secretária",
+    description: "Atende na recepção e auxilia os alunos que precisam de ajuda.",
+    image: "/images/team/julie-lima.webp",
   },
   {
-    id: "camila",
-    name: "Camila Duarte",
-    role: "Personal Trainer",
-    specialty: "Spinning e Condicionamento",
+    id: "alecsander-muriel",
+    name: "Alecsander Muriel",
+    role: "Atendente geral",
+    description: "Atende na recepção e auxilia os alunos que precisam de ajuda.",
+    image: "/images/team/alecsander-muriel.webp",
   },
   {
-    id: "rafael",
-    name: "Rafael Costa",
-    role: "Personal Trainer",
-    specialty: "Musculação e Hipertrofia",
+    id: "vitor-magalhaes",
+    name: "Vitor Magalhães",
+    role: "Estagiário de Educação Física",
+    image: "/images/team/vitor-magalhaes.webp",
+  },
+  {
+    id: "jean-schiavi",
+    name: "Jean Schiavi",
+    role: "Gerente",
+    description: "Atendimentos, serviços gerais e instrução de alunos.",
+    image: "/images/team/jean-schiavi.webp",
+  },
+  {
+    id: "samuel-retore",
+    name: "Samuel Retore",
+    role: "Gerente",
+    description: "Responsável pela administração e pelo financeiro da academia.",
+    image: "/images/team/samuel-retore.webp",
   },
 ]
 

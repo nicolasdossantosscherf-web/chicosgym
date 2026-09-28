@@ -10,30 +10,39 @@ export function Team() {
       <div className="mx-auto max-w-7xl px-6 md:px-10">
         <SectionHeading
           eyebrow="Equipe"
-          title="Profissionais que treinam junto com você"
-          description="Passe o mouse: a foto em preto e branco ganha cor. Cada profissional com CREF ativo e especialidade própria."
+          title="Quem faz a Chico's Gym acontecer"
+          description="As pessoas que recebem você, orientam seu treino e cuidam da academia no dia a dia."
         />
 
-        <div className="mt-14 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-14 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {team.map((member, i) => (
-            <Reveal key={member.id} delay={i * 90}>
-              <div className="group flex flex-col overflow-hidden rounded-sm border border-line bg-carbon">
+            <Reveal key={member.id} delay={(i % 3) * 90} className="h-full">
+              <div className="group flex h-full flex-col overflow-hidden rounded-sm border border-line bg-carbon">
                 <div className="relative aspect-[3/4]">
-                  <TiltImage src={member.image} alt={member.name} label="Foto do profissional" desaturate className="h-full w-full" />
+                  <TiltImage
+                    src={member.image}
+                    alt={`Ilustração de ${member.name}`}
+                    label="Foto do profissional"
+                    desaturate
+                    sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                    className="h-full w-full"
+                  />
                 </div>
-                <div className="flex flex-col gap-1 p-5">
-                  <h3 className="font-display text-xl uppercase tracking-wide text-offwhite">{member.name}</h3>
+                <div className="flex flex-1 flex-col gap-1 p-5">
+                  <h3 className="font-display text-2xl uppercase tracking-wide text-offwhite">{member.name}</h3>
                   <span className="text-xs font-semibold uppercase tracking-[0.2em] text-orange">{member.role}</span>
-                  <p className="mt-1 text-sm text-offwhite/60">{member.specialty}</p>
-                  <p className="text-[11px] uppercase tracking-[0.15em] text-offwhite/35">
-                    {member.cref ?? "CREF a confirmar"}
-                  </p>
+                  {member.cref && (
+                    <span className="text-[11px] uppercase tracking-[0.15em] text-offwhite/45">{member.cref}</span>
+                  )}
+                  {member.description && <p className="mt-2 text-sm text-offwhite/60">{member.description}</p>}
                   <a
-                    href={`https://wa.me/${brand.whatsapp}`}
+                    href={`https://wa.me/${brand.whatsapp}?text=${encodeURIComponent(
+                      `Olá! Gostaria de falar com ${member.name}.`
+                    )}`}
                     target="_blank"
                     rel="noreferrer"
                     data-cursor-hover
-                    className="mt-4 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.15em] text-offwhite/70 transition-colors hover:text-orange"
+                    className="mt-auto inline-flex items-center gap-2 pt-4 text-xs font-semibold uppercase tracking-[0.15em] text-offwhite/70 transition-colors hover:text-orange"
                   >
                     <MessageCircle size={14} />
                     Falar no WhatsApp
