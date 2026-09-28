@@ -57,12 +57,6 @@ export const sitePages: SitePage[] = [
     icon: "Users",
   },
   {
-    href: "/modalidades",
-    label: "Modalidades",
-    description: "Musculação, funcional, spinning, cardio e mais.",
-    icon: "Dumbbell",
-  },
-  {
     href: "/maquinas",
     label: "Máquinas",
     description: "Catálogo de equipamentos por grupo muscular, com dicas de uso.",
@@ -255,23 +249,6 @@ export const team: TeamMember[] = [
     description: "Responsável pela administração e pelo financeiro da academia.",
     image: "/images/team/samuel-retore.webp",
   },
-]
-
-export type ServiceItem = {
-  id: string
-  title: string
-  description: string
-  icon: string // nome do ícone lucide-react
-}
-
-export const services: ServiceItem[] = [
-  { id: "musculacao", title: "Musculação", description: "Parque completo de máquinas e peso livre.", icon: "Dumbbell" },
-  { id: "funcional", title: "Treino Funcional", description: "Aulas em grupo de alta intensidade.", icon: "Flame" },
-  { id: "spinning", title: "Spinning", description: "Aulas cênicas com música e iluminação imersiva.", icon: "Bike" },
-  { id: "cardio", title: "Cardio", description: "Esteiras, bikes e elípticos de última geração.", icon: "HeartPulse" },
-  { id: "avaliacao", title: "Avaliação Física", description: "Diagnóstico completo antes de começar.", icon: "ClipboardCheck" },
-  { id: "personal", title: "Personal Trainer", description: "Acompanhamento individual dedicado.", icon: "UserCheck" },
-  { id: "nutricao", title: "Nutrição Parceira", description: "Rede de nutricionistas parceiros.", icon: "Apple" },
 ]
 
 export type Plan = {
@@ -765,23 +742,6 @@ export const faqs: FaqItem[] = [
     question: "O personal trainer está incluso na mensalidade?",
     answer: "A avaliação física inicial está inclusa em todos os planos. Acompanhamento contínuo com personal trainer é um serviço à parte — fale com a equipe.",
   },
-]
-
-export type ScheduleSlot = { day: string; time: string; modality: string }
-
-// Grade de horários — ainda um modelo de referência, não a grade oficial da
-// Chico's Gym. Ajustar aqui assim que a academia confirmar os horários reais.
-export const classSchedule: ScheduleSlot[] = [
-  { day: "Segunda", time: "06h00", modality: "Spinning" },
-  { day: "Segunda", time: "19h00", modality: "Funcional" },
-  { day: "Terça", time: "07h00", modality: "Funcional" },
-  { day: "Terça", time: "18h30", modality: "Spinning" },
-  { day: "Quarta", time: "06h00", modality: "Spinning" },
-  { day: "Quarta", time: "19h00", modality: "Funcional" },
-  { day: "Quinta", time: "07h00", modality: "Funcional" },
-  { day: "Quinta", time: "18h30", modality: "Spinning" },
-  { day: "Sexta", time: "06h00", modality: "Spinning" },
-  { day: "Sábado", time: "09h30", modality: "Funcional" },
 ]
 
 export type ResultItem = { id: string; caption: string; image?: string }
