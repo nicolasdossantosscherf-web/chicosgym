@@ -87,12 +87,6 @@ export const sitePages: SitePage[] = [
     icon: "Wallet",
   },
   {
-    href: "/parcerias",
-    label: "Parcerias",
-    description: "Nutricionista, massoterapeuta e outros parceiros com desconto pra alunos.",
-    icon: "Handshake",
-  },
-  {
     href: "/local",
     label: "Local e Horários",
     description: "Endereço, mapa e horário de funcionamento da Chico's Gym.",
@@ -103,6 +97,12 @@ export const sitePages: SitePage[] = [
     label: "Contato",
     description: "Um jeito rápido de falar com a gente e tirar dúvidas.",
     icon: "MessageCircle",
+  },
+  {
+    href: "/parcerias",
+    label: "Parcerias",
+    description: "Wizard, massoterapeuta e nutricionista, com condições especiais pra alunos.",
+    icon: "Handshake",
   },
 ]
 
@@ -337,15 +337,11 @@ export type Partner = {
 // cartazes de divulgação enviados pela academia.
 export const partners: Partner[] = [
   {
-    id: "maura-dupont",
-    name: "Maura Dupont de Oliveira",
-    role: "Nutricionista",
-    registry: "CRN2 18612D",
-    image: { src: "/images/partners/maura-dupont.webp", width: 1122, height: 1402 },
-    highlights: ["Especializada em nutrição esportiva", "Pós-graduada em fisiologia do exercício"],
-    benefit: "Alunos da Chico's Gym têm desconto nas consultas.",
-    schedule: "Atendimentos aos sábados de manhã, na academia.",
-    bookable: true,
+    id: "wizard",
+    name: "Wizard by Pearson",
+    role: "Escola de idiomas",
+    logo: "/images/partners/wizard.png",
+    description: "Detalhes da parceria em breve.",
   },
   {
     id: "felipe-farias",
@@ -359,11 +355,15 @@ export const partners: Partner[] = [
     bookable: true,
   },
   {
-    id: "wizard",
-    name: "Wizard by Pearson",
-    role: "Escola de idiomas",
-    logo: "/images/partners/wizard.png",
-    description: "Detalhes da parceria em breve.",
+    id: "maura-dupont",
+    name: "Maura Dupont de Oliveira",
+    role: "Nutricionista",
+    registry: "CRN2 18612D",
+    image: { src: "/images/partners/maura-dupont.webp", width: 1122, height: 1402 },
+    highlights: ["Especializada em nutrição esportiva", "Pós-graduada em fisiologia do exercício"],
+    benefit: "Alunos da Chico's Gym têm desconto nas consultas.",
+    schedule: "Atendimentos aos sábados de manhã, na academia.",
+    bookable: true,
   },
 ]
 

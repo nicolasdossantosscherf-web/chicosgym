@@ -1,7 +1,6 @@
-import Image from "next/image"
 import Link from "next/link"
 import * as Icons from "lucide-react"
-import { brand, gymServices, partners } from "@/lib/data"
+import { brand, gymServices } from "@/lib/data"
 import { SectionHeading } from "./section-heading"
 import { Reveal } from "./reveal"
 
@@ -9,8 +8,6 @@ const linkClass =
   "mt-auto inline-flex items-center gap-2 pt-2 text-xs font-semibold uppercase tracking-[0.15em] text-offwhite/70 transition-colors hover:text-orange"
 
 export function GymServices() {
-  const flyers = partners.filter((p) => p.image)
-
   return (
     <section className="relative border-t border-line bg-carbon py-24 md:py-32">
       <div className="mx-auto max-w-7xl px-6 md:px-10">
@@ -56,28 +53,6 @@ export function GymServices() {
           })}
         </div>
 
-        {flyers.length > 0 && (
-          <div className="mt-12 grid grid-cols-1 items-start gap-6 md:grid-cols-2">
-            {flyers.map((partner, i) => (
-              <Reveal key={partner.id} delay={i * 100}>
-                <Link href="/parcerias" data-cursor-hover className="group block">
-                  <Image
-                    src={partner.image!.src}
-                    alt={`Cartaz da parceria da Chico's Gym com ${partner.name}`}
-                    width={partner.image!.width}
-                    height={partner.image!.height}
-                    sizes="(min-width: 768px) 45vw, 100vw"
-                    className="h-auto w-full rounded-sm border border-line transition-colors group-hover:border-orange/60"
-                  />
-                  <span className="mt-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.15em] text-offwhite/60 transition-colors group-hover:text-orange">
-                    {partner.role}: {partner.name}
-                    <Icons.ArrowUpRight size={14} />
-                  </span>
-                </Link>
-              </Reveal>
-            ))}
-          </div>
-        )}
       </div>
     </section>
   )
