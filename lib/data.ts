@@ -83,8 +83,14 @@ export const sitePages: SitePage[] = [
   {
     href: "/planos",
     label: "Planos e Serviços",
-    description: "Compare os planos e veja quanto você economiza.",
+    description: "Compare os planos e conheça os serviços extras da academia.",
     icon: "Wallet",
+  },
+  {
+    href: "/parcerias",
+    label: "Parcerias",
+    description: "Nutricionista, massoterapeuta e outros parceiros com desconto pra alunos.",
+    icon: "Handshake",
   },
   {
     href: "/local",
@@ -313,26 +319,90 @@ export const plans: Plan[] = [
 export type Partner = {
   id: string
   name: string
-  description: string
+  role: string
+  registry?: string
+  // Cartaz de divulgação da parceria (com as dimensões reais, pra não cortar o texto).
+  image?: { src: string; width: number; height: number }
   logo?: string
-  faqs?: FaqItem[]
+  description?: string
+  highlights?: string[]
+  benefit?: string
+  schedule?: string
+  instagram?: string
+  // Profissional com agenda: o botão vira "Agendar pelo WhatsApp".
+  bookable?: boolean
 }
 
-// Parcerias confirmadas pela Chico's Gym — só o nome ainda é certo; os
-// detalhes de cada benefício (e as perguntas específicas de cada parceiro)
-// chegam conforme a academia for confirmando.
+// Parcerias confirmadas pela Chico's Gym. Os dados dos profissionais vêm dos
+// cartazes de divulgação enviados pela academia.
 export const partners: Partner[] = [
+  {
+    id: "maura-dupont",
+    name: "Maura Dupont de Oliveira",
+    role: "Nutricionista",
+    registry: "CRN2 18612D",
+    image: { src: "/images/partners/maura-dupont.webp", width: 1122, height: 1402 },
+    highlights: ["Especializada em nutrição esportiva", "Pós-graduada em fisiologia do exercício"],
+    benefit: "Alunos da Chico's Gym têm desconto nas consultas.",
+    schedule: "Atendimentos aos sábados de manhã, na academia.",
+    bookable: true,
+  },
+  {
+    id: "felipe-farias",
+    name: "Felipe Farias",
+    role: "Massoterapeuta",
+    image: { src: "/images/partners/felipe-farias.webp", width: 1254, height: 1254 },
+    highlights: ["Tratamento da dor", "Massoterapia", "Liberação miofascial", "Ventosaterapia"],
+    benefit: "Alunos da academia têm desconto nas sessões e a 1ª avaliação é gratuita.",
+    schedule: "Atendimentos presenciais na academia.",
+    instagram: "felipefarias_neto",
+    bookable: true,
+  },
   {
     id: "wizard",
     name: "Wizard by Pearson",
-    description: "Detalhes da parceria em breve.",
+    role: "Escola de idiomas",
     logo: "/images/partners/wizard.png",
-    faqs: [
-      {
-        question: "Qual é o benefício da parceria com a Wizard?",
-        answer: "Ainda não confirmado — assim que a academia definir as condições, atualizamos aqui.",
-      },
-    ],
+    description: "Detalhes da parceria em breve.",
+  },
+]
+
+export type GymService = {
+  id: string
+  title: string
+  description: string
+  icon: string // nome do ícone lucide-react
+  // Quando o serviço é feito por um parceiro, o card leva pra página de parcerias.
+  partnerId?: string
+}
+
+// Serviços extras da academia (página Planos e Serviços), enviados pela Chico's Gym.
+export const gymServices: GymService[] = [
+  {
+    id: "avaliacao-fisica",
+    title: "1ª avaliação física grátis",
+    description: "Sua primeira avaliação física na academia é por nossa conta.",
+    icon: "ClipboardCheck",
+  },
+  {
+    id: "nutricionista",
+    title: "Nutricionista",
+    description: "Maura Dupont de Oliveira, especializada em nutrição esportiva. Alunos têm desconto nas consultas.",
+    icon: "Apple",
+    partnerId: "maura-dupont",
+  },
+  {
+    id: "massoterapeuta",
+    title: "Massoterapeuta",
+    description: "Felipe Farias: tratamento da dor, massoterapia, liberação miofascial e ventosaterapia, com desconto pra alunos.",
+    icon: "HandHeart",
+    partnerId: "felipe-farias",
+  },
+  {
+    id: "personal",
+    title: "Personal",
+    description: "Acompanhamento individual no seu treino, com a equipe da academia.",
+    icon: "UserCheck",
   },
 ]
 
@@ -681,7 +751,7 @@ export const faqs: FaqItem[] = [
   {
     question: "Vocês têm parceria com nutricionista e massoterapeuta?",
     answer:
-      "Sim — alunos ganham desconto em nutricionista e massoterapeuta parceiros, com atendimento presencial na própria academia.",
+      "Sim — Maura Dupont de Oliveira (nutricionista) e Felipe Farias (massoterapeuta) atendem na própria academia, com desconto pra alunos. Veja os detalhes na página de Parcerias.",
   },
   {
     question: "O que levar no primeiro dia?",

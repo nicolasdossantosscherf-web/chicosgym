@@ -1,92 +1,127 @@
-"use client"
-
-import { useState } from "react"
 import Image from "next/image"
-import { MessageCircle } from "lucide-react"
-import { brand, partners } from "@/lib/data"
+import { Camera, Check, MapPin, MessageCircle, Percent } from "lucide-react"
+import { brand, partners, type Partner } from "@/lib/data"
 import { SectionHeading } from "./section-heading"
 import { Reveal } from "./reveal"
 import { Magnetic } from "./magnetic"
 
-export function Partners() {
-  const [selectedId, setSelectedId] = useState<string | null>(partners[0]?.id ?? null)
-  const active = partners.find((partner) => partner.id === selectedId)
+function PartnerVisual({ partner }: { partner: Partner }) {
+  if (partner.image) {
+    return (
+      <Image
+        src={partner.image.src}
+        alt={`Cartaz da parceria da Chico's Gym com ${partner.name}`}
+        width={partner.image.width}
+        height={partner.image.height}
+        sizes="(min-width: 1024px) 45vw, 100vw"
+        className="h-auto w-full rounded-sm border border-line"
+      />
+    )
+  }
+  return (
+    <div className="flex aspect-[4/3] items-center justify-center rounded-sm border border-line bg-carbon p-10">
+      {partner.logo && (
+        <Image src={partner.logo} alt={partner.name} width={300} height={70} className="h-auto w-3/4 max-w-xs" />
+      )}
+    </div>
+  )
+}
+
+function PartnerRow({ partner, index }: { partner: Partner; index: number }) {
+  const message = partner.bookable
+    ? `Olá! Vi no site a parceria com ${partner.name} (${partner.role}) e quero agendar um horário.`
+    : `Olá! Quero saber mais sobre a parceria com ${partner.name}.`
 
   return (
-    <section className="relative border-t border-line bg-ink py-24 md:py-32">
-      <div className="mx-auto max-w-3xl px-6 md:px-10">
-        <SectionHeading
-          eyebrow="Parceiros"
-          title="Marcas parceiras"
-          description="Toque em um parceiro para ver os detalhes e falar direto sobre essa parceria."
-          align="center"
-        />
+    <article className="grid grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-16">
+      <Reveal className={index % 2 === 1 ? "lg:order-2" : ""}>
+        <PartnerVisual partner={partner} />
+      </Reveal>
 
-        <div className="mt-12 flex flex-wrap justify-center gap-4">
-          {partners.map((partner) => {
-            const isActive = partner.id === selectedId
-            return (
-              <button
-                key={partner.id}
-                type="button"
-                onClick={() => setSelectedId(isActive ? null : partner.id)}
-                data-cursor-hover
-                aria-pressed={isActive}
-                className={`flex h-20 w-44 items-center justify-center rounded-sm border p-5 transition-colors ${
-                  isActive ? "border-orange bg-carbon" : "border-line bg-carbon/60 hover:border-orange/40"
-                }`}
-              >
-                {partner.logo ? (
-                  <Image
-                    src={partner.logo}
-                    alt={partner.name}
-                    width={140}
-                    height={48}
-                    className="h-10 w-auto object-contain"
-                  />
-                ) : (
-                  <span className="font-display text-sm uppercase tracking-wide text-offwhite/70">{partner.name}</span>
-                )}
-              </button>
-            )
-          })}
+      <Reveal delay={120} className="flex flex-col gap-6">
+        <div>
+          <span className="inline-block rounded-full bg-orange px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-ink">
+            {partner.role}
+          </span>
+          <h2 className="mt-4 font-display text-4xl uppercase leading-[0.95] tracking-wide text-offwhite md:text-5xl">
+            {partner.name}
+          </h2>
+          {partner.registry && (
+            <p className="mt-2 text-xs uppercase tracking-[0.3em] text-offwhite/45">{partner.registry}</p>
+          )}
+          {partner.description && <p className="mt-3 text-sm text-offwhite/60">{partner.description}</p>}
         </div>
 
-        {active && (
-          <Reveal delay={80} className="mt-10">
-            <div className="rounded-sm border border-line bg-carbon p-8">
-              <h3 className="font-display text-xl uppercase tracking-wide text-offwhite">{active.name}</h3>
-
-              <div className="mt-4 flex flex-col divide-y divide-line border-y border-line">
-                {(active.faqs?.length ? active.faqs : [{ question: "Detalhes da parceria", answer: active.description }]).map(
-                  (item) => (
-                    <div key={item.question} className="py-4">
-                      <span className="text-sm font-semibold uppercase tracking-[0.15em] text-offwhite/80">
-                        {item.question}
-                      </span>
-                      <p className="mt-2 text-sm leading-relaxed text-offwhite/60">{item.answer}</p>
-                    </div>
-                  )
-                )}
-              </div>
-
-              <Magnetic className="mt-6 w-fit">
-                <a
-                  href={`https://wa.me/${brand.whatsapp}?text=${encodeURIComponent(
-                    `Quero saber mais sobre a parceria da Chico's Gym com a ${active.name}`
-                  )}`}
-                  target="_blank"
-                  rel="noreferrer"
-                  data-cursor-hover
-                  className="inline-flex items-center gap-2 rounded-sm bg-orange px-6 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-ink transition-colors hover:bg-gold"
-                >
-                  <MessageCircle size={14} />
-                  Falar sobre essa parceria
-                </a>
-              </Magnetic>
-            </div>
-          </Reveal>
+        {partner.highlights && (
+          <ul className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
+            {partner.highlights.map((item) => (
+              <li key={item} className="flex items-start gap-2 text-sm text-offwhite/75">
+                <Check size={16} className="mt-0.5 shrink-0 text-orange" />
+                {item}
+              </li>
+            ))}
+          </ul>
         )}
+
+        {partner.benefit && (
+          <div className="flex items-start gap-3 rounded-sm border border-orange/40 bg-orange/10 p-4">
+            <Percent size={18} className="mt-0.5 shrink-0 text-orange" />
+            <p className="text-sm text-offwhite">{partner.benefit}</p>
+          </div>
+        )}
+
+        {partner.schedule && (
+          <p className="flex items-start gap-2 text-sm text-offwhite/60">
+            <MapPin size={16} className="mt-0.5 shrink-0 text-orange" />
+            {partner.schedule}
+          </p>
+        )}
+
+        <div className="flex flex-wrap items-center gap-5">
+          <Magnetic>
+            <a
+              href={`https://wa.me/${brand.whatsapp}?text=${encodeURIComponent(message)}`}
+              target="_blank"
+              rel="noreferrer"
+              data-cursor-hover
+              className="inline-flex items-center gap-2 rounded-sm bg-orange px-6 py-3.5 text-xs font-semibold uppercase tracking-[0.2em] text-ink transition-colors hover:bg-gold"
+            >
+              <MessageCircle size={14} />
+              {partner.bookable ? "Agendar pelo WhatsApp" : "Saber mais pelo WhatsApp"}
+            </a>
+          </Magnetic>
+          {partner.instagram && (
+            <a
+              href={`https://www.instagram.com/${partner.instagram}`}
+              target="_blank"
+              rel="noreferrer"
+              data-cursor-hover
+              className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.15em] text-offwhite/70 transition-colors hover:text-orange"
+            >
+              <Camera size={16} />@{partner.instagram}
+            </a>
+          )}
+        </div>
+      </Reveal>
+    </article>
+  )
+}
+
+export function Partners() {
+  return (
+    <section className="relative bg-ink py-24 md:py-32">
+      <div className="mx-auto max-w-7xl px-6 md:px-10">
+        <SectionHeading
+          eyebrow="Parcerias"
+          title="Parceiros da Chico's Gym"
+          description="Profissionais e marcas parceiras, com condições especiais pra quem treina com a gente."
+        />
+
+        <div className="mt-16 flex flex-col gap-20 md:gap-28">
+          {partners.map((partner, i) => (
+            <PartnerRow key={partner.id} partner={partner} index={i} />
+          ))}
+        </div>
       </div>
     </section>
   )

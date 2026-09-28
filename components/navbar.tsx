@@ -81,7 +81,10 @@ export function Navbar() {
       </div>
 
       {open && (
-        <div className="max-h-[75vh] overflow-y-auto border-t border-line bg-ink px-6 py-2 md:px-10">
+        <div
+          data-lenis-prevent
+          className="max-h-[75vh] overflow-y-auto overscroll-contain border-t border-line bg-ink px-6 py-2 md:px-10"
+        >
           <nav className="mx-auto flex max-w-7xl flex-col divide-y divide-line">
             {links.map((link) => (
               <Link
