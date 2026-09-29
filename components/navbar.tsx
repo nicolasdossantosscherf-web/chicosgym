@@ -45,7 +45,7 @@ export function Navbar() {
         <Link href="/" className="flex items-center gap-2.5" data-cursor-hover>
           <Image src={brand.logo} alt="Chico's Gym" width={40} height={40} className="h-10 w-10 rounded-full" />
           <span className="font-display text-2xl uppercase tracking-widest text-offwhite">
-            Chico&apos;s <span className="text-orange">Gym</span>
+            Chico&apos;s Gym
           </span>
         </Link>
 

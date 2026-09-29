@@ -12,7 +12,7 @@ export function Footer() {
             <div className="flex items-center gap-2.5">
               <Image src={brand.logo} alt="Chico's Gym" width={36} height={36} className="h-9 w-9 rounded-full" />
               <span className="font-display text-2xl uppercase tracking-widest text-offwhite">
-                Chico&apos;s <span className="text-orange">Gym</span>
+                Chico&apos;s Gym
               </span>
             </div>
             <p className="mt-3 max-w-xs text-sm text-offwhite/50">{brand.tagline}</p>
