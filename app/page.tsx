@@ -3,7 +3,6 @@ import { StatsBar } from "@/components/stats-bar";
 import { ExploreGrid } from "@/components/explore-grid";
 import { Testimonials } from "@/components/testimonials";
 import { ResultsGallery } from "@/components/results-gallery";
-import { CtaBanner } from "@/components/cta-banner";
 
 export default function Home() {
   return (
@@ -13,7 +12,6 @@ export default function Home() {
       <ExploreGrid />
       <Testimonials />
       <ResultsGallery />
-      <CtaBanner />
     </main>
   );
 }
