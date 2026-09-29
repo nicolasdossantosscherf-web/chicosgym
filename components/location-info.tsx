@@ -1,5 +1,5 @@
 import Image from "next/image"
-import { Clock, Mail, MapPin } from "lucide-react"
+import { Clock } from "lucide-react"
 import { brand } from "@/lib/data"
 import { SectionHeading } from "./section-heading"
 import { Reveal } from "./reveal"
@@ -16,7 +16,7 @@ export function LocationInfo() {
         />
 
         <div className="mt-14 grid grid-cols-1 gap-6 lg:grid-cols-2">
-          <Reveal className="flex flex-col gap-6">
+          <Reveal>
             <div className="relative aspect-[4/3] overflow-hidden rounded-sm border border-line">
               <Image
                 src="/images/tour/fachada.jpg"
@@ -29,31 +29,34 @@ export function LocationInfo() {
                 <span className="text-xs uppercase tracking-[0.2em] text-offwhite/70">{brand.address}</span>
               </div>
             </div>
-            <div className="grid grid-cols-1 gap-4 rounded-sm border border-line bg-carbon p-6 sm:grid-cols-2">
-              <div className="flex items-start gap-3">
-                <MapPin size={18} className="mt-0.5 shrink-0 text-orange" />
-                <span className="text-sm text-offwhite/70">{brand.address}</span>
-              </div>
-              <div className="flex items-start gap-3">
-                <Mail size={18} className="mt-0.5 shrink-0 text-orange" />
-                <span className="text-sm text-offwhite/70">{brand.email}</span>
-              </div>
-              <div className="col-span-full flex items-start gap-3">
-                <Clock size={18} className="mt-0.5 shrink-0 text-orange" />
-                <div className="flex flex-col gap-0.5 text-sm text-offwhite/70">
-                  {brand.hours.map((h) => (
-                    <span key={h.label}>
-                      <span className="text-offwhite/45">{h.label}:</span> {h.value}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
           </Reveal>
           <Reveal delay={120}>
             <LocationMap />
           </Reveal>
         </div>
+
+        <Reveal delay={200} className="mx-auto mt-6 max-w-4xl">
+          <div className="rounded-sm border border-orange/40 bg-carbon px-6 py-10 md:px-10">
+            <div className="flex items-center justify-center gap-3 text-orange">
+              <Clock size={20} />
+              <span className="text-xs font-semibold uppercase tracking-[0.3em]">Horário de funcionamento</span>
+            </div>
+
+            <div className="mt-8 grid grid-cols-1 gap-8 sm:grid-cols-3 sm:gap-0 sm:divide-x sm:divide-line">
+              {brand.hours.map((h) => (
+                <div key={h.label} className="flex flex-col items-center gap-2 text-center sm:px-4">
+                  <span className="text-xs font-semibold uppercase tracking-[0.2em] text-offwhite/50">{h.label}</span>
+                  {h.times.map((time) => (
+                    <span key={time} className="font-display text-4xl uppercase leading-none text-offwhite md:text-5xl">
+                      {time}
+                    </span>
+                  ))}
+                  {h.note && <span className="text-xs text-orange">{h.note}</span>}
+                </div>
+              ))}
+            </div>
+          </div>
+        </Reveal>
       </div>
     </section>
   )

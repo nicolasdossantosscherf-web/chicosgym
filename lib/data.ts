@@ -17,9 +17,9 @@ export const brand = {
   address: "Rua Rio de Janeiro, 192, Centro, Três de Maio - RS, 98910-000 (ao lado da Trapus)",
   // Horários reais, tirados da placa fixada na entrada da academia.
   hours: [
-    { label: "Segunda a sexta", value: "05h às 00h (sem fechar ao meio-dia)" },
-    { label: "Sábados e feriados", value: "09h-12h e 15h-18h" },
-    { label: "Domingos", value: "16h-19h" },
+    { label: "Segunda a sexta", times: ["05h às 00h"], note: "Sem fechar ao meio-dia" },
+    { label: "Sábados e feriados", times: ["09h às 12h", "15h às 18h"] },
+    { label: "Domingos", times: ["16h às 19h"] },
   ],
   socials: [
     { label: "Instagram", href: "https://www.instagram.com/_chicosgym", icon: "Camera" },
