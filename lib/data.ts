@@ -601,7 +601,27 @@ export type Testimonial = {
 
 // Só feedbacks reais de alunos da academia. Enquanto a lista estiver vazia,
 // a seção de feedbacks não aparece na página inicial.
-export const testimonials: Testimonial[] = []
+export const testimonials: Testimonial[] = [
+  {
+    name: "Leonardo Leonhardt",
+    quote: "Dou nota 10, gosto bastante de treinar e tenho todos os equipamentos/pesos que preciso.",
+  },
+  {
+    name: "Victoria Mendonça",
+    quote:
+      "Gosto muito de treinar aí! O ambiente é super agradável e os professores/equipe são muito atenciosos. A estrutura e os equipamentos também são excelentes. Parabéns.",
+  },
+  {
+    name: "Lara Sivers",
+    quote:
+      "Minha experiência na academia tem sido muito boa! Gosto bastante da estrutura e dos equipamentos, e a equipe é atenciosa e prestativa.",
+  },
+  {
+    name: "Vera Santana",
+    quote:
+      "Minha experiência com a academia tem sido extremamente positiva, desde o primeiro contato para realizar a matrícula até cada dia de treino. Quero destacar a excelente recepção, a cordialidade e a atenção de toda a equipe, que fazem a diferença desde o primeiro momento. O atendimento é acolhedor, organizado e transmite profissionalismo e confiança.",
+  },
+]
 
 export type MuscleGroup = "peito" | "costas" | "pernas" | "ombros" | "bracos" | "core" | "cardio"
 

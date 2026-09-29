@@ -10,9 +10,10 @@ export function Testimonials() {
     <section className="relative overflow-hidden bg-carbon py-20 md:py-24">
       <div className="mx-auto max-w-7xl px-6 md:px-10">
         <SectionHeading eyebrow="Depoimentos" title="Feedbacks de nossos alunos" align="center" />
-        <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
+        {/* Até 3 por linha; com menos de 3, os cards ficam centralizados. */}
+        <div className="mt-12 flex flex-col gap-6 md:flex-row md:flex-wrap md:justify-center">
           {testimonials.map((t, i) => (
-            <Reveal key={t.name} delay={i * 90}>
+            <Reveal key={t.name} delay={(i % 3) * 90} className="md:basis-[calc((100%-3rem)/3)]">
               <div className="flex h-full flex-col gap-4 rounded-sm border border-line bg-ink p-7">
                 <Quote className="text-orange" size={22} />
                 <p className="flex-1 text-sm leading-relaxed text-offwhite/70">&ldquo;{t.quote}&rdquo;</p>
