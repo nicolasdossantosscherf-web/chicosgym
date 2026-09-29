@@ -246,3 +246,54 @@ body {
     margin-top: -3vh;
   }
 }
+
+/* Troca de página: cubo girando (ver components/page-transition.tsx).
+   A página atual sai pela esquerda e a nova entra pela direita, girando em
+   torno de um eixo atrás da tela — como duas faces vizinhas de um cubo.
+   O menu e o botão do WhatsApp têm nome próprio, então ficam parados. */
+.page-transition-fixed-header {
+  view-transition-name: site-header;
+}
+.page-transition-fixed-whatsapp {
+  view-transition-name: floating-whatsapp;
+}
+
+::view-transition {
+  background: var(--color-ink);
+}
+
+::view-transition-image-pair(root) {
+  perspective: 180vw;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.75s;
+  animation-timing-function: cubic-bezier(0.65, 0, 0.35, 1);
+  animation-fill-mode: both;
+  transform-origin: 50% 50% -50vw;
+  backface-visibility: hidden;
+  mix-blend-mode: normal;
+}
+
+::view-transition-old(root) {
+  animation-name: cube-out;
+}
+
+::view-transition-new(root) {
+  animation-name: cube-in;
+}
+
+@keyframes cube-out {
+  to {
+    transform: rotateY(-90deg);
+    filter: brightness(0.5);
+  }
+}
+
+@keyframes cube-in {
+  from {
+    transform: rotateY(90deg);
+    filter: brightness(0.5);
+  }
+}

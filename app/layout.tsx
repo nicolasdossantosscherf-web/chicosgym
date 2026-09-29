@@ -7,7 +7,7 @@ import { Cursor } from "@/components/cursor";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { FloatingWhatsapp } from "@/components/floating-whatsapp";
-import { PageTransitionOverlay } from "@/components/page-transition-overlay";
+import { PageTransition } from "@/components/page-transition";
 import { CartDrawer } from "@/components/cart-drawer";
 
 const bebasNeue = Bebas_Neue({
@@ -38,7 +38,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Cursor />
         <SmoothScrollProvider>
           <Navbar />
-          <PageTransitionOverlay />
+          <PageTransition />
           {children}
           <Footer />
           <FloatingWhatsapp />

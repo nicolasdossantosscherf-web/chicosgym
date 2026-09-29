@@ -6,7 +6,7 @@ import { Magnetic } from "./magnetic"
 
 export function FloatingWhatsapp() {
   return (
-    <div className="fixed bottom-6 right-6 z-40">
+    <div className="page-transition-fixed-whatsapp fixed bottom-6 right-6 z-40">
       <Magnetic strength={0.25}>
         <a
           href={`https://wa.me/${brand.whatsapp}`}
