@@ -49,14 +49,23 @@ export function Hero() {
           Chico&apos;s Gym.
         </p>
 
-        <div className="mt-9">
-          <Magnetic>
+        <div className="mt-9 flex flex-wrap items-center gap-4">
+          <Magnetic className="w-full sm:w-auto">
             <Link
               href="/planos"
               data-cursor-hover
-              className="inline-flex items-center gap-2 rounded-sm bg-orange px-7 py-3.5 text-xs font-semibold uppercase tracking-[0.25em] text-ink transition-colors hover:bg-gold"
+              className="flex w-full items-center justify-center gap-2 rounded-sm border border-orange bg-orange px-5 py-3.5 text-xs font-semibold uppercase tracking-[0.15em] text-ink transition-colors hover:border-gold hover:bg-gold sm:px-7 sm:tracking-[0.25em]"
             >
               Consulte o plano ideal pra você
+            </Link>
+          </Magnetic>
+          <Magnetic className="w-full sm:w-auto">
+            <Link
+              href="/local"
+              data-cursor-hover
+              className="flex w-full items-center justify-center gap-2 rounded-sm border border-offwhite/30 px-5 py-3.5 text-xs font-semibold uppercase tracking-[0.15em] text-offwhite transition-colors hover:border-orange hover:text-orange sm:px-7 sm:tracking-[0.25em]"
+            >
+              Local e Horários
             </Link>
           </Magnetic>
         </div>
