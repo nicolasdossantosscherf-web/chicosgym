@@ -40,6 +40,7 @@ export function ProductImage({
               {Array.from({ length: slots }, (_, slot) => (
                 <div
                   key={slot}
+                  style={{ flexGrow: product.imageSlotWidths?.[slot] ?? 1 }}
                   className={`h-full flex-1 bg-ink/70 backdrop-blur-[2px] transition-opacity duration-500 ${
                     slot === variant?.imageSlot ? "opacity-0" : "opacity-100"
                   }`}

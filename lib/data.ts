@@ -344,6 +344,8 @@ export type Product = {
   priceInstallments?: number
   // Quantos itens aparecem lado a lado na foto (pra destacar a variação escolhida).
   imageSlots?: number
+  // Largura relativa de cada item na foto, quando eles não ocupam faixas iguais.
+  imageSlotWidths?: number[]
   // Ex.: "Cor", "Sabor".
   variantLabel?: string
   variants?: ProductVariant[]
@@ -484,6 +486,25 @@ export const products: Product[] = [
     variants: [
       { id: "tangerina-morango", label: "Tangerina com morango", swatch: "#f26a1b", imageSlot: 0 },
       { id: "maca-verde", label: "Maçã verde", swatch: "#7cc242", imageSlot: 1 },
+    ],
+  },
+  {
+    id: "pre-treino-prohibido-fuel",
+    title: "Pré-Treino Prohibido Fuel",
+    category: "Bebidas",
+    description: "3VS · lata de 473 ml · zero açúcar.",
+    image: "/images/shop/pre-treino-prohibido-fuel.webp",
+    price: 18,
+    imageSlots: 6,
+    imageSlotWidths: [257, 190, 175, 185, 190, 283],
+    variantLabel: "Sabor",
+    variants: [
+      { id: "citrus", label: "Citrus", swatch: "#f2d027", imageSlot: 0 },
+      { id: "bubble-gum", label: "Bubble Gum", swatch: "#e0457b", imageSlot: 1 },
+      { id: "fruit-punch", label: "Fruit Punch", swatch: "#2f8fe0", imageSlot: 2 },
+      { id: "cotton-candy", label: "Cotton Candy", swatch: "#f4b3c8", imageSlot: 3 },
+      { id: "strawberry-margarita", label: "Strawberry Margarita", swatch: "#f0506e", imageSlot: 4 },
+      { id: "green-apple", label: "Green Apple", swatch: "#b5d334", imageSlot: 5 },
     ],
   },
   {
