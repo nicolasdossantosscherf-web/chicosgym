@@ -594,27 +594,14 @@ export const products: Product[] = [
 
 export type Testimonial = {
   name: string
-  since: string
+  // Ex.: "aluno desde 2023" — opcional.
+  since?: string
   quote: string
 }
 
-export const testimonials: Testimonial[] = [
-  {
-    name: "Marcos Vinícius",
-    since: "aluno desde 2023",
-    quote: "Entrei tímido e hoje treino pesado. A estrutura e o clima da Chico's Gym fazem toda a diferença.",
-  },
-  {
-    name: "Juliana Prado",
-    since: "aluna desde 2024",
-    quote: "As aulas de spinning à noite, com aquela luz em losango, viraram meu horário favorito do dia.",
-  },
-  {
-    name: "Diego Fontana",
-    since: "aluno desde 2022",
-    quote: "Acompanho a Chico's Gym desde o primeiro mês aberta. O crescimento da estrutura é visível.",
-  },
-]
+// Só feedbacks reais de alunos da academia. Enquanto a lista estiver vazia,
+// a seção de feedbacks não aparece na página inicial.
+export const testimonials: Testimonial[] = []
 
 export type MuscleGroup = "peito" | "costas" | "pernas" | "ombros" | "bracos" | "core" | "cardio"
 
