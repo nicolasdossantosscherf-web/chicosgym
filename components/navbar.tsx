@@ -6,6 +6,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Menu, X } from "lucide-react"
 import { CartButton } from "./cart-button"
+import { ShopLink } from "./shop-link"
 import { brand, sitePages } from "@/lib/data"
 
 const HOME_LINK = { href: "/", label: "Início" }
@@ -48,7 +49,8 @@ export function Navbar() {
           </span>
         </Link>
 
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-5 sm:gap-6">
+          <ShopLink />
           <CartButton />
 
           <button

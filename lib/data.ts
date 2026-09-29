@@ -88,9 +88,8 @@ export const sitePages: SitePage[] = [
 
 export const stats = [
   { value: 4, suffix: "+", label: "Anos de história" },
-  // Número aproximado informado pela academia.
-  { value: 300, suffix: "", label: "Alunos ativos" },
-  { value: 4.9, suffix: "", label: "Avaliação no Google", decimals: 1 },
+  { value: 303, suffix: "", label: "Alunos ativos" },
+  { value: 5, suffix: "", label: "Avaliação no Google", decimals: 1 },
 ]
 
 export type TimelineItem = {
@@ -191,6 +190,12 @@ export type Plan = {
   monthlyPrice: number
   highlight?: boolean
   features: string[]
+}
+
+// Primeiro card da página de planos; não entra no cálculo de economia dos planos.
+export const trialClass = {
+  label: "Aula experimental",
+  features: ["Totalmente gratuita", "Sem compromisso de matrícula", "Conheça a estrutura e a equipe"],
 }
 
 // Tabela real, confirmada pela Chico's Gym.

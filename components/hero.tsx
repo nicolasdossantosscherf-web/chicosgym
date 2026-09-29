@@ -1,6 +1,7 @@
 "use client"
 
 import Image from "next/image"
+import Link from "next/link"
 import { ArrowDown } from "lucide-react"
 import { Magnetic } from "./magnetic"
 import { brand } from "@/lib/data"
@@ -50,15 +51,13 @@ export function Hero() {
 
         <div className="mt-9">
           <Magnetic>
-            <a
-              href={`https://wa.me/${brand.whatsapp}`}
-              target="_blank"
-              rel="noreferrer"
+            <Link
+              href="/planos"
               data-cursor-hover
               className="inline-flex items-center gap-2 rounded-sm bg-orange px-7 py-3.5 text-xs font-semibold uppercase tracking-[0.25em] text-ink transition-colors hover:bg-gold"
             >
-              Agende seu treino experimental
-            </a>
+              Consulte o plano ideal pra você
+            </Link>
           </Magnetic>
         </div>
       </div>
