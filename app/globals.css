@@ -297,3 +297,21 @@ body {
     filter: brightness(0.5);
   }
 }
+
+/* Entrada suave de cada pergunta do "Descubra seu Treino". */
+@keyframes step-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+
+.animate-step-in {
+  animation: step-in 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-step-in {
+    animation: none;
+  }
+}

@@ -50,9 +50,9 @@ export const sitePages: SitePage[] = [
   },
   {
     href: "/treino",
-    label: "Monte seu Treino",
-    description: "Responda 3 perguntas e receba uma sugestão de treino na hora.",
-    icon: "Wand2",
+    label: "Descubra seu Treino",
+    description: "Responda 5 perguntas e receba a ficha de treino da Chico's Gym ideal pra você.",
+    icon: "Dumbbell",
   },
   {
     href: "/loja",
@@ -621,33 +621,6 @@ export const testimonials: Testimonial[] = [
     quote:
       "Minha experiência com a academia tem sido extremamente positiva, desde o primeiro contato para realizar a matrícula até cada dia de treino. Quero destacar a excelente recepção, a cordialidade e a atenção de toda a equipe, que fazem a diferença desde o primeiro momento. O atendimento é acolhedor, organizado e transmite profissionalismo e confiança.",
   },
-]
-
-export type MuscleGroup = "peito" | "costas" | "pernas" | "ombros" | "bracos" | "core" | "cardio"
-
-export type WorkoutExercise = { name: string; group: MuscleGroup }
-
-// Banco de exercícios usado pelo gerador de "Monte seu Treino" — a lógica de
-// montagem do treino fica em components/workout-builder.tsx.
-export const exercisePool: WorkoutExercise[] = [
-  { name: "Supino reto", group: "peito" },
-  { name: "Supino inclinado", group: "peito" },
-  { name: "Crucifixo", group: "peito" },
-  { name: "Puxada alta", group: "costas" },
-  { name: "Remada baixa", group: "costas" },
-  { name: "Remada curvada", group: "costas" },
-  { name: "Agachamento", group: "pernas" },
-  { name: "Leg press", group: "pernas" },
-  { name: "Cadeira extensora", group: "pernas" },
-  { name: "Mesa flexora", group: "pernas" },
-  { name: "Panturrilha em pé", group: "pernas" },
-  { name: "Desenvolvimento de ombros", group: "ombros" },
-  { name: "Elevação lateral", group: "ombros" },
-  { name: "Rosca direta", group: "bracos" },
-  { name: "Tríceps pulley", group: "bracos" },
-  { name: "Prancha", group: "core" },
-  { name: "Abdominal supra", group: "core" },
-  { name: "Esteira ou bike", group: "cardio" },
 ]
 
 export type FaqItem = { question: string; answer: string }

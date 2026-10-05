@@ -1,7 +1,8 @@
 "use client"
 
 import type { ReactNode } from "react"
-import { Check } from "lucide-react"
+import Link from "next/link"
+import { ArrowRight, Check } from "lucide-react"
 import { plans, brand, trialClass } from "@/lib/data"
 import { SectionHeading } from "./section-heading"
 import { Reveal } from "./reveal"
@@ -97,7 +98,19 @@ export function Pricing() {
             <PlanCard
               label={trialClass.label}
               price="Grátis"
-              details={<p className="mt-2 text-xs text-offwhite/50">Experimente antes de escolher</p>}
+              details={
+                <>
+                  <p className="mt-2 text-xs text-offwhite/50">Experimente antes de escolher</p>
+                  <Link
+                    href="/treino"
+                    data-cursor-hover
+                    className="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold text-orange transition-colors hover:text-gold"
+                  >
+                    Não sabe por onde começar? Descubra seu treino
+                    <ArrowRight size={12} className="shrink-0" />
+                  </Link>
+                </>
+              }
               features={trialClass.features}
               cta="Agendar"
               message="Olá! Quero agendar minha aula experimental gratuita na Chico's Gym."
