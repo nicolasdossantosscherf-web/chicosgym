@@ -1,11 +1,13 @@
 "use client"
 
 import { useRef, useState, type ReactNode } from "react"
-import { AlertTriangle, ArrowLeft, Bike, Check, MessageCircle, RotateCcw, Send } from "lucide-react"
+import { AlertTriangle, ArrowLeft, Bike, Check, Flame, MessageCircle, RotateCcw, Send, Timer } from "lucide-react"
 import { brand } from "@/lib/data"
 import { lenisStore } from "@/lib/lenis-store"
 import {
   WORKOUT_CARDIO,
+  WORKOUT_REST,
+  WORKOUT_WARMUP,
   detectInjuryRegions,
   exerciseRisks,
   findWorkoutPlan,
@@ -58,6 +60,8 @@ function workoutText(plan: WorkoutPlan, regions: InjuryRegion[]) {
     })
     lines.push("")
   })
+  lines.push(`*Aquecimento:* ${WORKOUT_WARMUP}`)
+  lines.push(`*Descanso:* ${WORKOUT_REST}`)
   lines.push(`*Cardio:* ${WORKOUT_CARDIO}`)
   return lines.join("\n")
 }
@@ -310,8 +314,8 @@ function WorkoutResult({
         <AnalysisCard title="Como seu treino funciona">
           {plan.frequency} dias por semana, cada um focado em uma parte do corpo:{" "}
           {plan.days.map((d, i) => `Dia ${i + 1} ${d.focus}`).join(" · ")}. Todos os exercícios são{" "}
-          {plan.days[0].exercises[0].sets} séries de {plan.days[0].exercises[0].reps} repetições, e o cardio fecha o
-          treino.
+          {plan.days[0].exercises[0].sets} séries de {plan.days[0].exercises[0].reps} repetições (a 1ª com pouca
+          carga, só de aquecimento), com 2 minutos de descanso entre as séries. O cardio fecha o treino.
         </AnalysisCard>
         {goal && <AnalysisCard title={`Objetivo: ${goal.label}`}>{goal.tip}</AnalysisCard>}
         {experience && (
@@ -370,7 +374,26 @@ function WorkoutResult({
           </div>
         </div>
 
-        <div className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {/* Regras que valem pra todos os exercícios da ficha. */}
+        <div className="mt-5 grid grid-cols-1 gap-3 md:grid-cols-3">
+          {[
+            { icon: Flame, title: "1ª série: aquecimento", text: WORKOUT_WARMUP },
+            { icon: Timer, title: "Descanso: 2 minutos", text: WORKOUT_REST },
+            { icon: Bike, title: "Cardio no final", text: WORKOUT_CARDIO },
+          ].map(({ icon: Icon, title, text }) => (
+            <div key={title} className="flex items-start gap-3 rounded-sm border border-line bg-carbon p-4">
+              <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-sm bg-orange/10 text-orange">
+                <Icon size={18} />
+              </div>
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.15em] text-offwhite">{title}</p>
+                <p className="mt-1 text-xs leading-relaxed text-offwhite/60">{text}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {plan.days.map((day, i) => (
             <div key={`${plan.frequency}-${i}`} className="overflow-hidden rounded-sm border border-line bg-carbon">
               <div className={`${DAY_COLORS[i]} px-5 py-3`}>
@@ -400,16 +423,6 @@ function WorkoutResult({
               </ul>
             </div>
           ))}
-
-          <div className="flex items-center gap-4 rounded-sm border border-line bg-carbon p-5">
-            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-sm bg-orange/10 text-orange">
-              <Bike size={22} />
-            </div>
-            <div>
-              <p className="font-display text-xl uppercase tracking-wide text-offwhite">Cardio</p>
-              <p className="text-sm text-offwhite/70">{WORKOUT_CARDIO}</p>
-            </div>
-          </div>
         </div>
       </div>
 

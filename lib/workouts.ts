@@ -12,6 +12,11 @@ export type WorkoutPlan = { sex: WorkoutSex; frequency: WorkoutFrequency; days: 
 
 export const WORKOUT_CARDIO = "Bike ou esteira: 20-30 minutos"
 
+// Regras gerais definidas pela academia, valem para todas as fichas.
+export const WORKOUT_WARMUP =
+  "A 1ª série de cada exercício é sempre com pouca carga, só pra aquecer o músculo e preparar para as séries válidas."
+export const WORKOUT_REST = "2 minutos de descanso entre cada série e entre um exercício e outro."
+
 // Todos os cartazes usam 4 séries de 10 a 12 repetições.
 const ex = (...names: string[]): WorkoutExercise[] => names.map((name) => ({ name, sets: 4, reps: "10-12" }))
 
@@ -242,7 +247,7 @@ export const workoutGoals: { id: WorkoutGoal; label: string; tip: string }[] = [
   {
     id: "massa",
     label: "Ganhar massa muscular",
-    tip: "Nas 4 séries de 10 a 12 repetições, escolha uma carga em que as últimas repetições fiquem difíceis, sem perder a execução. Quando as 12 repetições ficarem fáceis, é hora de aumentar a carga — combine com o instrutor.",
+    tip: "Nas séries válidas (depois da 1ª, de aquecimento), escolha uma carga em que as últimas repetições fiquem difíceis, sem perder a execução. Quando as 12 repetições ficarem fáceis, é hora de aumentar a carga — combine com o instrutor.",
   },
   {
     id: "emagrecer",
