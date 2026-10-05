@@ -73,6 +73,9 @@ export function Footer() {
 
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-line pt-6 text-xs text-offwhite/40 md:flex-row">
           <span>© {new Date().getFullYear()} Chico&apos;s Gym. Todos os direitos reservados.</span>
+          <Link href="/privacidade" className="transition-colors hover:text-orange">
+            Política de Privacidade
+          </Link>
           <span>
             Desenvolvido por <span className="text-offwhite/60">Nicolas Code</span>
           </span>
