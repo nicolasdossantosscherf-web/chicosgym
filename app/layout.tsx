@@ -24,7 +24,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Chico's Gym — Onde disciplina vira resultado.",
   description:
-    "Chico's Gym: academia industrial com musculação, funcional, spinning e personal trainer. Agende seu treino experimental.",
+    "Chico's Gym, academia em Três de Maio (RS): estrutura completa de musculação, planos sem taxa de matrícula, aula experimental grátis e loja de suplementos.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

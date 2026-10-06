@@ -6,17 +6,19 @@ import { useRouter } from "next/navigation"
 import { MailCheck } from "lucide-react"
 import { createClient } from "@/lib/supabase/client"
 import { authErrorMessage } from "@/lib/auth-errors"
+import { emailDomainError, emailDomainExists, sanitize, validateEmailFormat, validateName } from "@/lib/validation"
 import { AuthField, FormMessage, SubmitButton } from "./auth-ui"
 
 const MIN_PASSWORD = 8
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
 
 type FieldErrors = Partial<Record<"name" | "email" | "password" | "confirm" | "terms", string>>
 
 function validate(name: string, email: string, password: string, confirm: string, terms: boolean): FieldErrors {
   const errors: FieldErrors = {}
-  if (name.trim().split(/\s+/).filter(Boolean).length < 2) errors.name = "Informe nome e sobrenome."
-  if (!EMAIL_RE.test(email)) errors.email = "Informe um e-mail válido."
+  const nameError = validateName(name)
+  if (nameError) errors.name = nameError
+  const emailError = validateEmailFormat(email)
+  if (emailError) errors.email = emailError
   if (password.length < MIN_PASSWORD) errors.password = `A senha precisa ter pelo menos ${MIN_PASSWORD} caracteres.`
   else if (!/[a-zA-Z]/.test(password) || !/\d/.test(password)) errors.password = "Use letras e números na senha."
   if (confirm !== password) errors.confirm = "As senhas não são iguais."
@@ -45,6 +47,12 @@ export function SignupForm() {
     if (Object.keys(found).length > 0) return
 
     setPending(true)
+    // Confere se o domínio do e-mail existe de verdade antes de criar a conta.
+    if ((await emailDomainExists(cleanEmail)) === false) {
+      setErrors({ email: emailDomainError(cleanEmail) })
+      setPending(false)
+      return
+    }
     const { data, error } = await createClient().auth.signUp({
       email: cleanEmail,
       password,
@@ -90,7 +98,7 @@ export function SignupForm() {
         required
         maxLength={80}
         value={name}
-        onChange={(e) => setName(e.target.value.replace(/[^\p{L} '-]|[ªº]/gu, "").replace(/ {2,}/g, " ").replace(/^ /, ""))}
+        onChange={(e) => setName(sanitize.name(e.target.value))}
         placeholder="Seu nome e sobrenome"
         error={errors.name}
       />
@@ -102,7 +110,7 @@ export function SignupForm() {
         required
         maxLength={120}
         value={email}
-        onChange={(e) => setEmail(e.target.value.replace(/\s/g, ""))}
+        onChange={(e) => setEmail(sanitize.email(e.target.value))}
         placeholder="seuemail@exemplo.com"
         error={errors.email}
         hint="Use um e-mail que você acessa: vamos mandar um link de confirmação."

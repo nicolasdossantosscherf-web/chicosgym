@@ -39,7 +39,7 @@ export const sitePages: SitePage[] = [
   {
     href: "/historia",
     label: "Nossa História",
-    description: "De galpão abandonado a referência da região, ano a ano.",
+    description: "A trajetória da Chico's Gym desde 2022 — em breve, contada por quem fez acontecer.",
     icon: "History",
   },
   {
@@ -98,34 +98,9 @@ export type TimelineItem = {
   description: string
 }
 
-export const timeline: TimelineItem[] = [
-  {
-    year: "2022",
-    title: "Fundação",
-    description:
-      "O Chico transforma um galpão industrial abandonado na primeira unidade da Chico's Gym, com musculação e funcional.",
-  },
-  {
-    year: "2023",
-    title: "Expansão do parque",
-    description: "Chegada da sala de spinning e ampliação do parque de máquinas e cardio.",
-  },
-  {
-    year: "2024",
-    title: "Área externa",
-    description: "Inauguração da área externa com grama sintética e estrutura de treino funcional ao ar livre.",
-  },
-  {
-    year: "2025",
-    title: "Equipe completa",
-    description: "Formação do time de personal trainers e início da parceria com nutricionista.",
-  },
-  {
-    year: "2026",
-    title: "Chico's Gym no digital",
-    description: "Início da parceria com a Nicolas Code para levar a experiência da academia para o digital.",
-  },
-]
+// A história oficial ainda está sendo escrita pela academia. Enquanto a lista
+// estiver vazia, a página Nossa História mostra o aviso "em construção".
+export const timeline: TimelineItem[] = []
 
 export type TeamMember = {
   id: string
@@ -634,14 +609,6 @@ export const faqs: FaqItem[] = [
     question: "Vocês têm parceria com nutricionista e massoterapeuta?",
     answer:
       "Sim — Maura Dupont de Oliveira (nutricionista) e Felipe Farias (massoterapeuta) atendem na própria academia, com desconto pra alunos. Veja os detalhes na página de Parcerias.",
-  },
-  {
-    question: "O que levar no primeiro dia?",
-    answer: "Roupa de treino, tênis fechado, garrafa de água e uma toalha. Chegue 15 minutos antes para fazer seu cadastro.",
-  },
-  {
-    question: "Tem horário de pico?",
-    answer: "Geralmente entre 18h e 20h. Se prefere mais espaço, manhã e início de tarde costumam ser mais tranquilos.",
   },
   {
     question: "O personal trainer está incluso na mensalidade?",

@@ -5,6 +5,7 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { createClient } from "@/lib/supabase/client"
 import { authErrorMessage } from "@/lib/auth-errors"
+import { sanitize } from "@/lib/validation"
 import { AuthField, FormMessage, SubmitButton } from "./auth-ui"
 
 export function LoginForm({ next, notice }: { next: string; notice?: string | null }) {
@@ -39,7 +40,7 @@ export function LoginForm({ next, notice }: { next: string; notice?: string | nu
         required
         maxLength={120}
         value={email}
-        onChange={(e) => setEmail(e.target.value.replace(/\s/g, ""))}
+        onChange={(e) => setEmail(sanitize.email(e.target.value))}
         placeholder="seuemail@exemplo.com"
       />
       <div className="flex flex-col gap-2">

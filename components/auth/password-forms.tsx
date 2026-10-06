@@ -4,6 +4,7 @@ import { useState, type FormEvent } from "react"
 import { useRouter } from "next/navigation"
 import { createClient } from "@/lib/supabase/client"
 import { authErrorMessage } from "@/lib/auth-errors"
+import { sanitize, validateEmailFormat } from "@/lib/validation"
 import { AuthField, FormMessage, SubmitButton } from "./auth-ui"
 
 const MIN_PASSWORD = 8
@@ -18,8 +19,9 @@ export function ForgotPasswordForm() {
     e.preventDefault()
     setError(null)
     const cleanEmail = email.trim().toLowerCase()
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(cleanEmail)) {
-      setError("Informe um e-mail válido.")
+    const emailError = validateEmailFormat(cleanEmail)
+    if (emailError) {
+      setError(emailError)
       return
     }
     setPending(true)
@@ -52,7 +54,7 @@ export function ForgotPasswordForm() {
         required
         maxLength={120}
         value={email}
-        onChange={(e) => setEmail(e.target.value.replace(/\s/g, ""))}
+        onChange={(e) => setEmail(sanitize.email(e.target.value))}
         placeholder="seuemail@exemplo.com"
       />
       {error && <FormMessage tone="error">{error}</FormMessage>}
