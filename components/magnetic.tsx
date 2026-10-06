@@ -1,9 +1,10 @@
 "use client"
 
-import { ReactNode, useRef } from "react"
-import { motion, useMotionValue, useSpring } from "framer-motion"
+import { ReactNode, useRef, type MouseEvent } from "react"
 import { useReducedMotion } from "@/lib/use-reduced-motion"
 
+// Botão que "puxa" levemente na direção do mouse. Feito só com CSS
+// (transform + transition), sem biblioteca de animação.
 export function Magnetic({
   children,
   strength = 0.35,
@@ -15,36 +16,29 @@ export function Magnetic({
 }) {
   const ref = useRef<HTMLDivElement>(null)
   const reduced = useReducedMotion()
-  const x = useMotionValue(0)
-  const y = useMotionValue(0)
-  const springX = useSpring(x, { stiffness: 150, damping: 15, mass: 0.2 })
-  const springY = useSpring(y, { stiffness: 150, damping: 15, mass: 0.2 })
 
   if (reduced) return <div className={className}>{children}</div>
 
-  const handleMouseMove = (e: React.MouseEvent) => {
+  const move = (x: number, y: number) => {
+    if (ref.current) ref.current.style.transform = `translate3d(${x}px, ${y}px, 0)`
+  }
+
+  const handleMouseMove = (e: MouseEvent) => {
     const el = ref.current
     if (!el) return
     const rect = el.getBoundingClientRect()
-    x.set((e.clientX - (rect.left + rect.width / 2)) * strength)
-    y.set((e.clientY - (rect.top + rect.height / 2)) * strength)
-  }
-
-  const handleMouseLeave = () => {
-    x.set(0)
-    y.set(0)
+    move((e.clientX - (rect.left + rect.width / 2)) * strength, (e.clientY - (rect.top + rect.height / 2)) * strength)
   }
 
   return (
-    <motion.div
+    <div
       ref={ref}
       onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      style={{ x: springX, y: springY }}
+      onMouseLeave={() => move(0, 0)}
       data-cursor-hover
-      className={`inline-block ${className}`}
+      className={`inline-block transition-transform duration-300 ease-out ${className}`}
     >
       {children}
-    </motion.div>
+    </div>
   )
 }

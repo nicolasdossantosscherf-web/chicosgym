@@ -18,22 +18,8 @@ export function Cursor() {
     let hovering = false
     let raf = 0
 
-    const onMove = (e: MouseEvent) => {
-      mouseX = e.clientX
-      mouseY = e.clientY
-      dotRef.current?.style.setProperty(
-        "transform",
-        `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`
-      )
-    }
-
-    const onOver = (e: MouseEvent) => {
-      if ((e.target as HTMLElement)?.closest("a, button, [data-cursor-hover]")) hovering = true
-    }
-    const onOut = (e: MouseEvent) => {
-      if ((e.target as HTMLElement)?.closest("a, button, [data-cursor-hover]")) hovering = false
-    }
-
+    // O anel só é animado enquanto está alcançando o mouse; parado, não gasta
+    // processamento (antes o loop rodava 60x por segundo o tempo todo).
     const loop = () => {
       ringX += (mouseX - ringX) * 0.16
       ringY += (mouseY - ringY) * 0.16
@@ -41,13 +27,40 @@ export function Cursor() {
         "transform",
         `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%) scale(${hovering ? 1.9 : 1})`
       )
-      raf = requestAnimationFrame(loop)
+      raf = Math.abs(mouseX - ringX) + Math.abs(mouseY - ringY) > 0.3 ? requestAnimationFrame(loop) : 0
+    }
+    const wake = () => {
+      if (!raf) raf = requestAnimationFrame(loop)
+    }
+
+    const onMove = (e: MouseEvent) => {
+      mouseX = e.clientX
+      mouseY = e.clientY
+      dotRef.current?.style.setProperty(
+        "transform",
+        `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`
+      )
+      wake()
+    }
+
+    const onOver = (e: MouseEvent) => {
+      if ((e.target as HTMLElement)?.closest("a, button, [data-cursor-hover]")) {
+        hovering = true
+        ringX += 0.5
+        wake()
+      }
+    }
+    const onOut = (e: MouseEvent) => {
+      if ((e.target as HTMLElement)?.closest("a, button, [data-cursor-hover]")) {
+        hovering = false
+        ringX += 0.5
+        wake()
+      }
     }
 
     window.addEventListener("mousemove", onMove)
     document.addEventListener("mouseover", onOver)
     document.addEventListener("mouseout", onOut)
-    raf = requestAnimationFrame(loop)
 
     return () => {
       window.removeEventListener("mousemove", onMove)

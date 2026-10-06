@@ -5,41 +5,26 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { ArrowLeft, Check, MapPin, Minus, Plus, ShoppingBag, Trash2, X } from "lucide-react"
 import { brand, shopPaymentMethods, type ShopPaymentMethodId } from "@/lib/data"
+import {
+  emailDomainError,
+  emailDomainExists,
+  formatPhone,
+  sanitize,
+  validateEmailFormat,
+  validateName,
+  validatePhone,
+} from "@/lib/validation"
 import { cartActions, formatBRL, resolveCartItem, unitPrice, useCart } from "@/lib/cart"
 import { lenisStore } from "@/lib/lenis-store"
 import { ProductImage } from "./product-image"
 
 type Step = "cart" | "checkout" | "sent"
 
-const EMPTY_FORM = { name: "", phone: "", cpf: "", email: "" }
+const EMPTY_FORM = { name: "", phone: "", email: "" }
 type FormKey = keyof typeof EMPTY_FORM
+type EmailStatus = "checking" | "ok" | "missing" | "unknown"
 
-const LIMITS: Record<FormKey, number> = { name: 60, phone: 11, cpf: 11, email: 100 }
-
-// Limpa o que foi digitado: nome só com letras (acentuadas inclusive) e
-// espaços simples; telefone e CPF só dígitos; e-mail sem espaços.
-const SANITIZE: Record<FormKey, (value: string) => string> = {
-  name: (v) => v.replace(/[^\p{L} ]|[ªº]/gu, "").replace(/ {2,}/g, " ").replace(/^ /, ""),
-  phone: (v) => v.replace(/\D/g, ""),
-  cpf: (v) => v.replace(/\D/g, ""),
-  email: (v) => v.replace(/\s/g, ""),
-}
-
-function isValidCpf(cpf: string) {
-  if (!/^\d{11}$/.test(cpf) || /^(\d)\1{10}$/.test(cpf)) return false
-  const checkDigit = (length: number) => {
-    let sum = 0
-    for (let i = 0; i < length; i++) sum += Number(cpf[i]) * (length + 1 - i)
-    const rest = (sum * 10) % 11
-    return rest === 10 ? 0 : rest
-  }
-  return checkDigit(9) === Number(cpf[9]) && checkDigit(10) === Number(cpf[10])
-}
-
-const formatCpf = (cpf: string) => cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4")
-const formatPhone = (phone: string) => phone.replace(/^(\d{2})(\d{4,5})(\d{4})$/, "($1) $2-$3")
-
-function Field({ label, error, ...props }: { label: string; error?: string } & InputHTMLAttributes<HTMLInputElement>) {
+function Field({ label, error, hint, ...props }: { label: string; error?: string; hint?: string } & InputHTMLAttributes<HTMLInputElement>) {
   return (
     <label className="flex flex-col gap-1.5">
       <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-offwhite/50">{label}</span>
@@ -49,7 +34,13 @@ function Field({ label, error, ...props }: { label: string; error?: string } & I
           error ? "border-red-500/70" : "border-line"
         }`}
       />
-      {error && <span className="text-[11px] text-red-400">{error}</span>}
+      {error ? (
+        <span role="alert" className="text-[11px] text-red-400">
+          {error}
+        </span>
+      ) : (
+        hint && <span className="text-[11px] text-offwhite/40">{hint}</span>
+      )}
     </label>
   )
 }
@@ -82,6 +73,8 @@ export function CartDrawer() {
   const [form, setForm] = useState(EMPTY_FORM)
   const [payment, setPayment] = useState<ShopPaymentMethodId>("pix")
   const [showErrors, setShowErrors] = useState(false)
+  const [touched, setTouched] = useState<Partial<Record<FormKey, boolean>>>({})
+  const [emailCheck, setEmailCheck] = useState<{ email: string; status: EmailStatus } | null>(null)
 
   useEffect(() => {
     cartActions.close()
@@ -117,17 +110,38 @@ export function CartDrawer() {
   const view: Step = step === "sent" ? "sent" : lines.length === 0 ? "cart" : step
 
   const name = form.name.trim()
-  const errors: Record<FormKey, string | undefined> = {
-    name: name.split(" ").length >= 2 ? undefined : "Informe nome e sobrenome",
-    phone: form.phone.length >= 10 ? undefined : "Informe o WhatsApp com DDD (10 ou 11 números)",
-    cpf: isValidCpf(form.cpf) ? undefined : form.cpf.length === 11 ? "CPF inválido" : "Informe os 11 números do CPF",
-    email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email) ? undefined : "Informe um e-mail válido",
+  const email = form.email.trim().toLowerCase()
+  const emailFormatError = validateEmailFormat(email)
+
+  // Confere se o domínio do e-mail existe enquanto a pessoa preenche o resto,
+  // pra que o envio aconteça no mesmo toque (senão o celular bloqueia o WhatsApp).
+  useEffect(() => {
+    if (emailFormatError) return
+    let cancelled = false
+    const timer = setTimeout(async () => {
+      setEmailCheck({ email, status: "checking" })
+      const exists = await emailDomainExists(email)
+      if (!cancelled) setEmailCheck({ email, status: exists === false ? "missing" : exists ? "ok" : "unknown" })
+    }, 500)
+    return () => {
+      cancelled = true
+      clearTimeout(timer)
+    }
+  }, [email, emailFormatError])
+
+  const emailStatus: EmailStatus = emailCheck?.email === email ? emailCheck.status : "checking"
+  const emailChecking = !emailFormatError && emailStatus === "checking"
+  const errors: Record<FormKey, string | null> = {
+    name: validateName(name),
+    phone: validatePhone(form.phone),
+    email: emailFormatError ?? (emailStatus === "missing" ? emailDomainError(email) : null),
   }
   const hasErrors = Object.values(errors).some(Boolean)
-  const fieldError = (key: FormKey) => (showErrors ? errors[key] : undefined)
+  const fieldError = (key: FormKey) => (showErrors || touched[key] ? (errors[key] ?? undefined) : undefined)
+  const markTouched = (key: FormKey) => () => setTouched((t) => ({ ...t, [key]: true }))
 
   const setField = (key: FormKey) => (e: ChangeEvent<HTMLInputElement>) => {
-    const value = SANITIZE[key](e.target.value).slice(0, LIMITS[key])
+    const value = sanitize[key](e.target.value)
     setForm((f) => ({ ...f, [key]: value }))
   }
 
@@ -138,7 +152,7 @@ export function CartDrawer() {
 
   const submit = (e: FormEvent) => {
     e.preventDefault()
-    if (hasErrors) {
+    if (hasErrors || emailChecking) {
       setShowErrors(true)
       return
     }
@@ -158,8 +172,7 @@ export function CartDrawer() {
       "",
       `*Nome:* ${name}`,
       `*WhatsApp:* ${formatPhone(form.phone)}`,
-      `*CPF:* ${formatCpf(form.cpf)}`,
-      `*E-mail:* ${form.email}`,
+      `*E-mail:* ${email}`,
     ].join("\n")
 
     window.open(`https://wa.me/${brand.whatsapp}?text=${encodeURIComponent(message)}`, "_blank")
@@ -344,30 +357,22 @@ export function CartDrawer() {
                   label="Nome completo *"
                   value={form.name}
                   onChange={setField("name")}
+                  onBlur={markTouched("name")}
                   autoComplete="name"
                   error={fieldError("name")}
                 />
-                <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-                  <Field
-                    label="WhatsApp com DDD *"
-                    type="tel"
-                    inputMode="numeric"
-                    placeholder="55999999999"
-                    value={form.phone}
-                    onChange={setField("phone")}
-                    autoComplete="tel-national"
-                    error={fieldError("phone")}
-                  />
-                  <Field
-                    label="CPF *"
-                    inputMode="numeric"
-                    placeholder="Só números"
-                    value={form.cpf}
-                    onChange={setField("cpf")}
-                    autoComplete="off"
-                    error={fieldError("cpf")}
-                  />
-                </div>
+                <Field
+                  label="WhatsApp com DDD *"
+                  type="tel"
+                  inputMode="numeric"
+                  placeholder="55999999999"
+                  value={form.phone}
+                  onChange={setField("phone")}
+                  onBlur={markTouched("phone")}
+                  autoComplete="tel-national"
+                  error={fieldError("phone")}
+                  hint={form.phone.length >= 10 && !errors.phone ? formatPhone(form.phone) : undefined}
+                />
                 <Field
                   label="E-mail *"
                   type="email"
@@ -375,8 +380,10 @@ export function CartDrawer() {
                   placeholder="seuemail@exemplo.com"
                   value={form.email}
                   onChange={setField("email")}
+                  onBlur={markTouched("email")}
                   autoComplete="email"
                   error={fieldError("email")}
+                  hint={emailChecking && touched.email ? "Conferindo se o e-mail existe…" : undefined}
                 />
               </div>
 
@@ -411,14 +418,15 @@ export function CartDrawer() {
                 <span className="font-display text-3xl text-orange">{formatBRL(total)}</span>
               </div>
               {showErrors && hasErrors && (
-                <p className="text-xs text-red-400">Preencha os campos marcados pra continuar.</p>
+                <p className="text-xs text-red-400">Corrija os campos marcados pra continuar.</p>
               )}
               <button
                 type="submit"
+                disabled={showErrors && emailChecking && !hasErrors}
                 data-cursor-hover
-                className="mt-2 rounded-sm bg-orange px-6 py-3.5 text-xs font-semibold uppercase tracking-[0.2em] text-ink transition-colors hover:bg-gold"
+                className="mt-2 rounded-sm bg-orange px-6 py-3.5 text-xs font-semibold uppercase tracking-[0.2em] text-ink transition-colors hover:bg-gold disabled:opacity-60"
               >
-                Enviar pedido no WhatsApp
+                {showErrors && emailChecking && !hasErrors ? "Conferindo e-mail…" : "Enviar pedido no WhatsApp"}
               </button>
             </footer>
           </form>

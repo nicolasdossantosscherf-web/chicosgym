@@ -1,16 +1,69 @@
-import { timeline } from "@/lib/data"
+import Image from "next/image"
+import Link from "next/link"
+import { Camera, PenLine } from "lucide-react"
+import { brand, timeline } from "@/lib/data"
 import { SectionHeading } from "./section-heading"
 import { Reveal } from "./reveal"
 
+// Enquanto a academia não envia a história oficial, a página mostra que ela
+// está sendo escrita — sem inventar fatos.
+function StoryInProgress() {
+  const instagram = brand.socials.find((s) => s.label === "Instagram")
+  return (
+    <section id="historia" className="relative bg-carbon py-24 md:py-32">
+      <div className="mx-auto flex max-w-3xl flex-col items-center px-6 text-center md:px-10">
+        <Reveal>
+          <div className="relative">
+            <Image src={brand.logo} alt="Chico's Gym" width={120} height={120} className="h-28 w-28 rounded-full" />
+            <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-orange px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-ink">
+              Est. {brand.founded}
+            </span>
+          </div>
+        </Reveal>
+        <div className="mt-10">
+          <SectionHeading
+            eyebrow="Nossa História"
+            title="Nossa história está sendo escrita"
+            align="center"
+            description={`A Chico's Gym nasceu em ${brand.founded}, em Três de Maio. Em breve, a gente conta aqui como tudo começou — pelas palavras de quem fez acontecer.`}
+          />
+        </div>
+        <Reveal delay={200}>
+          <span className="mt-8 inline-flex items-center gap-2 rounded-full border border-orange/40 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-orange">
+            <PenLine size={14} />
+            Em construção
+          </span>
+        </Reveal>
+        {instagram && (
+          <Reveal delay={260}>
+            <Link
+              href={instagram.href}
+              target="_blank"
+              rel="noreferrer"
+              data-cursor-hover
+              className="mt-6 inline-flex items-center gap-2 text-sm text-offwhite/60 transition-colors hover:text-orange"
+            >
+              <Camera size={16} />
+              Enquanto isso, siga no Instagram
+            </Link>
+          </Reveal>
+        )}
+      </div>
+    </section>
+  )
+}
+
 export function StoryTimeline() {
+  if (timeline.length === 0) return <StoryInProgress />
+
   return (
     <section id="historia" className="relative bg-carbon py-24 md:py-32">
       <div className="mx-auto max-w-5xl px-6 md:px-10">
         <SectionHeading
           eyebrow="Nossa História"
-          title="De galpão abandonado a referência da região"
+          title="Nossa história"
           align="center"
-          description={`Desde ${timeline[0].year}, a Chico's Gym cresce um degrau por vez — sempre com o mesmo propósito: dar estrutura de verdade pra quem decide treinar sério.`}
+          description={`Desde ${timeline[0].year}, a Chico's Gym cresce um degrau por vez.`}
         />
 
         <div className="relative mt-16 flex flex-col gap-12 pl-8 md:pl-0">
