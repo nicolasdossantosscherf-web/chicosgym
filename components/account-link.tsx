@@ -4,13 +4,7 @@ import { useEffect, useState } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { UserRound } from "lucide-react"
-
-// Nome do cookie de sessão que o Supabase grava (pode vir em partes: .0, .1…).
-const SESSION_COOKIE = `sb-${new URL(process.env.NEXT_PUBLIC_SUPABASE_URL!).hostname.split(".")[0]}-auth-token`
-
-function hasSessionCookie() {
-  return document.cookie.split("; ").some((c) => c.startsWith(SESSION_COOKIE))
-}
+import { hasSessionCookie } from "@/lib/session-cookie"
 
 // Botão do topo. Só olha se existe o cookie de sessão (sem carregar o Supabase
 // em todas as páginas); quem garante o acesso de verdade é a própria /aluno.

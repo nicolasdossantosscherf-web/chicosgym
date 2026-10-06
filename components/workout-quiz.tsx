@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef, useState, type ReactNode } from "react"
+import { useEffect, useRef, useState, type ReactNode } from "react"
 import { AlertTriangle, ArrowLeft, Bike, Check, Flame, MessageCircle, RotateCcw, Send, Timer } from "lucide-react"
 import { brand } from "@/lib/data"
 import { lenisStore } from "@/lib/lenis-store"
@@ -14,21 +14,14 @@ import {
   workoutExperiences,
   workoutGoals,
   type InjuryRegion,
-  type WorkoutExperience,
   type WorkoutFrequency,
-  type WorkoutGoal,
   type WorkoutPlan,
   type WorkoutSex,
 } from "@/lib/workouts"
 import { SectionHeading } from "./section-heading"
+import { PENDING_QUIZ_KEY, SaveWorkoutBox, type QuizAnswers } from "./save-workout-box"
 
-type Answers = {
-  sex?: WorkoutSex
-  goal?: WorkoutGoal
-  experience?: WorkoutExperience
-  frequency?: WorkoutFrequency
-  injury?: string | null
-}
+type Answers = QuizAnswers
 
 type Option<T> = { value: T; label: string }
 
@@ -90,6 +83,21 @@ export function WorkoutQuiz() {
   const [hasInjury, setHasInjury] = useState<boolean | null>(null)
   const [injuryText, setInjuryText] = useState("")
   const [viewFrequency, setViewFrequency] = useState<WorkoutFrequency>(3)
+
+  // Voltando do login (/treino?salvar=1): reabre o resultado que a pessoa queria salvar.
+  useEffect(() => {
+    if (!new URLSearchParams(window.location.search).has("salvar")) return
+    try {
+      const raw = sessionStorage.getItem(PENDING_QUIZ_KEY)
+      if (!raw) return
+      const saved = JSON.parse(raw) as Answers
+      if (!saved.sex || !saved.frequency) return
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setAnswers(saved)
+      setViewFrequency(saved.frequency)
+      setStep(TOTAL_STEPS)
+    } catch {}
+  }, [])
 
   const done = step >= TOTAL_STEPS
 
@@ -425,6 +433,8 @@ function WorkoutResult({
           ))}
         </div>
       </div>
+
+      <SaveWorkoutBox answers={answers} frequency={viewFrequency} />
 
       {/* Ações */}
       <div className="flex flex-col items-center gap-4 rounded-sm border border-line bg-carbon p-6 text-center md:p-8">

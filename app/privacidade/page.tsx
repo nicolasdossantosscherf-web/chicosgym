@@ -33,8 +33,16 @@ const SECTIONS: { title: string; body: ReactNode }[] = [
           guardada criptografada — nem a equipe da academia consegue vê-la.
         </li>
         <li>
-          <strong className="text-offwhite">Ao usar a Área do Aluno:</strong> as informações que você mesmo registrar,
-          como treinos, cargas e anotações, conforme essas funções forem sendo liberadas.
+          <strong className="text-offwhite">Ao usar a Área do Aluno:</strong> a ficha de treino que você salvar (sexo,
+          objetivo, experiência e dias por semana), os treinos que você registrar (data e dia da ficha) e as cargas
+          anotadas em cada exercício. A sua frequência é calculada a partir desses treinos.
+        </li>
+        <li>
+          <strong className="text-offwhite">Lesão ou restrição (dado de saúde):</strong> só é guardada se você marcar
+          essa opção ao salvar a ficha, e pode ser removida por você a qualquer momento na Área do Aluno.
+        </li>
+        <li>
+          <strong className="text-offwhite">Plano e vencimento:</strong> registrados pela recepção da academia.
         </li>
         <li>
           <strong className="text-offwhite">No Descubra seu Treino e no carrinho da loja:</strong> as respostas do quiz
@@ -50,11 +58,11 @@ const SECTIONS: { title: string; body: ReactNode }[] = [
   },
   {
     title: "Base legal",
-    body: "Tratamos seus dados para executar o serviço que você pediu ao criar a conta e com o seu consentimento, dado ao aceitar esta política no cadastro (Lei Geral de Proteção de Dados — LGPD, art. 7º, incisos I e V).",
+    body: "Tratamos seus dados para executar o serviço que você pediu ao criar a conta e com o seu consentimento, dado ao aceitar esta política no cadastro (Lei Geral de Proteção de Dados — LGPD, art. 7º, incisos I e V). A informação de lesão, por ser dado de saúde, só é tratada com o seu consentimento específico, dado ao marcar a opção correspondente (LGPD, art. 11, inciso I).",
   },
   {
-    title: "Onde os dados ficam",
-    body: "Os dados da Área do Aluno ficam guardados no Supabase, em servidores em São Paulo, e o site é hospedado pela Vercel. Esses serviços apenas armazenam e processam os dados a nosso pedido. O acesso é protegido: cada aluno só consegue ver os próprios dados.",
+    title: "Onde os dados ficam e quem acessa",
+    body: "Os dados da Área do Aluno ficam guardados no Supabase, em servidores em São Paulo, e o site é hospedado pela Vercel. Esses serviços apenas armazenam e processam os dados a nosso pedido. O acesso é protegido: cada aluno só consegue ver os próprios dados. A equipe da academia vê, no painel da recepção, o nome, o e-mail, o plano e as datas dos treinos registrados de cada aluno — não vê suas cargas, sua ficha nem a lesão informada.",
   },
   {
     title: "Por quanto tempo",
