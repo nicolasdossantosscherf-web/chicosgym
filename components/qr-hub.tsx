@@ -3,11 +3,18 @@
 import { useState, type ReactNode } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { Check, ChevronDown, ChevronRight, Copy, Globe, Star, Wifi } from "lucide-react"
+import { Camera, Check, ChevronDown, ChevronRight, Copy, Globe, MessageCircle, Star, Wifi } from "lucide-react"
 import { brand, guestWifi } from "@/lib/data"
 
 const OPTION_CLASS =
   "flex w-full items-center gap-4 rounded-xl border border-line bg-carbon p-4 text-left transition-colors hover:border-orange/60 active:bg-carbon-2"
+
+const SOCIAL_CLASS =
+  "flex items-center justify-center gap-2.5 rounded-xl border border-line bg-carbon px-4 py-4 font-display text-xl uppercase tracking-wide text-offwhite transition-colors hover:border-orange/60 active:bg-carbon-2"
+
+const INSTAGRAM_URL = brand.socials.find((social) => social.label === "Instagram")?.href
+// A mensagem pronta mostra para a academia que a pessoa chegou pelo QR Code.
+const WHATSAPP_URL = `https://wa.me/${brand.whatsapp}?text=${encodeURIComponent("Olá! Vim pelo QR Code da Chico's Gym.")}`
 
 export function QrHub() {
   const [wifiOpen, setWifiOpen] = useState(false)
@@ -72,6 +79,33 @@ export function QrHub() {
           <OptionText title="Avaliar no Google" description="Sua opinião ajuda a academia a crescer" />
           <ChevronRight size={20} className="ml-auto shrink-0 text-offwhite/50" />
         </a>
+
+        <div className="grid grid-cols-2 gap-3">
+          {INSTAGRAM_URL && (
+            <a
+              href={INSTAGRAM_URL}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Seguir a Chico's Gym no Instagram"
+              data-cursor-hover
+              className={SOCIAL_CLASS}
+            >
+              <Camera size={20} className="shrink-0 text-orange" />
+              Instagram
+            </a>
+          )}
+          <a
+            href={WHATSAPP_URL}
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Falar com a Chico's Gym no WhatsApp"
+            data-cursor-hover
+            className={SOCIAL_CLASS}
+          >
+            <MessageCircle size={20} className="shrink-0 text-orange" />
+            WhatsApp
+          </a>
+        </div>
       </nav>
 
       {/* Mesma frase e estilo do título da página inicial, numa linha só: o tamanho
