@@ -29,12 +29,12 @@ export const brand = {
   googleReviewUrl: "https://search.google.com/local/writereview?placeid=ChIJzQSll3JT-ZQRKvja3NBsOCc",
 }
 
-// Wi-Fi mostrado na página /qr (o QR Code dos cartazes da academia). Tem que ser
-// a rede de visitantes, separada da rede da recepção e das câmeras, porque a
-// senha fica pública. Enquanto estiver vazio, a página pede para perguntar na recepção.
+// Wi-Fi mostrado na página /qr (o QR Code dos cartazes da academia). Mesma rede e
+// senha do cartaz de Wi-Fi que já fica na parede, então a senha é pública. Se a
+// academia trocar a senha, atualizar aqui. Vazio = a página manda pedir na recepção.
 export const guestWifi = {
-  network: "",
-  password: "",
+  network: "Chico´s Gym",
+  password: "12345678",
 }
 
 export type SitePage = {
