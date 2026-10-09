@@ -9,6 +9,7 @@ import { Footer } from "@/components/footer";
 import { FloatingWhatsapp } from "@/components/floating-whatsapp";
 import { PageTransition } from "@/components/page-transition";
 import { CartDrawer } from "@/components/cart-drawer";
+import { SiteChrome } from "@/components/site-chrome";
 
 const bebasNeue = Bebas_Neue({
   variable: "--font-display",
@@ -37,11 +38,15 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <GrainOverlay />
         <Cursor />
         <SmoothScrollProvider>
-          <Navbar />
+          <SiteChrome>
+            <Navbar />
+          </SiteChrome>
           <PageTransition />
           {children}
-          <Footer />
-          <FloatingWhatsapp />
+          <SiteChrome>
+            <Footer />
+            <FloatingWhatsapp />
+          </SiteChrome>
           <CartDrawer />
         </SmoothScrollProvider>
       </body>

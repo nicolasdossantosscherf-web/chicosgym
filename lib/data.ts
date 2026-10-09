@@ -24,6 +24,17 @@ export const brand = {
   socials: [
     { label: "Instagram", href: "https://www.instagram.com/_chicosgym", icon: "Camera" },
   ],
+  // Abre direto a caixa de avaliação do perfil oficial no Google (R. Rio de Janeiro, 192).
+  // Existe um segundo perfil "Chico's Gym" na R. Teresa Verzeri, sem avaliações — não é este.
+  googleReviewUrl: "https://search.google.com/local/writereview?placeid=ChIJzQSll3JT-ZQRKvja3NBsOCc",
+}
+
+// Wi-Fi mostrado na página /qr (o QR Code dos cartazes da academia). Tem que ser
+// a rede de visitantes, separada da rede da recepção e das câmeras, porque a
+// senha fica pública. Enquanto estiver vazio, a página pede para perguntar na recepção.
+export const guestWifi = {
+  network: "",
+  password: "",
 }
 
 export type SitePage = {
