@@ -69,11 +69,10 @@ export function QrHub() {
         </a>
       </nav>
 
-      {/* Mesma frase e mesmo estilo do título da página inicial. */}
-      <p className="mt-auto pt-12 text-center font-display text-4xl uppercase leading-[0.86] tracking-tight text-offwhite">
-        Onde disciplina
-        <br />
-        <span className="text-gradient-ember">vira resultado.</span>
+      {/* Mesma frase e estilo do título da página inicial, numa linha só: o tamanho
+          acompanha a largura da tela para caber até em celular de 320px. */}
+      <p className="mt-auto whitespace-nowrap pt-12 text-center font-display text-[min(8.4vw,36px)] uppercase leading-none tracking-tight text-offwhite">
+        Onde disciplina <span className="text-gradient-ember">vira resultado.</span>
       </p>
     </div>
   )
