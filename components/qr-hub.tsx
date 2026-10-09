@@ -13,8 +13,13 @@ export function QrHub() {
   const [wifiOpen, setWifiOpen] = useState(false)
 
   return (
-    <div className="mx-auto flex min-h-svh w-full max-w-md flex-col px-5 pb-10 pt-14">
-      <header className="flex flex-col items-center text-center">
+    <div className="relative mx-auto flex min-h-svh w-full max-w-md flex-col overflow-hidden px-5 pb-10 pt-14">
+      <div
+        aria-hidden
+        className="glow-ember pointer-events-none absolute left-1/2 top-0 h-80 w-80 -translate-x-1/2 -translate-y-1/3 opacity-60"
+      />
+
+      <header className="relative flex flex-col items-center text-center">
         <Image
           src={brand.logoWhite}
           alt="Chico's Gym"
@@ -25,10 +30,10 @@ export function QrHub() {
         />
         <p className="mt-7 text-[11px] font-semibold uppercase tracking-[0.3em] text-orange">Bem-vindo à</p>
         <h1 className="mt-1 font-display text-5xl uppercase tracking-wide text-offwhite">Chico&apos;s Gym</h1>
-        <p className="mt-2 text-sm text-offwhite/60">Você quer ser um vencedor?</p>
+        <p className="mt-2 text-sm font-medium text-orange">Você quer ser um vencedor?</p>
       </header>
 
-      <nav aria-label="Opções" className="mt-9 flex flex-col gap-3">
+      <nav aria-label="Opções" className="relative mt-9 flex flex-col gap-3">
         <div className={`rounded-xl border bg-carbon transition-colors ${wifiOpen ? "border-orange/60" : "border-line"}`}>
           <button
             type="button"
@@ -71,7 +76,7 @@ export function QrHub() {
 
       {/* Mesma frase e estilo do título da página inicial, numa linha só: o tamanho
           acompanha a largura da tela para caber até em celular de 320px. */}
-      <p className="mt-auto whitespace-nowrap pt-12 text-center font-display text-[min(8.4vw,36px)] uppercase leading-none tracking-tight text-offwhite">
+      <p className="relative mt-auto whitespace-nowrap pt-12 text-center font-display text-[min(8.4vw,36px)] uppercase leading-none tracking-tight text-offwhite">
         Onde disciplina <span className="text-gradient-ember">vira resultado.</span>
       </p>
     </div>
