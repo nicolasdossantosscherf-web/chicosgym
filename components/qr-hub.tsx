@@ -9,9 +9,6 @@ import { brand, guestWifi } from "@/lib/data"
 const OPTION_CLASS =
   "flex w-full items-center gap-4 rounded-xl border border-line bg-carbon p-4 text-left transition-colors hover:border-orange/60 active:bg-carbon-2"
 
-const SOCIAL_CLASS =
-  "flex items-center justify-center gap-2.5 rounded-xl border border-line bg-carbon px-4 py-4 font-display text-xl uppercase tracking-wide text-offwhite transition-colors hover:border-orange/60 active:bg-carbon-2"
-
 const INSTAGRAM_URL = brand.socials.find((social) => social.label === "Instagram")?.href
 const WHATSAPP_URL = `https://wa.me/${brand.whatsapp}`
 
@@ -79,32 +76,23 @@ export function QrHub() {
           <ChevronRight size={20} className="ml-auto shrink-0 text-offwhite/50" />
         </a>
 
-        <div className="grid grid-cols-2 gap-3">
-          {INSTAGRAM_URL && (
-            <a
-              href={INSTAGRAM_URL}
-              target="_blank"
-              rel="noreferrer"
-              aria-label="Seguir a Chico's Gym no Instagram"
-              data-cursor-hover
-              className={SOCIAL_CLASS}
-            >
-              <Camera size={20} className="shrink-0 text-orange" />
-              Instagram
-            </a>
-          )}
-          <a
-            href={WHATSAPP_URL}
-            target="_blank"
-            rel="noreferrer"
-            aria-label="Falar com a Chico's Gym no WhatsApp"
-            data-cursor-hover
-            className={SOCIAL_CLASS}
-          >
-            <MessageCircle size={20} className="shrink-0 text-orange" />
-            WhatsApp
+        {INSTAGRAM_URL && (
+          <a href={INSTAGRAM_URL} target="_blank" rel="noreferrer" data-cursor-hover className={OPTION_CLASS}>
+            <OptionIcon>
+              <Camera size={22} />
+            </OptionIcon>
+            <OptionText title="Seguir no Instagram" description="@_chicosgym" />
+            <ChevronRight size={20} className="ml-auto shrink-0 text-offwhite/50" />
           </a>
-        </div>
+        )}
+
+        <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" data-cursor-hover className={OPTION_CLASS}>
+          <OptionIcon>
+            <MessageCircle size={22} />
+          </OptionIcon>
+          <OptionText title="Falar no WhatsApp" description={brand.whatsappDisplay} />
+          <ChevronRight size={20} className="ml-auto shrink-0 text-offwhite/50" />
+        </a>
       </nav>
 
       {/* Mesma frase e estilo do título da página inicial, numa linha só: o tamanho
