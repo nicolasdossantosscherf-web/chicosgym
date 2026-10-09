@@ -24,10 +24,10 @@ export function QrHub() {
 
       <header className="relative flex flex-col items-center text-center">
         <Image
-          src={brand.logoOutline}
+          src={brand.logoWhite}
           alt="Chico's Gym"
           width={560}
-          height={559}
+          height={558}
           priority
           className="h-36 w-auto"
         />

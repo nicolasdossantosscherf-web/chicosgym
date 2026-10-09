@@ -10,8 +10,8 @@ export const brand = {
   // Frase real da placa de horários na entrada da academia.
   motto: "Disciplina não tem horário, a Chico's Gym também não.",
   logo: "/images/brand/logo.jpg",
-  // Versões com fundo transparente para usar sobre fundo preto: toda branca, e
-  // preta com contorno claro (a usada na página /qr).
+  // Versões com fundo transparente para usar sobre fundo preto: toda branca (a
+  // usada na página /qr) e preta com contorno claro (testada lá, guardada).
   logoWhite: "/images/brand/logo-branca.png",
   logoOutline: "/images/brand/logo-contorno.png",
   whatsapp: "5555999470965",
