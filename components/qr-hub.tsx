@@ -13,8 +13,7 @@ const SOCIAL_CLASS =
   "flex items-center justify-center gap-2.5 rounded-xl border border-line bg-carbon px-4 py-4 font-display text-xl uppercase tracking-wide text-offwhite transition-colors hover:border-orange/60 active:bg-carbon-2"
 
 const INSTAGRAM_URL = brand.socials.find((social) => social.label === "Instagram")?.href
-// A mensagem pronta mostra para a academia que a pessoa chegou pelo QR Code.
-const WHATSAPP_URL = `https://wa.me/${brand.whatsapp}?text=${encodeURIComponent("Olá! Vim pelo QR Code da Chico's Gym.")}`
+const WHATSAPP_URL = `https://wa.me/${brand.whatsapp}`
 
 export function QrHub() {
   const [wifiOpen, setWifiOpen] = useState(false)
