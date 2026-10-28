@@ -96,7 +96,7 @@ export const sitePages: SitePage[] = [
   {
     href: "/parcerias",
     label: "Parcerias",
-    description: "Wizard, massoterapeuta e nutricionista, com condições especiais pra alunos.",
+    description: "Wizard e nutricionista, com condições especiais pra alunos.",
     icon: "Handshake",
   },
 ]
@@ -249,17 +249,6 @@ export const partners: Partner[] = [
     description: "Detalhes da parceria em breve.",
   },
   {
-    id: "felipe-farias",
-    name: "Felipe Farias",
-    role: "Massoterapeuta",
-    image: { src: "/images/partners/felipe-farias.webp", width: 1254, height: 1254 },
-    highlights: ["Tratamento da dor", "Massoterapia", "Liberação miofascial", "Ventosaterapia"],
-    benefit: "Alunos da academia têm desconto nas sessões e a 1ª avaliação é gratuita.",
-    schedule: "Atendimentos presenciais na academia.",
-    instagram: "felipefarias_neto",
-    bookable: true,
-  },
-  {
     id: "maura-dupont",
     name: "Maura Dupont de Oliveira",
     role: "Nutricionista",
@@ -295,13 +284,6 @@ export const gymServices: GymService[] = [
     description: "Maura Dupont de Oliveira, especializada em nutrição esportiva. Alunos têm desconto nas consultas.",
     icon: "Apple",
     partnerId: "maura-dupont",
-  },
-  {
-    id: "massoterapeuta",
-    title: "Massoterapeuta",
-    description: "Felipe Farias: tratamento da dor, massoterapia, liberação miofascial e ventosaterapia, com desconto pra alunos.",
-    icon: "HandHeart",
-    partnerId: "felipe-farias",
   },
   {
     id: "personal",
@@ -621,9 +603,9 @@ export const faqs: FaqItem[] = [
     answer: "Não — a Chico's Gym não cobra taxa de matrícula em nenhum plano.",
   },
   {
-    question: "Vocês têm parceria com nutricionista e massoterapeuta?",
+    question: "Vocês têm parceria com nutricionista?",
     answer:
-      "Sim — Maura Dupont de Oliveira (nutricionista) e Felipe Farias (massoterapeuta) atendem na própria academia, com desconto pra alunos. Veja os detalhes na página de Parcerias.",
+      "Sim — a nutricionista Maura Dupont de Oliveira atende na própria academia, com desconto pra alunos. Veja os detalhes na página de Parcerias.",
   },
   {
     question: "O personal trainer está incluso na mensalidade?",

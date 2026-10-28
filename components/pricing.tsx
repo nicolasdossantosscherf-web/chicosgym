@@ -90,7 +90,7 @@ export function Pricing() {
         <SectionHeading
           eyebrow="Planos"
           title="Escolha seu ritmo de treino"
-          description="Sem taxa de matrícula em nenhum plano. Alunos ainda ganham desconto em nutricionista e massoterapeuta parceiros, com atendimento presencial na própria academia."
+          description="Sem taxa de matrícula em nenhum plano. Alunos ainda ganham desconto com a nutricionista parceira, com atendimento presencial na própria academia."
         />
 
         <div className="mt-14 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">

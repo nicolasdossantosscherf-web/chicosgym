@@ -14,7 +14,7 @@ export function GymServices() {
           description="Serviços extras pra acompanhar sua evolução, com condições especiais pra alunos da academia."
         />
 
-        <div className="mt-14 grid grid-cols-1 gap-px overflow-hidden rounded-sm border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-14 grid grid-cols-1 gap-px overflow-hidden rounded-sm border border-line bg-line sm:grid-cols-3">
           {gymServices.map((service, i) => {
             const Icon = (Icons as unknown as Record<string, Icons.LucideIcon>)[service.icon] ?? Icons.Sparkles
             return (
