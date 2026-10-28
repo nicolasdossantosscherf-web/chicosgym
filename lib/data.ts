@@ -48,8 +48,8 @@ export type SitePage = {
   icon: string
 }
 
-// Estrutura de páginas do site — usada pelo menu, rodapé e pela grade
-// de navegação da Home. Trocar aqui atualiza a navegação inteira.
+// Estrutura de páginas do site — usada pelo menu e pelo rodapé.
+// Trocar aqui atualiza a navegação inteira.
 export const sitePages: SitePage[] = [
   {
     href: "/historia",
@@ -629,13 +629,4 @@ export const faqs: FaqItem[] = [
     question: "O personal trainer está incluso na mensalidade?",
     answer: "A avaliação física inicial está inclusa em todos os planos. Acompanhamento contínuo com personal trainer é um serviço à parte — fale com a equipe.",
   },
-]
-
-export type ResultItem = { id: string; caption: string; image?: string }
-
-export const results: ResultItem[] = [
-  { id: "r1", caption: "Transformações da nossa comunidade" },
-  { id: "r2", caption: "Resultado de quem treina sério" },
-  { id: "r3", caption: "Antes e depois dos nossos alunos" },
-  { id: "r4", caption: "Histórias reais, em breve aqui" },
 ]

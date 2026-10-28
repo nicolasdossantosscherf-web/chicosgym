@@ -111,22 +111,6 @@ body {
   box-shadow: 0 0 12px 1px var(--color-orange);
 }
 
-.diamond-lg {
-  width: 1.1rem;
-  height: 1.1rem;
-  flex: none;
-  transform: rotate(45deg);
-  background: var(--color-orange);
-  box-shadow: 0 0 18px 2px var(--color-orange);
-}
-
-.diamond-row {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 2.5rem;
-}
-
 .hairline {
   border-color: var(--color-line);
 }
