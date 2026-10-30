@@ -206,6 +206,39 @@ body {
   }
 }
 
+/* Faixa de números que roda sem parar (components/stats-bar.tsx). A lista é
+   renderizada duas vezes; andar -50% faz a segunda cópia cair exatamente onde
+   a primeira começou, então o loop não tem emenda. Para ao passar o mouse. */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  animation: marquee var(--marquee-duration, 60s) linear infinite;
+}
+
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+    animation: none;
+  }
+
+  .marquee-track [data-marquee-copy] {
+    display: none;
+  }
+}
+
 /* Brilho ambiente do hero — luz laranja suave que respira sozinha e
    intensifica levemente conforme o scroll (ver components/hero.tsx). */
 .glow-ember {
