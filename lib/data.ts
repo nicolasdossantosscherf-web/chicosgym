@@ -96,14 +96,14 @@ export const sitePages: SitePage[] = [
   {
     href: "/parcerias",
     label: "Parcerias",
-    description: "Wizard e nutricionista, com condições especiais pra alunos.",
+    description: "Wizard, Lactalis e nutricionista parceiros da Chico's Gym.",
     icon: "Handshake",
   },
 ]
 
 export const stats = [
   { value: 4, suffix: "+", label: "Anos de história" },
-  { value: 303, suffix: "", label: "Alunos ativos" },
+  { value: 307, suffix: "", label: "Alunos ativos" },
   { value: 5, suffix: "", label: "Avaliação no Google", decimals: 1 },
 ]
 
@@ -223,41 +223,42 @@ export const plans: Plan[] = [
 
 export type Partner = {
   id: string
+  // Usado como texto alternativo da imagem.
   name: string
-  role: string
-  registry?: string
-  // Cartaz de divulgação da parceria (com as dimensões reais, pra não cortar o texto).
-  image?: { src: string; width: number; height: number }
-  logo?: string
-  description?: string
-  highlights?: string[]
-  benefit?: string
-  schedule?: string
-  instagram?: string
-  // Profissional com agenda: o botão vira "Agendar pelo WhatsApp".
-  bookable?: boolean
+  // "logo": marca com fundo transparente, centralizada no espaço.
+  // "photo": cartaz ou foto que ocupa o espaço inteiro (formato 4:5).
+  kind: "logo" | "photo"
+  image: { src: string; width: number; height: number }
 }
 
-// Parcerias confirmadas pela Chico's Gym. Os dados dos profissionais vêm dos
-// cartazes de divulgação enviados pela academia.
+// Parcerias da Chico's Gym, mostradas só com a logo ou o cartaz, lado a lado.
+// A ordem alterna logo e cartaz pra cada linha ficar equilibrada no celular.
 export const partners: Partner[] = [
   {
     id: "wizard",
     name: "Wizard by Pearson",
-    role: "Escola de idiomas",
-    logo: "/images/partners/wizard.png",
-    description: "Detalhes da parceria em breve.",
+    kind: "logo",
+    image: { src: "/images/partners/wizard.png", width: 300, height: 70 },
   },
   {
     id: "maura-dupont",
-    name: "Maura Dupont de Oliveira",
-    role: "Nutricionista",
-    registry: "CRN2 18612D",
+    name: "Maura Dupont de Oliveira, nutricionista",
+    kind: "photo",
     image: { src: "/images/partners/maura-dupont.webp", width: 1122, height: 1402 },
-    highlights: ["Especializada em nutrição esportiva", "Pós-graduada em fisiologia do exercício"],
-    benefit: "Alunos da Chico's Gym têm desconto nas consultas.",
-    schedule: "Atendimentos aos sábados de manhã, na academia.",
-    bookable: true,
+  },
+  {
+    // Versão com as letras em branco (a original é azul-escuro), pra aparecer no fundo preto.
+    id: "lactalis",
+    name: "Lactalis Brasil",
+    kind: "logo",
+    image: { src: "/images/partners/lactalis.png", width: 900, height: 320 },
+  },
+  {
+    // Provisório: foto de espetinho (Unsplash, Z Grills Australia) até a parceria ser confirmada.
+    id: "espetinho",
+    name: "Espetinho, parceria em breve",
+    kind: "photo",
+    image: { src: "/images/partners/espetinho.webp", width: 1000, height: 1250 },
   },
 ]
 
