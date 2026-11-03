@@ -101,10 +101,17 @@ export const sitePages: SitePage[] = [
   },
 ]
 
-export const stats = [
+// Itens da faixa que roda na Home: um número (com contagem animada) ou um
+// destaque em texto. Pra acrescentar uma informação, é só incluir aqui.
+export type StatItem =
+  | { value: number; suffix?: string; decimals?: number; label: string }
+  | { highlight: string; label: string }
+
+export const stats: StatItem[] = [
   { value: 4, suffix: "+", label: "Anos de história" },
-  { value: 307, suffix: "", label: "Alunos ativos" },
-  { value: 5, suffix: "", label: "Avaliação no Google", decimals: 1 },
+  { value: 307, label: "Alunos ativos" },
+  { value: 5, label: "Avaliação no Google", decimals: 1 },
+  { highlight: "Espetinho", label: "Toda sexta-feira a partir das 17h" },
 ]
 
 export type TimelineItem = {

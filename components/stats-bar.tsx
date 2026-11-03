@@ -41,8 +41,8 @@ function CountUp({ target, decimals = 0, suffix = "" }: { target: number; decima
   )
 }
 
-// Cada metade da faixa repete os números até ter pelo menos isso de itens,
-// pra cobrir telas largas mesmo com poucos números cadastrados.
+// Cada metade da faixa repete os itens até ter pelo menos isso de itens,
+// pra cobrir telas largas mesmo com poucos itens cadastrados.
 const MIN_ITEMS_PER_HALF = 10
 const SECONDS_PER_ITEM = 5
 
@@ -55,9 +55,9 @@ export function StatsBar() {
   return (
     <section className="relative overflow-hidden border-y border-line bg-carbon">
       <div className="marquee [mask-image:linear-gradient(to_right,transparent,#000_8%,#000_92%,transparent)]">
-        <ul aria-label="Números da Chico's Gym" className="marquee-track flex w-max" style={duration}>
+        <ul aria-label="Destaques da Chico's Gym" className="marquee-track flex w-max" style={duration}>
           {items.map((stat, i) => {
-            // Só a primeira aparição de cada número é lida por leitores de tela.
+            // Só a primeira aparição de cada item é lida por leitores de tela.
             const isCopy = i >= stats.length
             return (
               <li
@@ -67,8 +67,12 @@ export function StatsBar() {
                 className="flex shrink-0 items-center"
               >
                 <div className="flex flex-col gap-1 px-10 py-10 sm:px-14 sm:py-12">
-                  <span className="font-display text-4xl text-gradient-ember sm:text-5xl">
-                    <CountUp target={stat.value} decimals={stat.decimals ?? 0} suffix={stat.suffix} />
+                  <span className="whitespace-nowrap font-display text-4xl uppercase text-gradient-ember sm:text-5xl">
+                    {"value" in stat ? (
+                      <CountUp target={stat.value} decimals={stat.decimals ?? 0} suffix={stat.suffix} />
+                    ) : (
+                      stat.highlight
+                    )}
                   </span>
                   <span className="whitespace-nowrap text-xs uppercase tracking-[0.2em] text-offwhite/50">
                     {stat.label}
