@@ -223,42 +223,36 @@ export const plans: Plan[] = [
 
 export type Partner = {
   id: string
-  // Usado como texto alternativo da imagem.
+  // Usado como texto alternativo da logo.
   name: string
-  // "logo": marca com fundo transparente, centralizada no espaço.
-  // "photo": cartaz ou foto que ocupa o espaço inteiro (formato 4:5).
-  kind: "logo" | "photo"
+  // Logo com fundo transparente; as dimensões reais definem o tamanho na tela.
   image: { src: string; width: number; height: number }
 }
 
-// Parcerias da Chico's Gym, mostradas só com a logo ou o cartaz, lado a lado.
-// A ordem alterna logo e cartaz pra cada linha ficar equilibrada no celular.
+// Parcerias da Chico's Gym, mostradas só com a logo, lado a lado. As logos
+// claras/brancas são versões pra fundo preto (os originais têm texto escuro).
 export const partners: Partner[] = [
   {
     id: "wizard",
     name: "Wizard by Pearson",
-    kind: "logo",
     image: { src: "/images/partners/wizard.png", width: 300, height: 70 },
   },
   {
+    // Texto verde-escuro do original trocado por branco.
     id: "maura-dupont",
-    name: "Maura Dupont de Oliveira, nutricionista",
-    kind: "photo",
-    image: { src: "/images/partners/maura-dupont.webp", width: 1122, height: 1402 },
+    name: "Maura de Oliveira, nutricionista",
+    image: { src: "/images/partners/maura-logo.webp", width: 900, height: 549 },
   },
   {
-    // Versão com as letras em branco (a original é azul-escuro), pra aparecer no fundo preto.
+    // Letras azul-escuras do original trocadas por branco.
     id: "lactalis",
     name: "Lactalis Brasil",
-    kind: "logo",
     image: { src: "/images/partners/lactalis.png", width: 900, height: 320 },
   },
   {
-    // Provisório: foto de espetinho (Unsplash, Z Grills Australia) até a parceria ser confirmada.
-    id: "espetinho",
-    name: "Espetinho, parceria em breve",
-    kind: "photo",
-    image: { src: "/images/partners/espetinho.webp", width: 1000, height: 1250 },
+    id: "espetinho-cristiano-hensel",
+    name: "Espetinho do Cristiano Hensel",
+    image: { src: "/images/partners/espetinho-logo.webp", width: 900, height: 792 },
   },
 ]
 
