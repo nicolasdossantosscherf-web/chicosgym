@@ -33,6 +33,21 @@ export const brand = {
   googleReviewUrl: "https://search.google.com/local/writereview?placeid=ChIJzQSll3JT-ZQRKvja3NBsOCc",
 }
 
+// Os mesmos horários de brand.hours, em horas do dia (24 = meia-noite), para o
+// relógio "aberta/fechada" da faixa da Home (lib/gym-hours.ts). Se mudar um, mude o outro.
+export const openingSchedule = {
+  weekdays: [[5, 24]],
+  saturdaysAndHolidays: [
+    [9, 12],
+    [15, 18],
+  ],
+  sundays: [[16, 19]],
+} satisfies Record<string, [number, number][]>
+
+// Feriados com o horário de sábado (dia-mês). Nacionais + 20/09 (feriado do RS);
+// a Sexta-feira Santa é calculada a cada ano. Pra incluir um feriado municipal, é só somar aqui.
+export const holidays = ["01-01", "21-04", "01-05", "07-09", "20-09", "12-10", "02-11", "15-11", "20-11", "25-12"]
+
 // Wi-Fi mostrado na página /qr (o QR Code dos cartazes da academia). Mesma rede e
 // senha do cartaz de Wi-Fi que já fica na parede, então a senha é pública. Se a
 // academia trocar a senha, atualizar aqui. Vazio = a página manda pedir na recepção.
@@ -101,13 +116,15 @@ export const sitePages: SitePage[] = [
   },
 ]
 
-// Itens da faixa que roda na Home: um número (com contagem animada) ou um
-// destaque em texto. Pra acrescentar uma informação, é só incluir aqui.
+// Itens da faixa que roda na Home: um número (com contagem animada), um
+// destaque em texto ou o relógio de funcionamento. Pra acrescentar, é só incluir aqui.
 export type StatItem =
   | { value: number; suffix?: string; decimals?: number; label: string }
   | { highlight: string; label: string }
+  | { clock: true }
 
 export const stats: StatItem[] = [
+  { clock: true },
   { value: 4, suffix: "+", label: "Anos de história" },
   { value: 307, label: "Alunos ativos" },
   { value: 5, label: "Avaliação no Google", decimals: 1 },

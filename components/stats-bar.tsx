@@ -1,7 +1,73 @@
 "use client"
 
-import { useEffect, useRef, useState, type CSSProperties } from "react"
+import { useEffect, useRef, useState, useSyncExternalStore, type CSSProperties } from "react"
 import { stats } from "@/lib/data"
+import { gymStatus, gymTime, statusText } from "@/lib/gym-hours"
+
+// Um único relógio compartilhado por todas as cópias do item na faixa: um
+// intervalo só, que avisa os inscritos quando o segundo muda.
+let currentSecond = 0
+const clockListeners = new Set<() => void>()
+let clockTimer: ReturnType<typeof setInterval> | undefined
+
+function subscribeToClock(listener: () => void) {
+  clockListeners.add(listener)
+  if (!clockTimer) {
+    clockTimer = setInterval(() => {
+      const second = Math.floor(Date.now() / 1000)
+      if (second === currentSecond) return
+      currentSecond = second
+      clockListeners.forEach((notify) => notify())
+    }, 250)
+  }
+  return () => {
+    clockListeners.delete(listener)
+    if (!clockListeners.size && clockTimer) {
+      clearInterval(clockTimer)
+      clockTimer = undefined
+    }
+  }
+}
+
+function getClockSecond() {
+  if (!currentSecond) currentSecond = Math.floor(Date.now() / 1000)
+  return currentSecond
+}
+
+const pad = (n: number) => String(n).padStart(2, "0")
+
+function GymClock() {
+  // No servidor não há "agora" do visitante: mostra o traço até o relógio montar.
+  const second = useSyncExternalStore(subscribeToClock, getClockSecond, () => null)
+  if (second === null) {
+    return (
+      <>
+        <span className="font-display text-4xl text-offwhite/40 sm:text-5xl">--:--:--</span>
+        <span className="text-xs uppercase tracking-[0.2em] text-offwhite/50">Horário da academia</span>
+      </>
+    )
+  }
+
+  const time = gymTime(new Date(second * 1000))
+  const status = gymStatus(time)
+  return (
+    <>
+      <span className="font-display text-4xl tabular-nums text-offwhite sm:text-5xl">
+        {pad(time.hour)}:{pad(time.minute)}:{pad(time.second)}
+      </span>
+      <span className="flex items-center gap-2 whitespace-nowrap text-xs uppercase tracking-[0.2em] text-offwhite/50">
+        <span className={`relative flex h-2 w-2 ${status.open ? "text-emerald-400" : "text-red-500"}`}>
+          {status.open && <span className="absolute inset-0 animate-ping rounded-full bg-current opacity-60" />}
+          <span className="relative h-2 w-2 rounded-full bg-current" />
+        </span>
+        <span className={`font-semibold ${status.open ? "text-emerald-400" : "text-red-500"}`}>
+          {status.open ? "Aberta" : "Fechada"}
+        </span>
+        · {statusText(status)}
+      </span>
+    </>
+  )
+}
 
 function CountUp({ target, decimals = 0, suffix = "" }: { target: number; decimals?: number; suffix?: string }) {
   const ref = useRef<HTMLSpanElement>(null)
@@ -67,16 +133,22 @@ export function StatsBar() {
                 className="flex shrink-0 items-center"
               >
                 <div className="flex flex-col gap-1 px-10 py-10 sm:px-14 sm:py-12">
-                  <span className="whitespace-nowrap font-display text-4xl uppercase text-gradient-ember sm:text-5xl">
-                    {"value" in stat ? (
-                      <CountUp target={stat.value} decimals={stat.decimals ?? 0} suffix={stat.suffix} />
-                    ) : (
-                      stat.highlight
-                    )}
-                  </span>
-                  <span className="whitespace-nowrap text-xs uppercase tracking-[0.2em] text-offwhite/50">
-                    {stat.label}
-                  </span>
+                  {"clock" in stat ? (
+                    <GymClock />
+                  ) : (
+                    <>
+                      <span className="whitespace-nowrap font-display text-4xl uppercase text-gradient-ember sm:text-5xl">
+                        {"value" in stat ? (
+                          <CountUp target={stat.value} decimals={stat.decimals ?? 0} suffix={stat.suffix} />
+                        ) : (
+                          stat.highlight
+                        )}
+                      </span>
+                      <span className="whitespace-nowrap text-xs uppercase tracking-[0.2em] text-offwhite/50">
+                        {stat.label}
+                      </span>
+                    </>
+                  )}
                 </div>
                 <span aria-hidden className="diamond opacity-50" />
               </li>
