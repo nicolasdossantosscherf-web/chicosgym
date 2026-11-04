@@ -116,15 +116,13 @@ export const sitePages: SitePage[] = [
   },
 ]
 
-// Itens da faixa que roda na Home: um número (com contagem animada), um
-// destaque em texto ou o relógio de funcionamento. Pra acrescentar, é só incluir aqui.
+// Itens da faixa que roda na Home: um número (com contagem animada) ou um
+// destaque em texto. Pra acrescentar, é só incluir aqui.
 export type StatItem =
   | { value: number; suffix?: string; decimals?: number; label: string }
   | { highlight: string; label: string }
-  | { clock: true }
 
 export const stats: StatItem[] = [
-  { clock: true },
   { value: 4, suffix: "+", label: "Anos de história" },
   { value: 307, label: "Alunos ativos" },
   { value: 5, label: "Avaliação no Google", decimals: 1 },

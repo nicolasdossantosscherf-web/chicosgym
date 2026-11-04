@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation"
 import { Menu, X } from "lucide-react"
 import { CartButton } from "./cart-button"
 import { ShopLink } from "./shop-link"
+import { HeaderClock } from "./header-clock"
 import { brand, sitePages } from "@/lib/data"
 
 const HOME_LINK = { href: "/", label: "Início" }
@@ -41,13 +42,16 @@ export function Navbar() {
           : "border-b border-transparent bg-transparent"
       }`}
     >
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 md:px-10">
-        <Link href="/" className="flex items-center gap-2.5" data-cursor-hover>
-          <Image src={brand.logo} alt="Chico's Gym" width={40} height={40} className="h-10 w-10 rounded-full" />
-          <span className="font-display text-2xl uppercase tracking-widest text-offwhite">
+      <div className="relative mx-auto flex max-w-7xl items-center justify-between gap-3 px-6 py-4 md:px-10">
+        <Link href="/" aria-label="Chico's Gym, página inicial" className="flex items-center gap-2.5" data-cursor-hover>
+          <Image src={brand.logo} alt="" width={40} height={40} className="h-10 w-10 rounded-full" />
+          {/* No celular o nome dá lugar ao relógio; a logo redonda continua. */}
+          <span className="hidden font-display text-2xl uppercase tracking-widest text-offwhite md:inline">
             Chico&apos;s Gym
           </span>
         </Link>
+
+        <HeaderClock className="md:absolute md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2" />
 
         <div className="flex items-center gap-5 sm:gap-6">
           <ShopLink />

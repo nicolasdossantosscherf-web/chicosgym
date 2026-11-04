@@ -14,8 +14,6 @@ const partsFormatter = new Intl.DateTimeFormat("en-US", {
   hourCycle: "h23",
 })
 
-const WEEKDAY_NAMES = ["domingo", "segunda", "terça", "quarta", "quinta", "sexta", "sábado"]
-
 export type GymTime = { year: number; month: number; day: number; hour: number; minute: number; second: number }
 
 export type GymStatus =
@@ -85,15 +83,13 @@ export function gymStatus(time: GymTime): GymStatus {
   throw new Error("Sem horário de abertura na próxima semana")
 }
 
+// 0 = domingo ... 6 = sábado, no dia de Três de Maio.
+export function weekdayOf(time: GymTime) {
+  return new Date(Date.UTC(time.year, time.month - 1, time.day)).getUTCDay()
+}
+
 export function formatMinutes(minutes: number) {
   const h = Math.floor(minutes / 60) % 24
   const m = minutes % 60
   return `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}`
-}
-
-export function statusText(status: GymStatus) {
-  if (status.open) return `Até as ${formatMinutes(status.until)}`
-  const when =
-    status.daysAhead === 0 ? "" : status.daysAhead === 1 ? "amanhã " : `${WEEKDAY_NAMES[status.weekday]} `
-  return `Abrimos ${when}às ${formatMinutes(status.opensAt)}`
 }
