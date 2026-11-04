@@ -8,10 +8,30 @@ import { LedClock, LedClockCompact } from "./led-clock"
 
 // Relógio do cabeçalho: compacto (hora + aberta/fechada); ao tocar, abre logo
 // abaixo o relógio completo, igual ao da parede da academia.
+// A temperatura só é buscada quando o relógio completo abre (e de novo se a
+// última leitura tiver mais de 10 minutos).
+const TEMPERATURE_MAX_AGE = 10 * 60 * 1000
+
 export function HeaderClock({ className = "" }: { className?: string }) {
   const [open, setOpen] = useState(false)
+  const [temperature, setTemperature] = useState<number | null>(null)
+  const fetchedAt = useRef(0)
   const rootRef = useRef<HTMLDivElement>(null)
   const pathname = usePathname()
+
+  useEffect(() => {
+    if (!open || Date.now() - fetchedAt.current < TEMPERATURE_MAX_AGE) return
+    fetchedAt.current = Date.now()
+    const controller = new AbortController()
+    fetch("/api/clima", { signal: controller.signal })
+      .then((response) => response.json() as Promise<{ temperature: number | null }>)
+      .then((data) => setTemperature(data.temperature))
+      .catch(() => {
+        // Sem conexão ou cancelado: tenta de novo na próxima vez que abrir.
+        fetchedAt.current = 0
+      })
+    return () => controller.abort()
+  }, [open])
 
   useEffect(() => {
     // Mesmo padrão do menu: trocar de página fecha o painel.
@@ -55,7 +75,7 @@ export function HeaderClock({ className = "" }: { className?: string }) {
         className="absolute left-1/2 top-full z-10 mt-3 w-[min(380px,calc(100vw-2rem))] -translate-x-1/2"
       >
         <div className="rounded-2xl border border-line bg-ink p-3 shadow-2xl">
-          <LedClock className="h-auto w-full" />
+          <LedClock className="h-auto w-full" temperature={temperature} />
           <Link
             href="/local"
             data-cursor-hover
@@ -64,6 +84,13 @@ export function HeaderClock({ className = "" }: { className?: string }) {
             Ver todos os horários
             <ArrowRight size={14} />
           </Link>
+          {/* Crédito exigido pela licença dos dados (CC BY 4.0). */}
+          <p className="mt-2 text-center text-[10px] text-offwhite/35">
+            Temperatura em Três de Maio:{" "}
+            <a href="https://www.met.no/en" target="_blank" rel="noreferrer" className="underline hover:text-offwhite/60">
+              MET Norway
+            </a>
+          </p>
         </div>
       </div>
     </div>

@@ -42,6 +42,14 @@ const DIGITS: Record<string, string> = {
   "7": "abc",
   "8": "abcdefg",
   "9": "abcdfg",
+  "-": "g",
+}
+
+// Temperatura em 2 casas, alinhada à direita como no relógio (" 7", "23", "-3").
+function temperatureText(temperature: number | null | undefined) {
+  if (temperature == null) return null
+  const text = String(temperature)
+  return text.length > 2 ? "--" : text.padStart(2, " ")
 }
 
 const DIGIT_W = 56
@@ -192,14 +200,17 @@ export function LedClockCompact({ className }: { className?: string }) {
   )
 }
 
-export function LedClock({ className }: { className?: string }) {
+// `temperature`: graus em Três de Maio (null/undefined enquanto não chega).
+export function LedClock({ className, temperature }: { className?: string; temperature?: number | null }) {
   const { glow, panel } = useSvgIds()
   const { time, status, weekday, nextChange: nextTime, label } = useGymClock()
   const nextChange = nextTime?.replace(":", "") ?? null
   const statusColor = status ? (status.open ? OPEN_GREEN : LIT) : "#555"
+  const temp = temperatureText(temperature)
+  const fullLabel = temperature == null ? label : `${label} Temperatura em Três de Maio: ${temperature} °C.`
 
   return (
-    <svg viewBox="0 0 800 460" role="img" aria-label={label} className={className}>
+    <svg viewBox="0 0 800 460" role="img" aria-label={fullLabel} className={className}>
       <ClockDefs glow={glow} panel={panel} />
 
       {/* Caixa: moldura cinza, painel preto e o reflexo do vidro */}
@@ -262,10 +273,14 @@ export function LedClock({ className }: { className?: string }) {
         </text>
       ))}
 
-      {/* Dia, mês, ano e o próximo horário (fecha/abre) */}
+      {/* Dia, mês, ano, temperatura e o próximo horário (fecha/abre) */}
       <DigitWindow x={52} y={336} scale={0.5} padding={8} text={time ? pad(time.day) : null} glow={glow} />
       <DigitWindow x={157} y={336} scale={0.5} padding={8} text={time ? pad(time.month) : null} glow={glow} />
       <DigitWindow x={262} y={336} scale={0.5} padding={8} text={time ? String(time.year) : "    "} glow={glow} />
+      <DigitWindow x={428} y={336} scale={0.5} padding={8} text={temp} glow={glow} />
+      <text x="512" y="364" fontSize="24" fontWeight="800" fill="#e6e6e6" className="font-body">
+        °C
+      </text>
       <DigitWindow x={572} y={336} scale={0.5} padding={8} text={nextChange?.slice(0, 2) ?? null} glow={glow} />
       <DigitWindow x={668} y={336} scale={0.5} padding={8} text={nextChange?.slice(2) ?? null} glow={glow} />
       <g filter={nextChange ? `url(#${glow})` : undefined}>
@@ -276,6 +291,7 @@ export function LedClock({ className }: { className?: string }) {
         ["Dia", 90],
         ["Mês", 195],
         ["Ano", 334],
+        ["Temp", 467],
       ].map(([text, x]) => (
         <text key={text} x={x} y="436" textAnchor="middle" fontSize="24" fontWeight="700" fill="#e6e6e6" className="font-body">
           {text}

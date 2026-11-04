@@ -124,9 +124,9 @@ export type StatItem =
 
 export const stats: StatItem[] = [
   { value: 4, suffix: "+", label: "Anos de história" },
-  { value: 307, label: "Alunos ativos" },
+  { value: 315, label: "Alunos ativos" },
   { value: 5, label: "Avaliação no Google", decimals: 1 },
-  { highlight: "Espetinho", label: "Toda sexta-feira a partir das 17h" },
+  { highlight: "Espetinho", label: "Toda sexta-feira a partir das 18h" },
 ]
 
 export type TimelineItem = {
