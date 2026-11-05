@@ -315,7 +315,7 @@ body {
   }
 }
 
-/* Entrada suave de cada pergunta do "Descubra seu Treino". */
+/* Entrada suave de cada pergunta do "Monte seu Treino". */
 @keyframes step-in {
   from {
     opacity: 0;

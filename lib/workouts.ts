@@ -2,6 +2,7 @@
 // academia (montados pelos profissionais com CREF). Exercícios, séries e
 // repetições estão exatamente como nos cartazes — só as abreviações
 // ("Agacha. hack", "Poster. ombro"…) foram escritas por extenso.
+// O "Monte seu Treino" (lib/workout-engine.ts) usa estas fichas como base.
 
 export type WorkoutSex = "feminino" | "masculino"
 export type WorkoutFrequency = 3 | 4 | 5
@@ -233,10 +234,6 @@ export const workoutPlans: WorkoutPlan[] = [
     ],
   },
 ]
-
-export function findWorkoutPlan(sex: WorkoutSex, frequency: WorkoutFrequency) {
-  return workoutPlans.find((p) => p.sex === sex && p.frequency === frequency)
-}
 
 export type WorkoutGoal = "massa" | "emagrecer" | "condicionamento" | "saude"
 export type WorkoutExperience = "nunca" | "parei" | "treino"

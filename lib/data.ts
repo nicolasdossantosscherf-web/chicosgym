@@ -80,8 +80,8 @@ export const sitePages: SitePage[] = [
   },
   {
     href: "/treino",
-    label: "Descubra seu Treino",
-    description: "Responda 5 perguntas e receba a ficha de treino da Chico's Gym ideal pra você.",
+    label: "Monte seu Treino",
+    description: "Responda algumas perguntas e receba na hora um treino personalizado pra você.",
     icon: "Dumbbell",
   },
   {

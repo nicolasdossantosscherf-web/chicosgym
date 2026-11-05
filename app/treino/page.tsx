@@ -1,16 +1,16 @@
 import type { Metadata } from "next";
-import { WorkoutQuiz } from "@/components/workout-quiz";
+import { WorkoutBuilder } from "@/components/workout-builder";
 
 export const metadata: Metadata = {
-  title: "Descubra seu Treino — Chico's Gym",
+  title: "Monte seu Treino — Chico's Gym",
   description:
-    "Responda 5 perguntas e receba a ficha oficial de treino da Chico's Gym ideal pra você, montada pelos profissionais da academia.",
+    "Responda algumas perguntas e receba na hora um treino personalizado, montado com os exercícios e as regras da Chico's Gym. Salve no celular e use sempre que quiser.",
 };
 
 export default function TreinoPage() {
   return (
     <main className="pt-24 md:pt-28">
-      <WorkoutQuiz />
+      <WorkoutBuilder />
     </main>
   );
 }

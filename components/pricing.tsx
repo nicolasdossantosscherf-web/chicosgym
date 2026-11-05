@@ -106,7 +106,7 @@ export function Pricing() {
                     data-cursor-hover
                     className="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold text-orange transition-colors hover:text-gold"
                   >
-                    Não sabe por onde começar? Descubra seu treino
+                    Não sabe por onde começar? Monte seu treino
                     <ArrowRight size={12} className="shrink-0" />
                   </Link>
                 </>
