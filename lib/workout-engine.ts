@@ -23,11 +23,18 @@ export type MuscleGroup =
   | "biceps"
   | "triceps"
   | "antebraco"
+  | "abdomen"
 
-export type Equipment = "maquina" | "polia" | "livre"
+// "corpo": só o peso do corpo e um colchonete (não entra na preferência
+// máquinas × pesos livres).
+export type Equipment = "maquina" | "polia" | "livre" | "corpo"
+
+type CatalogEntry = { name: string; group: MuscleGroup; equipment: Equipment; technical?: boolean; reps?: string }
 
 // `technical`: exercícios livres que pedem mais técnica — pra quem está
 // começando (ou tem 60+), o motor prefere uma opção em máquina quando existe.
+// `reps`: quando o exercício não segue as repetições do treino (ex.: prancha).
+// Os de abdômen não estão nos cartazes: são os básicos, que só pedem colchonete.
 const CATALOG = {
   "cadeira-extensora": { name: "Cadeira extensora", group: "quadriceps", equipment: "maquina" },
   "leg-press": { name: "Leg press", group: "quadriceps", equipment: "maquina" },
@@ -64,14 +71,31 @@ const CATALOG = {
   "triceps-polia": { name: "Tríceps polia", group: "triceps", equipment: "polia" },
   "triceps-livre": { name: "Tríceps livre", group: "triceps", equipment: "livre" },
   antebraco: { name: "Antebraço", group: "antebraco", equipment: "livre" },
-} satisfies Record<string, { name: string; group: MuscleGroup; equipment: Equipment; technical?: boolean }>
+  "abdominal-supra": { name: "Abdominal supra", group: "abdomen", equipment: "corpo", reps: "15-20" },
+  "abdominal-infra": { name: "Abdominal infra", group: "abdomen", equipment: "corpo", reps: "15-20" },
+  prancha: { name: "Prancha", group: "abdomen", equipment: "corpo", reps: "30-40 segundos" },
+} satisfies Record<string, CatalogEntry>
 
 export type ExerciseId = keyof typeof CATALOG
-export type CatalogExercise = { id: ExerciseId; name: string; group: MuscleGroup; equipment: Equipment; technical: boolean }
+export type CatalogExercise = {
+  id: ExerciseId
+  name: string
+  group: MuscleGroup
+  equipment: Equipment
+  technical: boolean
+  reps: string | null
+}
 
 export const exerciseCatalog: CatalogExercise[] = (Object.keys(CATALOG) as ExerciseId[]).map((id) => {
-  const entry: { name: string; group: MuscleGroup; equipment: Equipment; technical?: boolean } = CATALOG[id]
-  return { id, name: entry.name, group: entry.group, equipment: entry.equipment, technical: entry.technical ?? false }
+  const entry: CatalogEntry = CATALOG[id]
+  return {
+    id,
+    name: entry.name,
+    group: entry.group,
+    equipment: entry.equipment,
+    technical: entry.technical ?? false,
+    reps: entry.reps ?? null,
+  }
 })
 
 const catalogById = new Map(exerciseCatalog.map((exercise) => [exercise.id, exercise]))
@@ -92,6 +116,7 @@ export const exerciseSections: { label: string; groups: MuscleGroup[] }[] = [
   { label: "Costas", groups: ["costas"] },
   { label: "Ombros", groups: ["ombros", "trapezio"] },
   { label: "Braços", groups: ["biceps", "triceps", "antebraco"] },
+  { label: "Abdômen", groups: ["abdomen"] },
 ]
 
 // ---------------------------------------------------------------------------
@@ -102,7 +127,16 @@ export type Sex = "feminino" | "masculino"
 export type Goal = "massa" | "emagrecer" | "condicionamento" | "saude"
 export type TrainingTime = "menos-6m" | "6m-1a" | "1a-2a" | "mais-2a"
 export type EquipmentPreference = "tanto-faz" | "maquinas" | "livres"
-export type FocusArea = "gluteos" | "pernas" | "posterior" | "peito" | "costas" | "ombros" | "bracos" | "panturrilha"
+export type FocusArea =
+  | "gluteos"
+  | "pernas"
+  | "posterior"
+  | "peito"
+  | "costas"
+  | "ombros"
+  | "bracos"
+  | "panturrilha"
+  | "abdomen"
 export type TrainingDays = 2 | 3 | 4 | 5 | 6
 export type Level = "iniciante" | "intermediario" | "avancado"
 
@@ -149,6 +183,7 @@ export const focusAreas: { id: FocusArea; label: string; groups: MuscleGroup[] }
   { id: "ombros", label: "Ombros", groups: ["ombros", "trapezio"] },
   { id: "bracos", label: "Braços", groups: ["biceps", "triceps", "antebraco"] },
   { id: "panturrilha", label: "Panturrilha", groups: ["panturrilha"] },
+  { id: "abdomen", label: "Abdômen", groups: ["abdomen"] },
 ]
 
 export const levelLabels: Record<Level, string> = {
@@ -164,7 +199,7 @@ export const LIMITS = {
   height: { min: 120, max: 230 },
   injury: 200,
   notes: 200,
-  focus: 2,
+  focus: 9, // todas as partes
   favorites: 5,
   avoid: 12,
 }
@@ -535,8 +570,10 @@ const OUTSIDE_OPTIONS_PENALTY = 35
 function scoreExercise(exercise: CatalogExercise, ctx: Context) {
   let score = 0
   if (ctx.favorites.has(exercise.id) && !ctx.usedInWeek.has(exercise.id)) score += 60
-  if (ctx.equipment === "maquinas") score += exercise.equipment === "livre" ? -15 : 15
-  if (ctx.equipment === "livres") score += exercise.equipment === "livre" ? 15 : -10
+  if (exercise.equipment !== "corpo") {
+    if (ctx.equipment === "maquinas") score += exercise.equipment === "livre" ? -15 : 15
+    if (ctx.equipment === "livres") score += exercise.equipment === "livre" ? 15 : -10
+  }
   if (exercise.technical && ctx.cautiousTechnique) score -= 25
   if (exerciseRisks(exercise.name, ctx.injuryRegions).length > 0) score -= 30
   // Variar a semana quando a vaga tem alternativas.
@@ -615,7 +652,8 @@ function buildDay(template: DayTemplate, perDay: number, focusGroups: Set<Muscle
 }
 
 // Regiões do corpo, usadas quando um exercício precisa ir pra outro grupo.
-const FAMILY: Record<MuscleGroup, "inferiores" | "empurrar" | "puxar"> = {
+const FAMILY: Record<MuscleGroup, "inferiores" | "empurrar" | "puxar" | "abdomen"> = {
+  abdomen: "abdomen",
   quadriceps: "inferiores",
   posterior: "inferiores",
   gluteos: "inferiores",
@@ -669,9 +707,32 @@ export function buildWorkout(profile: WorkoutProfile, now = new Date()): Generat
   const focusGroups = focusGroupsFor(profile)
   const days = SPLITS[profile.sex][profile.days].map((template) => buildDay(template, rules.perDay, focusGroups, ctx))
 
+  // Foco em abdômen: um exercício de abdômen no fim de cada dia, revezando
+  // entre eles. É rápido, então entra mesmo se o dia já estiver cheio.
+  if (focusGroups.has("abdomen")) {
+    const abs = exerciseCatalog.filter((e) => e.group === "abdomen" && !ctx.avoid.has(e.id))
+    const uses = new Map<ExerciseId, number>()
+    for (const d of days) {
+      let best: CatalogExercise | null = null
+      let bestScore = -Infinity
+      for (const exercise of abs) {
+        const score = scoreExercise(exercise, ctx) - 15 * (uses.get(exercise.id) ?? 0)
+        if (score > bestScore) {
+          best = exercise
+          bestScore = score
+        }
+      }
+      if (!best) break
+      uses.set(best.id, (uses.get(best.id) ?? 0) + 1)
+      ctx.usedInWeek.add(best.id)
+      d.exercises.push(toGenerated(best))
+    }
+  }
+
   // Favorito que não coube em nenhuma vaga entra no dia que já treina o mesmo
   // grupo muscular (logo depois do último exercício desse grupo) ou, se não
-  // houver, no dia com mais exercícios da mesma região do corpo.
+  // houver, no dia com mais exercícios da mesma região do corpo. Abdômen vai
+  // pro fim do dia mais curto.
   for (const id of profile.favorites) {
     if (profile.avoid.includes(id) || days.some((d) => d.exercises.some((e) => e.id === id))) continue
     const exercise = getExercise(id)
@@ -680,7 +741,9 @@ export function buildWorkout(profile: WorkoutProfile, now = new Date()): Generat
     const familyCount = (d: GeneratedDay) => d.exercises.filter((e) => FAMILY[e.group] === FAMILY[exercise.group]).length
     const target =
       sameGroup ??
-      open.filter((d) => familyCount(d) > 0).sort((a, b) => familyCount(b) - familyCount(a))[0]
+      (exercise.group === "abdomen"
+        ? [...open].sort((a, b) => a.exercises.length - b.exercises.length)[0]
+        : open.filter((d) => familyCount(d) > 0).sort((a, b) => familyCount(b) - familyCount(a))[0])
     if (!target) continue
     const lastIndex = target.exercises.findLastIndex((e) =>
       sameGroup ? e.group === exercise.group : FAMILY[e.group] === FAMILY[exercise.group]
@@ -798,7 +861,7 @@ export function isGeneratedWorkout(value: unknown): value is GeneratedWorkout {
         typeof d === "object" &&
         typeof (d as GeneratedDay).title === "string" &&
         Array.isArray((d as GeneratedDay).exercises) &&
-        (d as GeneratedDay).exercises.length <= MAX_PER_DAY &&
+        (d as GeneratedDay).exercises.length <= MAX_PER_DAY + 1 &&
         (d as GeneratedDay).exercises.every((e) => !!e && isExerciseId(e.id))
     )
   )

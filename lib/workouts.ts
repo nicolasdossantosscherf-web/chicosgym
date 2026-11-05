@@ -297,7 +297,7 @@ export const injuryRegions: InjuryRegion[] = [
     id: "coluna",
     label: "na coluna/lombar",
     keywords: ["lombar", "coluna", "costas", "hernia", "disco", "ciatico", "lombalgia", "escoliose"],
-    exercises: ["stiff", "agachamento", "remada", "serrote", "leg press", "elevacao pelvica"],
+    exercises: ["stiff", "agachamento", "remada", "serrote", "leg press", "elevacao pelvica", "abdominal infra"],
   },
   {
     id: "ombro",
@@ -369,7 +369,7 @@ export const injuryRegions: InjuryRegion[] = [
     id: "pescoco",
     label: "no pescoço",
     keywords: ["pescoco", "cervical", "nuca"],
-    exercises: ["trapezio", "desenvolvimento"],
+    exercises: ["trapezio", "desenvolvimento", "abdominal supra"],
   },
 ]
 

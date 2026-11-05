@@ -114,7 +114,12 @@ function firstName(name: string) {
 }
 
 function formatHeight(cm: number) {
-  return `${(cm / 100).toFixed(2).replace(".", ",")} m`
+  return `${cm} cm`
+}
+
+// "A, B e C"
+function joinList(items: string[]) {
+  return items.length > 1 ? `${items.slice(0, -1).join(", ")} e ${items.at(-1)}` : (items[0] ?? "")
 }
 
 function formatNumber(value: number) {
@@ -152,7 +157,7 @@ function validateBody(draft: Draft) {
   if (weight === null || weight < LIMITS.weight.min || weight > LIMITS.weight.max)
     return "Informe o peso em quilos, por exemplo 70 ou 70,5."
   if (height === null || height < LIMITS.height.min || height > LIMITS.height.max)
-    return "Informe a altura, por exemplo 1,75 ou 175."
+    return "Informe a altura em centímetros, por exemplo 170."
   return null
 }
 
@@ -194,7 +199,8 @@ function workoutText(workout: GeneratedWorkout) {
     lines.push(`*Dia ${i + 1} — ${day.title}*`)
     day.exercises.forEach((e) => {
       const risky = exerciseRisks(e.name, rules.injuryRegions).length > 0
-      lines.push(`• ${e.name}${risky ? " ⚠️ cuidado com a lesão" : ""}`)
+      const reps = getExercise(e.id).reps
+      lines.push(`• ${e.name}${reps ? ` — ${reps}` : ""}${risky ? " ⚠️ cuidado com a lesão" : ""}`)
     })
     lines.push("")
   })
@@ -335,7 +341,7 @@ export function WorkoutBuilder() {
     const fields: { key: "age" | "weight" | "height"; label: string; suffix: string; placeholder: string }[] = [
       { key: "age", label: "Idade", suffix: "anos", placeholder: "25" },
       { key: "weight", label: "Peso", suffix: "kg", placeholder: "70" },
-      { key: "height", label: "Altura", suffix: "m", placeholder: "1,70" },
+      { key: "height", label: "Altura", suffix: "cm", placeholder: "170" },
     ]
     return (
       <>
@@ -491,27 +497,24 @@ export function WorkoutBuilder() {
 
       <fieldset className="mt-4 flex flex-col gap-2">
         <legend className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-offwhite/50">
-          Quer mais foco em alguma parte? (até {LIMITS.focus})
+          Qual é o seu maior foco? (escolha quantos quiser)
         </legend>
         <div className="flex flex-wrap gap-2">
-          {focusAreas.map((area) => {
-            const selected = draft.focus.includes(area.id)
-            return (
-              <button
-                key={area.id}
-                type="button"
-                aria-pressed={selected}
-                onClick={() => update({ focus: toggleIn(draft.focus, area.id, LIMITS.focus) })}
-                disabled={!selected && draft.focus.length >= LIMITS.focus}
-                data-cursor-hover
-                className={`rounded-full border px-4 py-2 text-xs font-semibold uppercase tracking-[0.1em] transition-colors disabled:opacity-35 ${
-                  selected ? "border-orange bg-orange/10 text-orange" : "border-line text-offwhite/70 hover:border-orange/60"
-                }`}
-              >
-                {area.label}
-              </button>
-            )
-          })}
+          <FocusChip
+            label="Todos"
+            selected={draft.focus.length === focusAreas.length}
+            onClick={() =>
+              update({ focus: draft.focus.length === focusAreas.length ? [] : focusAreas.map((area) => area.id) })
+            }
+          />
+          {focusAreas.map((area) => (
+            <FocusChip
+              key={area.id}
+              label={area.label}
+              selected={draft.focus.includes(area.id)}
+              onClick={() => update({ focus: toggleIn(draft.focus, area.id, LIMITS.focus) })}
+            />
+          ))}
         </div>
       </fieldset>
 
@@ -802,7 +805,11 @@ function WorkoutResult({
   const experience = workoutExperiences.find(
     (x) => x.id === (!profile.experience.trained ? "nunca" : profile.experience.active ? "treino" : "parei")
   )
+  const allFocus = profile.focus.length === focusAreas.length
   const focusLabels = focusAreas.filter((a) => profile.focus.includes(a.id)).map((a) => a.label)
+  const muscleFocusLabels = focusAreas
+    .filter((a) => a.id !== "abdomen" && profile.focus.includes(a.id))
+    .map((a) => a.label)
   const inPlan = new Set(workout.days.flatMap((d) => d.exercises.map((e) => e.id)))
   const missingFavorites = profile.favorites.filter((id) => !inPlan.has(id)).map((id) => getExercise(id).name)
   const regions = rules.injuryRegions
@@ -822,14 +829,20 @@ function WorkoutResult({
     goal?.label,
     rules.levelLabel,
     `${profile.days} dias por semana`,
-    ...focusLabels.map((label) => `Foco: ${label}`),
+    focusLabels.length > 0 && `Foco: ${allFocus ? "todas as partes" : focusLabels.join(", ")}`,
   ].filter(Boolean) as string[]
 
   const preferenceLines = [
     profile.equipment === "maquinas" && "Demos prioridade a máquinas e polias.",
     profile.equipment === "livres" && "Demos prioridade a pesos livres (halteres e barras).",
-    focusLabels.length > 0 &&
-      `Foco em ${focusLabels.join(" e ")}: um exercício a mais nos dias que treinam essa parte.`,
+    muscleFocusLabels.length > 0 &&
+      (allFocus
+        ? "Foco em todas as partes: um exercício a mais em cada dia."
+        : `Foco em ${joinList(muscleFocusLabels)}: um exercício a mais nos dias que treinam ${
+            muscleFocusLabels.length > 1 ? "essas partes" : "essa parte"
+          }.`),
+    profile.focus.includes("abdomen") &&
+      "Abdômen: um exercício no fim de cada dia, revezando abdominal supra, abdominal infra e prancha.",
     profile.avoid.length > 0 && `Ficaram de fora: ${profile.avoid.map((id) => getExercise(id).name).join(", ")}.`,
     profile.favorites.length > missingFavorites.length &&
       `Seus favoritos estão no treino: ${profile.favorites
@@ -1022,7 +1035,7 @@ function WorkoutResult({
                         <span className="flex min-w-0 flex-col">
                           <span className="text-sm font-semibold text-offwhite">{exercise.name}</span>
                           <span className="text-xs font-semibold text-orange">
-                            {rules.sets}x {rules.reps}
+                            {rules.sets}x {getExercise(exercise.id).reps ?? rules.reps}
                           </span>
                           {risky && (
                             <span className="mt-0.5 inline-flex items-center gap-1 text-[11px] text-amber-400">
@@ -1124,6 +1137,22 @@ function OptionButton({ label, selected, onClick }: { label: string; selected: b
     >
       {label}
       {selected && <Check size={16} className="shrink-0" />}
+    </button>
+  )
+}
+
+function FocusChip({ label, selected, onClick }: { label: string; selected: boolean; onClick: () => void }) {
+  return (
+    <button
+      type="button"
+      aria-pressed={selected}
+      onClick={onClick}
+      data-cursor-hover
+      className={`rounded-full border px-4 py-2 text-xs font-semibold uppercase tracking-[0.1em] transition-colors ${
+        selected ? "border-orange bg-orange/10 text-orange" : "border-line text-offwhite/70 hover:border-orange/60"
+      }`}
+    >
+      {label}
     </button>
   )
 }
