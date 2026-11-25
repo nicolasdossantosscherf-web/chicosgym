@@ -273,8 +273,8 @@ export const partners: Partner[] = [
   },
   {
     id: "espetinho-cristiano-hensel",
-    name: "Espetinho do Cristiano Hensel",
-    image: { src: "/images/partners/espetinho-logo.webp", width: 900, height: 792 },
+    name: "Espetinho's Hensel",
+    image: { src: "/images/partners/espetinho-hensel.webp", width: 900, height: 884 },
   },
 ]
 
