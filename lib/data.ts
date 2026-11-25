@@ -22,8 +22,8 @@ export const brand = {
   // Horários reais, tirados da placa fixada na entrada da academia.
   hours: [
     { label: "Segunda a sexta", times: ["05h às 00h"], note: "Sem fechar ao meio-dia" },
-    { label: "Sábados e feriados", times: ["09h às 12h", "15h às 18h"] },
-    { label: "Domingos", times: ["16h às 19h"] },
+    { label: "Sábados e feriados", times: ["09h às 12h", "17h às 20h"] },
+    { label: "Domingos", times: ["17h às 20h"] },
   ],
   socials: [
     { label: "Instagram", href: "https://www.instagram.com/_chicosgym", icon: "Camera" },
@@ -39,9 +39,9 @@ export const openingSchedule = {
   weekdays: [[5, 24]],
   saturdaysAndHolidays: [
     [9, 12],
-    [15, 18],
+    [17, 20],
   ],
-  sundays: [[16, 19]],
+  sundays: [[17, 20]],
 } satisfies Record<string, [number, number][]>
 
 // Feriados com o horário de sábado (dia-mês). Nacionais + 20/09 (feriado do RS);
