@@ -59,15 +59,23 @@ export function Hero() {
               Consulte o plano ideal pra você
             </Link>
           </Magnetic>
-          <Magnetic className="w-full sm:w-auto">
-            <Link
-              href="/local"
-              data-cursor-hover
-              className="flex w-full items-center justify-center gap-2 rounded-sm border border-offwhite/30 px-5 py-3.5 text-xs font-semibold uppercase tracking-[0.15em] text-offwhite transition-colors hover:border-orange hover:text-orange sm:px-7 sm:tracking-[0.25em]"
-            >
-              Local e Horários
-            </Link>
-          </Magnetic>
+          {/* No celular os dois ficam lado a lado, pra não esticar a abertura. */}
+          <div className="grid w-full grid-cols-2 gap-3 sm:flex sm:w-auto sm:gap-4">
+            {[
+              { href: "/local", label: "Local e Horários" },
+              { href: "/treino", label: "Monte seu Treino" },
+            ].map((link) => (
+              <Magnetic key={link.href} className="w-full sm:w-auto">
+                <Link
+                  href={link.href}
+                  data-cursor-hover
+                  className="flex h-full w-full items-center justify-center gap-2 rounded-sm border border-offwhite/30 px-3 py-3.5 text-center text-xs font-semibold uppercase tracking-[0.1em] text-offwhite transition-colors hover:border-orange hover:text-orange sm:px-7 sm:tracking-[0.25em]"
+                >
+                  {link.label}
+                </Link>
+              </Magnetic>
+            ))}
+          </div>
         </div>
       </div>
 
