@@ -40,7 +40,7 @@ function PlanCard({
       }`}
     >
       {badge && (
-        <span className="absolute -top-3 left-7 rounded-full bg-orange px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-ink">
+        <span className="absolute -top-3 left-7 rounded-full bg-orange px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-offwhite">
           {badge}
         </span>
       )}
@@ -56,7 +56,7 @@ function PlanCard({
       <ul className="flex flex-1 flex-col gap-2.5">
         {features.map((feature) => (
           <li key={feature} className="flex items-start gap-2 text-sm text-offwhite/70">
-            <Check size={15} className="mt-0.5 shrink-0 text-orange" />
+            <Check size={15} className="mt-0.5 shrink-0 text-ember" />
             {feature}
           </li>
         ))}
@@ -70,8 +70,8 @@ function PlanCard({
           data-cursor-hover
           className={`flex w-full items-center justify-center rounded-sm px-5 py-3 text-xs font-semibold uppercase tracking-[0.2em] transition-colors ${
             highlight
-              ? "bg-orange text-ink hover:bg-gold"
-              : "border border-line text-offwhite/80 hover:border-orange hover:text-orange"
+              ? "bg-orange text-offwhite hover:bg-gold"
+              : "border border-line text-offwhite/80 hover:border-orange hover:text-ember"
           }`}
         >
           {cta}
@@ -104,7 +104,7 @@ export function Pricing() {
                   <Link
                     href="/treino"
                     data-cursor-hover
-                    className="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold text-orange transition-colors hover:text-gold"
+                    className="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold text-ember transition-colors hover:text-gold"
                   >
                     Não sabe por onde começar? Monte seu treino
                     <ArrowRight size={12} className="shrink-0" />
@@ -144,7 +144,7 @@ export function Pricing() {
                         <p className="mt-2 text-xs text-offwhite/50">Sem fidelidade</p>
                       )}
                       {savings > 0 && (
-                        <p className="mt-2 text-xs font-semibold uppercase tracking-[0.1em] text-orange">
+                        <p className="mt-2 text-xs font-semibold uppercase tracking-[0.1em] text-ember">
                           Economize {formatBRL(savings)} ({savingsPercent}%) vs. mensal
                         </p>
                       )}

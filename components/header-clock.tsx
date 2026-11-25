@@ -79,7 +79,7 @@ export function HeaderClock({ className = "" }: { className?: string }) {
           <Link
             href="/local"
             data-cursor-hover
-            className="mt-3 flex items-center justify-center gap-2 rounded-sm border border-line px-4 py-2.5 text-[11px] font-semibold uppercase tracking-[0.2em] text-offwhite/80 transition-colors hover:border-orange hover:text-orange"
+            className="mt-3 flex items-center justify-center gap-2 rounded-sm border border-line px-4 py-2.5 text-[11px] font-semibold uppercase tracking-[0.2em] text-offwhite/80 transition-colors hover:border-orange hover:text-ember"
           >
             Ver todos os horários
             <ArrowRight size={14} />

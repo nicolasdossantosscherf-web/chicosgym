@@ -94,9 +94,9 @@ const DAY_COLORS = ["bg-[#3b78c4]", "bg-[#e8691f]", "bg-[#2e9a52]", "bg-[#cf5f93
 const inputClass =
   "w-full rounded-sm border border-line bg-ink px-4 py-3 text-base text-offwhite outline-none transition-colors placeholder:text-offwhite/30 focus:border-orange"
 const primaryButton =
-  "inline-flex items-center justify-center gap-2 rounded-sm bg-orange px-6 py-3.5 text-xs font-semibold uppercase tracking-[0.2em] text-ink transition-colors hover:bg-gold disabled:cursor-not-allowed disabled:opacity-40"
+  "inline-flex items-center justify-center gap-2 rounded-sm bg-orange px-6 py-3.5 text-xs font-semibold uppercase tracking-[0.2em] text-offwhite transition-colors hover:bg-gold disabled:cursor-not-allowed disabled:opacity-40"
 const secondaryButton =
-  "inline-flex items-center justify-center gap-2 rounded-sm border border-line px-6 py-3.5 text-xs font-semibold uppercase tracking-[0.2em] text-offwhite/80 transition-colors hover:border-orange hover:text-orange"
+  "inline-flex items-center justify-center gap-2 rounded-sm border border-line px-6 py-3.5 text-xs font-semibold uppercase tracking-[0.2em] text-offwhite/80 transition-colors hover:border-orange hover:text-ember"
 
 function scrollToTop(el: HTMLElement | null) {
   if (!el) return
@@ -523,7 +523,7 @@ export function WorkoutBuilder() {
           Exercícios e máquinas (opcional)
         </p>
         <p className="text-xs leading-relaxed text-offwhite/50">
-          Toque em <Heart size={12} className="inline text-orange" /> no que você gosta e quer no treino, ou em{" "}
+          Toque em <Heart size={12} className="inline text-ember" /> no que você gosta e quer no treino, ou em{" "}
           <X size={12} className="inline text-red-400" /> no que quer tirar.
         </p>
         <div className="flex flex-col divide-y divide-line rounded-sm border border-line">
@@ -538,7 +538,7 @@ export function WorkoutBuilder() {
                 >
                   <span>
                     {section.label}
-                    {marked > 0 && <span className="ml-2 text-xs normal-case tracking-normal text-orange">{marked} marcado(s)</span>}
+                    {marked > 0 && <span className="ml-2 text-xs normal-case tracking-normal text-ember">{marked} marcado(s)</span>}
                   </span>
                   <ChevronDown size={16} className="shrink-0 transition-transform group-open:rotate-180" />
                 </summary>
@@ -549,7 +549,7 @@ export function WorkoutBuilder() {
                     return (
                       <li key={exercise.id} className="flex items-center justify-between gap-3 px-4 py-1.5">
                         <span
-                          className={`text-sm ${avoided ? "text-offwhite/35 line-through" : liked ? "text-orange" : "text-offwhite/80"}`}
+                          className={`text-sm ${avoided ? "text-offwhite/35 line-through" : liked ? "text-ember" : "text-offwhite/80"}`}
                         >
                           {exercise.name}
                         </span>
@@ -723,7 +723,7 @@ export function WorkoutBuilder() {
                     setStep((s) => s - 1)
                   }}
                   data-cursor-hover
-                  className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.15em] text-offwhite/60 transition-colors hover:text-orange"
+                  className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.15em] text-offwhite/60 transition-colors hover:text-ember"
                 >
                   <ArrowLeft size={14} />
                   Voltar
@@ -770,7 +770,7 @@ function BuildingCard({ name }: { name: string }) {
     >
       <div className="relative flex h-16 w-16 items-center justify-center">
         <span className="absolute inset-0 animate-ping rounded-full bg-orange/20" />
-        <Sparkles size={28} className="relative text-orange" />
+        <Sparkles size={28} className="relative text-ember" />
       </div>
       <div>
         <p className="font-display text-3xl uppercase tracking-wide text-offwhite">Montando seu treino{name ? `, ${name}` : ""}</p>
@@ -869,7 +869,7 @@ function WorkoutResult({
 
       {/* Perfil + salvar */}
       <div className="rounded-sm border border-orange/40 bg-carbon p-6 md:p-8">
-        <span className="text-xs font-semibold uppercase tracking-[0.25em] text-orange">Treino personalizado de</span>
+        <span className="text-xs font-semibold uppercase tracking-[0.25em] text-ember">Treino personalizado de</span>
         <h3 className="mt-2 break-words font-display text-4xl uppercase tracking-wide text-offwhite md:text-5xl">
           {profile.name}
         </h3>
@@ -1002,7 +1002,7 @@ function WorkoutResult({
             { icon: Bike, title: "Cardio no final", text: rules.cardio },
           ].map(({ icon: Icon, title, text }) => (
             <div key={title} className="flex items-start gap-3 rounded-sm border border-line bg-carbon p-4">
-              <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-sm bg-orange/10 text-orange">
+              <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-sm bg-orange/10 text-ember">
                 <Icon size={18} />
               </div>
               <div>
@@ -1034,7 +1034,7 @@ function WorkoutResult({
                       <li key={`${exercise.id}-${exerciseIndex}`} className="flex items-center justify-between gap-3 px-5 py-3">
                         <span className="flex min-w-0 flex-col">
                           <span className="text-sm font-semibold text-offwhite">{exercise.name}</span>
-                          <span className="text-xs font-semibold text-orange">
+                          <span className="text-xs font-semibold text-ember">
                             {rules.sets}x {getExercise(exercise.id).reps ?? rules.reps}
                           </span>
                           {risky && (
@@ -1054,7 +1054,7 @@ function WorkoutResult({
                             aria-label={`Trocar ${exercise.name}`}
                             title="Trocar exercício"
                             data-cursor-hover
-                            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-line text-offwhite/60 transition-colors hover:border-orange hover:text-orange"
+                            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-line text-offwhite/60 transition-colors hover:border-orange hover:text-ember"
                           >
                             <RefreshCw size={14} />
                           </button>
@@ -1090,7 +1090,7 @@ function WorkoutResult({
             type="button"
             onClick={onNew}
             data-cursor-hover
-            className="inline-flex items-center justify-center gap-2 rounded-sm px-6 py-3.5 text-xs font-semibold uppercase tracking-[0.2em] text-offwhite/60 transition-colors hover:text-orange"
+            className="inline-flex items-center justify-center gap-2 rounded-sm px-6 py-3.5 text-xs font-semibold uppercase tracking-[0.2em] text-offwhite/60 transition-colors hover:text-ember"
           >
             <RotateCcw size={14} />
             Montar outro treino
@@ -1132,7 +1132,7 @@ function OptionButton({ label, selected, onClick }: { label: string; selected: b
       aria-pressed={selected}
       data-cursor-hover
       className={`flex w-full items-center justify-between gap-3 rounded-sm border px-5 py-4 text-left text-sm font-semibold uppercase tracking-[0.08em] transition-colors ${
-        selected ? "border-orange bg-orange/10 text-orange" : "border-line text-offwhite/80 hover:border-orange/60"
+        selected ? "border-orange bg-orange/10 text-ember" : "border-line text-offwhite/80 hover:border-orange/60"
       }`}
     >
       {label}
@@ -1149,7 +1149,7 @@ function FocusChip({ label, selected, onClick }: { label: string; selected: bool
       onClick={onClick}
       data-cursor-hover
       className={`rounded-full border px-4 py-2 text-xs font-semibold uppercase tracking-[0.1em] transition-colors ${
-        selected ? "border-orange bg-orange/10 text-orange" : "border-line text-offwhite/70 hover:border-orange/60"
+        selected ? "border-orange bg-orange/10 text-ember" : "border-line text-offwhite/70 hover:border-orange/60"
       }`}
     >
       {label}
@@ -1165,7 +1165,7 @@ function Pill({ label, selected, onClick }: { label: string; selected: boolean; 
       aria-pressed={selected}
       data-cursor-hover
       className={`rounded-sm border px-3 py-3 text-xs font-semibold uppercase tracking-[0.08em] transition-colors ${
-        selected ? "border-orange bg-orange/10 text-orange" : "border-line text-offwhite/70 hover:border-orange/60"
+        selected ? "border-orange bg-orange/10 text-ember" : "border-line text-offwhite/70 hover:border-orange/60"
       }`}
     >
       {label}
@@ -1188,7 +1188,7 @@ function IconToggle({
   onClick: () => void
   children: ReactNode
 }) {
-  const active = tone === "like" ? "border-orange bg-orange text-ink" : "border-red-400 bg-red-400 text-ink"
+  const active = tone === "like" ? "border-orange bg-orange text-offwhite" : "border-red-400 bg-red-400 text-ink"
   return (
     <button
       type="button"
@@ -1223,7 +1223,7 @@ function AnalysisCard({
     >
       <p
         className={`flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] ${
-          tone === "warning" ? "text-amber-400" : "text-orange"
+          tone === "warning" ? "text-amber-400" : "text-ember"
         }`}
       >
         {tone === "warning" && <AlertTriangle size={14} />}

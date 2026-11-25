@@ -28,7 +28,7 @@ export function Faq() {
                   <span className="font-display text-lg uppercase tracking-wide text-offwhite">
                     {item.question}
                   </span>
-                  <Plus size={18} className={`shrink-0 text-orange transition-transform ${isOpen ? "rotate-45" : ""}`} />
+                  <Plus size={18} className={`shrink-0 text-ember transition-transform ${isOpen ? "rotate-45" : ""}`} />
                 </button>
                 <div
                   className={`grid transition-all duration-300 ${

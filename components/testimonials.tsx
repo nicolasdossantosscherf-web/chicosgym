@@ -73,7 +73,7 @@ export function Testimonials() {
                     inert={i !== index}
                     className={`col-start-1 row-start-1 flex flex-col items-center justify-center gap-6 px-7 py-12 text-center transition-all duration-700 ease-out md:px-16 md:py-14 ${position}`}
                   >
-                    <Quote className="text-orange" size={28} />
+                    <Quote className="text-ember" size={28} />
                     <blockquote className="text-base leading-relaxed text-offwhite/80 md:text-xl">
                       &ldquo;{t.quote}&rdquo;
                     </blockquote>
@@ -93,7 +93,7 @@ export function Testimonials() {
                   onClick={() => go(index - 1)}
                   aria-label="Feedback anterior"
                   data-cursor-hover
-                  className="flex h-11 w-11 items-center justify-center rounded-full border border-line text-offwhite/80 transition-colors hover:border-orange hover:text-orange"
+                  className="flex h-11 w-11 items-center justify-center rounded-full border border-line text-offwhite/80 transition-colors hover:border-orange hover:text-ember"
                 >
                   <ChevronLeft size={20} />
                 </button>
@@ -123,7 +123,7 @@ export function Testimonials() {
                   onClick={() => go(index + 1)}
                   aria-label="Próximo feedback"
                   data-cursor-hover
-                  className="flex h-11 w-11 items-center justify-center rounded-full border border-line text-offwhite/80 transition-colors hover:border-orange hover:text-orange"
+                  className="flex h-11 w-11 items-center justify-center rounded-full border border-line text-offwhite/80 transition-colors hover:border-orange hover:text-ember"
                 >
                   <ChevronRight size={20} />
                 </button>

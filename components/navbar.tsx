@@ -83,7 +83,7 @@ export function Navbar() {
                 href={link.href}
                 data-cursor-hover
                 className={`py-4 font-display text-xl uppercase tracking-wide transition-colors ${
-                  pathname === link.href ? "text-orange" : "text-offwhite/85 hover:text-orange"
+                  pathname === link.href ? "text-ember" : "text-offwhite/85 hover:text-ember"
                 }`}
               >
                 {link.label}

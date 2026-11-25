@@ -29,7 +29,7 @@ export function Team() {
                 </div>
                 <div className="flex flex-1 flex-col gap-1 p-5">
                   <h3 className="font-display text-2xl uppercase tracking-wide text-offwhite">{member.name}</h3>
-                  <span className="text-xs font-semibold uppercase tracking-[0.2em] text-orange">{member.role}</span>
+                  <span className="text-xs font-semibold uppercase tracking-[0.2em] text-ember">{member.role}</span>
                   {member.cref && (
                     <span className="text-[11px] uppercase tracking-[0.15em] text-offwhite/45">{member.cref}</span>
                   )}

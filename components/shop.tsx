@@ -44,7 +44,7 @@ function ProductCard({ product }: { product: Product }) {
           </span>
         )}
         <div className="mt-auto pt-3">
-          <span className="text-base font-semibold text-orange">{formatBRL(product.price)}</span>
+          <span className="text-base font-semibold text-ember">{formatBRL(product.price)}</span>
           {product.priceInstallments !== undefined && (
             <>
               <span className="ml-1 text-[11px] text-offwhite/50">à vista</span>
@@ -83,7 +83,7 @@ export function Shop() {
                 aria-pressed={active}
                 data-cursor-hover
                 className={`rounded-full border px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] transition-colors ${
-                  active ? "border-orange bg-orange text-ink" : "border-line text-offwhite/70 hover:border-orange/50"
+                  active ? "border-orange bg-orange text-offwhite" : "border-line text-offwhite/70 hover:border-orange/50"
                 }`}
               >
                 {c}

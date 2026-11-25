@@ -15,7 +15,7 @@ function StoryInProgress() {
         <Reveal>
           <div className="relative">
             <Image src={brand.logo} alt="Chico's Gym" width={120} height={120} className="h-28 w-28 rounded-full" />
-            <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-orange px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-ink">
+            <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-orange px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-offwhite">
               Est. {brand.founded}
             </span>
           </div>
@@ -29,7 +29,7 @@ function StoryInProgress() {
           />
         </div>
         <Reveal delay={200}>
-          <span className="mt-8 inline-flex items-center gap-2 rounded-full border border-orange/40 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-orange">
+          <span className="mt-8 inline-flex items-center gap-2 rounded-full border border-orange/40 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-ember">
             <PenLine size={14} />
             Em construção
           </span>
@@ -41,7 +41,7 @@ function StoryInProgress() {
               target="_blank"
               rel="noreferrer"
               data-cursor-hover
-              className="mt-6 inline-flex items-center gap-2 text-sm text-offwhite/60 transition-colors hover:text-orange"
+              className="mt-6 inline-flex items-center gap-2 text-sm text-offwhite/60 transition-colors hover:text-ember"
             >
               <Camera size={16} />
               Enquanto isso, siga no Instagram
@@ -70,7 +70,7 @@ export function StoryTimeline() {
           <div className="absolute bottom-2 left-[7px] top-2 w-px bg-line md:left-1/2 md:-translate-x-1/2" />
           {timeline.map((item, i) => (
             <Reveal key={item.year} delay={i * 90} className="relative md:grid md:grid-cols-2 md:gap-10">
-              <span className="absolute -left-8 top-1 h-3.5 w-3.5 -translate-x-1/2 rounded-full bg-orange shadow-[0_0_16px_2px_rgba(242,101,34,0.6)] md:left-1/2" />
+              <span className="absolute -left-8 top-1 h-3.5 w-3.5 -translate-x-1/2 rounded-full bg-orange shadow-[0_0_16px_2px_rgba(170,3,3,0.6)] md:left-1/2" />
               <div className={i % 2 === 0 ? "md:col-start-1 md:pr-10 md:text-right" : "md:col-start-2 md:pl-10"}>
                 <span className="font-display text-3xl text-gradient-ember">{item.year}</span>
                 <h3 className="mt-1 font-display text-xl uppercase tracking-wide text-offwhite">{item.title}</h3>

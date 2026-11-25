@@ -12,7 +12,7 @@ export function ShopLink() {
       href="/loja"
       aria-label="Loja"
       data-cursor-hover
-      className={`flex items-center gap-2 transition-colors hover:text-orange ${active ? "text-orange" : "text-offwhite"}`}
+      className={`flex items-center gap-2 transition-colors hover:text-ember ${active ? "text-ember" : "text-offwhite"}`}
     >
       <span className="hidden text-xs font-semibold uppercase tracking-[0.2em] sm:inline">Loja</span>
       <Store size={22} />

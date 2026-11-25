@@ -17,9 +17,17 @@
   --color-carbon: #141414;
   --color-carbon-2: #1c1c1c;
   --color-line: rgba(237, 237, 237, 0.09);
-  --color-orange: #f26522;
-  --color-orange-2: #ff8a4d;
-  --color-gold: #f5a623;
+  /* TESTE: laranja trocado pelo vermelho bordô (mesmo vermelho do
+     linkny.com.br/chicos-gym). Os nomes "orange" e "gold" ficaram por
+     enquanto pra não mexer em todo o site; se aprovado, dá pra renomear.
+     - orange: botões, bordas, losangos e brilhos (#aa0303, o do exemplo)
+     - gold: hover dos botões e meio do degradê do título
+     - ember: textos de destaque — o bordô puro fica escuro demais pra
+       letra pequena sobre o preto, então o texto usa um vermelho mais claro */
+  --color-orange: #aa0303;
+  --color-orange-2: #c41e1e;
+  --color-gold: #d42020;
+  --color-ember: #e5484d;
   --color-offwhite: #ededed;
   --color-turf: #1e2b22;
   --font-display: "Bebas Neue", "Arial Narrow", sans-serif;
@@ -34,6 +42,7 @@
   --color-orange: var(--color-orange);
   --color-orange-2: var(--color-orange-2);
   --color-gold: var(--color-gold);
+  --color-ember: var(--color-ember);
   --color-offwhite: var(--color-offwhite);
   --color-turf: var(--color-turf);
   --font-display: var(--font-display);
@@ -59,7 +68,7 @@ body {
 
 ::selection {
   background: var(--color-orange);
-  color: var(--color-ink);
+  color: var(--color-offwhite);
 }
 
 @media (pointer: fine) {
@@ -116,7 +125,7 @@ body {
 }
 
 .text-gradient-ember {
-  background: linear-gradient(90deg, var(--color-gold), var(--color-orange) 60%);
+  background: linear-gradient(90deg, var(--color-ember), var(--color-gold) 45%, var(--color-orange) 90%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -149,8 +158,8 @@ body {
 .photo-placeholder {
   position: relative;
   background:
-    radial-gradient(120% 140% at 15% 0%, rgba(242, 101, 34, 0.28), transparent 55%),
-    radial-gradient(120% 140% at 100% 100%, rgba(245, 166, 35, 0.18), transparent 50%),
+    radial-gradient(120% 140% at 15% 0%, rgba(170, 3, 3, 0.32), transparent 55%),
+    radial-gradient(120% 140% at 100% 100%, rgba(212, 32, 32, 0.18), transparent 50%),
     linear-gradient(155deg, #1a1a1a 0%, #0c0c0c 70%);
   overflow: hidden;
 }
@@ -239,13 +248,13 @@ body {
   }
 }
 
-/* Brilho ambiente do hero — luz laranja suave que respira sozinha e
+/* Brilho ambiente do hero — luz vermelha suave que respira sozinha e
    intensifica levemente conforme o scroll (ver components/hero.tsx). */
 .glow-ember {
   background: radial-gradient(
     circle,
-    rgba(242, 101, 34, 0.55) 0%,
-    rgba(245, 166, 35, 0.28) 32%,
+    rgba(170, 3, 3, 0.6) 0%,
+    rgba(212, 32, 32, 0.28) 32%,
     transparent 68%
   );
   filter: blur(48px);

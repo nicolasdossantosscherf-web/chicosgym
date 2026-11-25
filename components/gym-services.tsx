@@ -20,7 +20,7 @@ export function GymServices() {
             return (
               <Reveal key={service.id} delay={i * 70} className="flex bg-ink p-7">
                 <div className="flex flex-1 flex-col gap-4">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-sm bg-orange/10 text-orange">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-sm bg-orange/10 text-ember">
                     <Icon size={22} strokeWidth={1.75} />
                   </div>
                   <h3 className="font-display text-xl uppercase tracking-wide text-offwhite">{service.title}</h3>
@@ -29,7 +29,7 @@ export function GymServices() {
                     <Link
                       href="/parcerias"
                       data-cursor-hover
-                      className="mt-auto inline-flex items-center gap-2 pt-2 text-xs font-semibold uppercase tracking-[0.15em] text-offwhite/70 transition-colors hover:text-orange"
+                      className="mt-auto inline-flex items-center gap-2 pt-2 text-xs font-semibold uppercase tracking-[0.15em] text-offwhite/70 transition-colors hover:text-ember"
                     >
                       Ver parceria
                       <Icons.ArrowUpRight size={14} />

@@ -13,11 +13,11 @@ export function CartButton() {
       onClick={cartActions.open}
       aria-label={count > 0 ? `Abrir carrinho (${count} ${count === 1 ? "item" : "itens"})` : "Abrir carrinho"}
       data-cursor-hover
-      className="relative flex text-offwhite transition-colors hover:text-orange"
+      className="relative flex text-offwhite transition-colors hover:text-ember"
     >
       <ShoppingBag size={22} />
       {count > 0 && (
-        <span className="absolute -right-2 -top-2 flex h-5 min-w-5 items-center justify-center rounded-full bg-orange px-1 text-[10px] font-bold text-ink">
+        <span className="absolute -right-2 -top-2 flex h-5 min-w-5 items-center justify-center rounded-full bg-orange px-1 text-[10px] font-bold text-offwhite">
           {count}
         </span>
       )}

@@ -31,9 +31,9 @@ export function QrHub() {
           priority
           className="h-36 w-auto"
         />
-        <p className="mt-7 text-[11px] font-semibold uppercase tracking-[0.3em] text-orange">Bem-vindo à</p>
+        <p className="mt-7 text-[11px] font-semibold uppercase tracking-[0.3em] text-ember">Bem-vindo à</p>
         <h1 className="mt-1 font-display text-5xl uppercase tracking-wide text-offwhite">Chico&apos;s Gym</h1>
-        <p className="mt-2 text-sm font-medium text-orange">Você quer ser um vencedor?</p>
+        <p className="mt-2 text-sm font-medium text-ember">Você quer ser um vencedor?</p>
       </header>
 
       <nav aria-label="Opções" className="relative mt-9 flex flex-col gap-3">
@@ -106,7 +106,7 @@ export function QrHub() {
 
 function OptionIcon({ children }: { children: ReactNode }) {
   return (
-    <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-orange/10 text-orange">
+    <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-orange/10 text-ember">
       {children}
     </span>
   )
@@ -199,7 +199,7 @@ function CopyPasswordButton({ password }: { password: string }) {
         type="button"
         onClick={copy}
         data-cursor-hover
-        className="flex w-full items-center justify-center gap-2 rounded-sm bg-orange px-5 py-3.5 text-xs font-semibold uppercase tracking-[0.2em] text-ink transition-colors hover:bg-gold"
+        className="flex w-full items-center justify-center gap-2 rounded-sm bg-orange px-5 py-3.5 text-xs font-semibold uppercase tracking-[0.2em] text-offwhite transition-colors hover:bg-gold"
       >
         {status === "copied" ? <Check size={16} /> : <Copy size={16} />}
         {status === "copied" ? "Senha copiada" : "Copiar senha"}

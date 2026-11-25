@@ -34,7 +34,7 @@ export function Hero() {
       <div className="absolute inset-0 bg-gradient-to-r from-ink/80 via-ink/20 to-transparent" />
 
       <div className="relative z-10 mx-auto flex h-full max-w-7xl flex-col justify-center px-6 md:px-10">
-        <span className="mb-5 inline-flex w-fit items-center gap-2 rounded-full border border-orange/40 px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.3em] text-orange">
+        <span className="mb-5 inline-flex w-fit items-center gap-2 rounded-full border border-orange/40 px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.3em] text-ember">
           Academia · Est. {brand.founded}
         </span>
 
@@ -54,7 +54,7 @@ export function Hero() {
             <Link
               href="/planos"
               data-cursor-hover
-              className="flex w-full items-center justify-center gap-2 rounded-sm border border-orange bg-orange px-5 py-3.5 text-xs font-semibold uppercase tracking-[0.15em] text-ink transition-colors hover:border-gold hover:bg-gold sm:px-7 sm:tracking-[0.25em]"
+              className="flex w-full items-center justify-center gap-2 rounded-sm border border-orange bg-orange px-5 py-3.5 text-xs font-semibold uppercase tracking-[0.15em] text-offwhite transition-colors hover:border-gold hover:bg-gold sm:px-7 sm:tracking-[0.25em]"
             >
               Consulte o plano ideal pra você
             </Link>
@@ -69,7 +69,7 @@ export function Hero() {
                 <Link
                   href={link.href}
                   data-cursor-hover
-                  className="flex h-full w-full items-center justify-center gap-2 rounded-sm border border-offwhite/30 px-3 py-3.5 text-center text-xs font-semibold uppercase tracking-[0.1em] text-offwhite transition-colors hover:border-orange hover:text-orange sm:px-7 sm:tracking-[0.25em]"
+                  className="flex h-full w-full items-center justify-center gap-2 rounded-sm border border-offwhite/30 px-3 py-3.5 text-center text-xs font-semibold uppercase tracking-[0.1em] text-offwhite transition-colors hover:border-orange hover:text-ember sm:px-7 sm:tracking-[0.25em]"
                 >
                   {link.label}
                 </Link>

@@ -18,7 +18,7 @@ export function SectionHeading({
       <Reveal>
         <div className="flex items-center gap-3">
           <span className="diamond" />
-          <span className="text-xs font-semibold uppercase tracking-[0.35em] text-orange">{eyebrow}</span>
+          <span className="text-xs font-semibold uppercase tracking-[0.35em] text-ember">{eyebrow}</span>
         </div>
       </Reveal>
       <SplitReveal

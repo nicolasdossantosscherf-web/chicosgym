@@ -62,7 +62,7 @@ function Choice({ active, onClick, children }: { active: boolean; onClick: () =>
 }
 
 function SectionTitle({ children }: { children: ReactNode }) {
-  return <h3 className="text-[11px] font-semibold uppercase tracking-[0.25em] text-orange">{children}</h3>
+  return <h3 className="text-[11px] font-semibold uppercase tracking-[0.25em] text-ember">{children}</h3>
 }
 
 export function CartDrawer() {
@@ -213,7 +213,7 @@ export function CartDrawer() {
                 onClick={() => setStep("cart")}
                 aria-label="Voltar ao carrinho"
                 data-cursor-hover
-                className="text-offwhite/60 transition-colors hover:text-orange"
+                className="text-offwhite/60 transition-colors hover:text-ember"
               >
                 <ArrowLeft size={20} />
               </button>
@@ -227,7 +227,7 @@ export function CartDrawer() {
             onClick={close}
             aria-label="Fechar carrinho"
             data-cursor-hover
-            className="text-offwhite/60 transition-colors hover:text-orange"
+            className="text-offwhite/60 transition-colors hover:text-ember"
           >
             <X size={22} />
           </button>
@@ -241,7 +241,7 @@ export function CartDrawer() {
               href="/loja"
               onClick={close}
               data-cursor-hover
-              className="rounded-sm border border-line px-6 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-offwhite/80 transition-colors hover:border-orange hover:text-orange"
+              className="rounded-sm border border-line px-6 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-offwhite/80 transition-colors hover:border-orange hover:text-ember"
             >
               Ver produtos
             </Link>
@@ -267,7 +267,7 @@ export function CartDrawer() {
                       href={`/loja/${product.id}`}
                       onClick={close}
                       data-cursor-hover
-                      className="font-display text-lg uppercase leading-tight tracking-wide text-offwhite hover:text-orange"
+                      className="font-display text-lg uppercase leading-tight tracking-wide text-offwhite hover:text-ember"
                     >
                       {product.title}
                     </Link>
@@ -276,7 +276,7 @@ export function CartDrawer() {
                         {product.variantLabel ?? "Opção"}: {variant.label}
                       </span>
                     )}
-                    <span className="mt-1 text-sm font-semibold text-orange">{formatBRL(product.price * item.qty)}</span>
+                    <span className="mt-1 text-sm font-semibold text-ember">{formatBRL(product.price * item.qty)}</span>
                     <div className="mt-auto flex items-center justify-between pt-2">
                       <div className="flex items-center rounded-sm border border-line">
                         <button
@@ -284,7 +284,7 @@ export function CartDrawer() {
                           onClick={() => cartActions.setQty(item.productId, item.variantId, item.qty - 1)}
                           aria-label="Diminuir quantidade"
                           data-cursor-hover
-                          className="px-2.5 py-1.5 text-offwhite/70 hover:text-orange"
+                          className="px-2.5 py-1.5 text-offwhite/70 hover:text-ember"
                         >
                           <Minus size={14} />
                         </button>
@@ -294,7 +294,7 @@ export function CartDrawer() {
                           onClick={() => cartActions.setQty(item.productId, item.variantId, item.qty + 1)}
                           aria-label="Aumentar quantidade"
                           data-cursor-hover
-                          className="px-2.5 py-1.5 text-offwhite/70 hover:text-orange"
+                          className="px-2.5 py-1.5 text-offwhite/70 hover:text-ember"
                         >
                           <Plus size={14} />
                         </button>
@@ -332,7 +332,7 @@ export function CartDrawer() {
                   setStep("checkout")
                 }}
                 data-cursor-hover
-                className="rounded-sm bg-orange px-6 py-3.5 text-xs font-semibold uppercase tracking-[0.2em] text-ink transition-colors hover:bg-gold"
+                className="rounded-sm bg-orange px-6 py-3.5 text-xs font-semibold uppercase tracking-[0.2em] text-offwhite transition-colors hover:bg-gold"
               >
                 Finalizar pedido
               </button>
@@ -340,7 +340,7 @@ export function CartDrawer() {
                 type="button"
                 onClick={close}
                 data-cursor-hover
-                className="rounded-sm border border-line px-6 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-offwhite/80 transition-colors hover:border-orange hover:text-orange"
+                className="rounded-sm border border-line px-6 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-offwhite/80 transition-colors hover:border-orange hover:text-ember"
               >
                 Continuar comprando
               </button>
@@ -390,7 +390,7 @@ export function CartDrawer() {
               <div className="flex flex-col gap-3">
                 <SectionTitle>Retirada</SectionTitle>
                 <div className="flex items-start gap-3 rounded-sm border border-line bg-ink p-3 text-sm text-offwhite/70">
-                  <MapPin size={16} className="mt-0.5 shrink-0 text-orange" />
+                  <MapPin size={16} className="mt-0.5 shrink-0 text-ember" />
                   <span>
                     Retire seu pedido na academia:
                     <span className="mt-1 block text-offwhite/50">{brand.address}</span>
@@ -415,7 +415,7 @@ export function CartDrawer() {
                 <span className="text-offwhite">
                   Total <span className="text-offwhite/50">{method.installments ? "(parcelado)" : "(à vista)"}</span>
                 </span>
-                <span className="font-display text-3xl text-orange">{formatBRL(total)}</span>
+                <span className="font-display text-3xl text-ember">{formatBRL(total)}</span>
               </div>
               {showErrors && hasErrors && (
                 <p className="text-xs text-red-400">Corrija os campos marcados pra continuar.</p>
@@ -424,7 +424,7 @@ export function CartDrawer() {
                 type="submit"
                 disabled={showErrors && emailChecking && !hasErrors}
                 data-cursor-hover
-                className="mt-2 rounded-sm bg-orange px-6 py-3.5 text-xs font-semibold uppercase tracking-[0.2em] text-ink transition-colors hover:bg-gold disabled:opacity-60"
+                className="mt-2 rounded-sm bg-orange px-6 py-3.5 text-xs font-semibold uppercase tracking-[0.2em] text-offwhite transition-colors hover:bg-gold disabled:opacity-60"
               >
                 {showErrors && emailChecking && !hasErrors ? "Conferindo e-mail…" : "Enviar pedido no WhatsApp"}
               </button>
@@ -434,7 +434,7 @@ export function CartDrawer() {
 
         {view === "sent" && (
           <div className="flex flex-1 flex-col items-center justify-center gap-4 px-8 text-center">
-            <span className="flex h-14 w-14 items-center justify-center rounded-full border border-orange text-orange">
+            <span className="flex h-14 w-14 items-center justify-center rounded-full border border-orange text-ember">
               <Check size={26} />
             </span>
             <p className="font-display text-2xl uppercase tracking-wide text-offwhite">Seu pedido está no WhatsApp</p>
@@ -445,7 +445,7 @@ export function CartDrawer() {
               type="button"
               onClick={startNewOrder}
               data-cursor-hover
-              className="mt-2 w-full rounded-sm bg-orange px-6 py-3.5 text-xs font-semibold uppercase tracking-[0.2em] text-ink transition-colors hover:bg-gold"
+              className="mt-2 w-full rounded-sm bg-orange px-6 py-3.5 text-xs font-semibold uppercase tracking-[0.2em] text-offwhite transition-colors hover:bg-gold"
             >
               Fazer um novo pedido
             </button>
@@ -453,7 +453,7 @@ export function CartDrawer() {
               type="button"
               onClick={() => setStep("checkout")}
               data-cursor-hover
-              className="text-xs text-offwhite/50 underline-offset-4 transition-colors hover:text-orange hover:underline"
+              className="text-xs text-offwhite/50 underline-offset-4 transition-colors hover:text-ember hover:underline"
             >
               O WhatsApp não abriu? Tentar de novo
             </button>

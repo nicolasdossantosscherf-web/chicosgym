@@ -32,7 +32,7 @@ export function ProductDetail({ product }: { product: Product }) {
         <Link
           href="/loja"
           data-cursor-hover
-          className="inline-flex items-center gap-2 text-sm text-offwhite/60 transition-colors hover:text-orange"
+          className="inline-flex items-center gap-2 text-sm text-offwhite/60 transition-colors hover:text-ember"
         >
           <ArrowLeft size={16} />
           Voltar para a loja
@@ -106,7 +106,7 @@ export function ProductDetail({ product }: { product: Product }) {
                 type="button"
                 onClick={addToCart}
                 data-cursor-hover
-                className={`flex flex-1 items-center justify-center gap-2 rounded-sm px-6 py-4 text-xs font-semibold uppercase tracking-[0.2em] text-ink transition-colors ${
+                className={`flex flex-1 items-center justify-center gap-2 rounded-sm px-6 py-4 text-xs font-semibold uppercase tracking-[0.2em] text-offwhite transition-colors ${
                   added ? "bg-gold" : "bg-orange hover:bg-gold"
                 }`}
               >
@@ -117,7 +117,7 @@ export function ProductDetail({ product }: { product: Product }) {
                 type="button"
                 onClick={cartActions.open}
                 data-cursor-hover
-                className="flex items-center justify-center rounded-sm border border-line px-6 py-4 text-xs font-semibold uppercase tracking-[0.2em] text-offwhite/80 transition-colors hover:border-orange hover:text-orange"
+                className="flex items-center justify-center rounded-sm border border-line px-6 py-4 text-xs font-semibold uppercase tracking-[0.2em] text-offwhite/80 transition-colors hover:border-orange hover:text-ember"
               >
                 Ver carrinho
               </button>
@@ -125,11 +125,11 @@ export function ProductDetail({ product }: { product: Product }) {
 
             <ul className="grid grid-cols-1 gap-3 border-t border-line pt-6 text-sm text-offwhite/60 sm:grid-cols-2">
               <li className="flex items-start gap-2">
-                <Store size={16} className="mt-0.5 shrink-0 text-orange" />
+                <Store size={16} className="mt-0.5 shrink-0 text-ember" />
                 Retirada na academia
               </li>
               <li className="flex items-start gap-2">
-                <MessageCircle size={16} className="mt-0.5 shrink-0 text-orange" />
+                <MessageCircle size={16} className="mt-0.5 shrink-0 text-ember" />
                 Pedido finalizado pelo WhatsApp
               </li>
             </ul>

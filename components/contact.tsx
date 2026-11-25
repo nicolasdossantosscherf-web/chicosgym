@@ -104,7 +104,7 @@ export function Contact() {
               <button
                 type="submit"
                 data-cursor-hover
-                className="inline-flex items-center gap-2 rounded-sm bg-orange px-7 py-3.5 text-xs font-semibold uppercase tracking-[0.25em] text-ink transition-colors hover:bg-gold"
+                className="inline-flex items-center gap-2 rounded-sm bg-orange px-7 py-3.5 text-xs font-semibold uppercase tracking-[0.25em] text-offwhite transition-colors hover:bg-gold"
               >
                 <Send size={14} />
                 Enviar pelo WhatsApp
@@ -120,7 +120,7 @@ export function Contact() {
               target="_blank"
               rel="noreferrer"
               data-cursor-hover
-              className="mt-8 flex items-center justify-center gap-2 text-sm font-semibold uppercase tracking-[0.2em] text-offwhite/60 transition-colors hover:text-orange"
+              className="mt-8 flex items-center justify-center gap-2 text-sm font-semibold uppercase tracking-[0.2em] text-offwhite/60 transition-colors hover:text-ember"
             >
               <Camera size={16} />
               Siga no Instagram {instagramHandle}

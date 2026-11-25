@@ -37,7 +37,7 @@ export function LocationInfo() {
 
         <Reveal delay={200} className="mx-auto mt-6 max-w-4xl">
           <div className="rounded-sm border border-orange/40 bg-carbon px-6 py-10 md:px-10">
-            <div className="flex items-center justify-center gap-3 text-orange">
+            <div className="flex items-center justify-center gap-3 text-ember">
               <Clock size={20} />
               <span className="text-xs font-semibold uppercase tracking-[0.3em]">Horário de funcionamento</span>
             </div>
@@ -51,7 +51,7 @@ export function LocationInfo() {
                       {time}
                     </span>
                   ))}
-                  {h.note && <span className="text-xs text-orange">{h.note}</span>}
+                  {h.note && <span className="text-xs text-ember">{h.note}</span>}
                 </div>
               ))}
             </div>

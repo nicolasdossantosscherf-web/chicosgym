@@ -26,7 +26,7 @@ export function Footer() {
                     href={social.href}
                     aria-label={social.label}
                     data-cursor-hover
-                    className="flex h-9 w-9 items-center justify-center rounded-full border border-line text-offwhite/60 transition-colors hover:border-orange hover:text-orange"
+                    className="flex h-9 w-9 items-center justify-center rounded-full border border-line text-offwhite/60 transition-colors hover:border-orange hover:text-ember"
                   >
                     <Icon size={16} />
                   </a>
@@ -40,7 +40,7 @@ export function Footer() {
             <ul className="mt-4 flex flex-col gap-2.5 text-sm text-offwhite/60">
               {sitePages.slice(0, 5).map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className="hover:text-orange">
+                  <Link href={link.href} className="hover:text-ember">
                     {link.label}
                   </Link>
                 </li>
@@ -53,7 +53,7 @@ export function Footer() {
             <ul className="mt-4 flex flex-col gap-2.5 text-sm text-offwhite/60">
               {sitePages.slice(5).map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className="hover:text-orange">
+                  <Link href={link.href} className="hover:text-ember">
                     {link.label}
                   </Link>
                 </li>
