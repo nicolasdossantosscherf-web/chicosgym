@@ -38,10 +38,10 @@ export function Hero() {
           Academia · Est. {brand.founded}
         </span>
 
-        <h1 className="font-display text-[16vw] uppercase leading-[0.86] tracking-tight text-offwhite sm:text-[11vw] md:text-[7.2vw]">
-          ONDE DISCIPLINA
+        <h1 className="font-display text-[13.5vw] uppercase leading-[0.86] tracking-tight text-offwhite sm:text-[11vw] md:text-[7.2vw]">
+          NO PAIN NO GAIN
           <br />
-          <span className="text-gradient-ember">VIRA RESULTADO.</span>
+          <span className="text-gradient-ember">SEM DOR SEM GANHO.</span>
         </h1>
 
         <p className="mt-6 max-w-md text-sm text-offwhite/60 md:text-base">
@@ -49,33 +49,24 @@ export function Hero() {
           Chico&apos;s Gym.
         </p>
 
-        <div className="mt-9 flex flex-wrap items-center gap-4">
-          <Magnetic className="w-full sm:w-auto">
-            <Link
-              href="/planos"
-              data-cursor-hover
-              className="flex w-full items-center justify-center gap-2 rounded-sm border border-orange bg-orange px-5 py-3.5 text-xs font-semibold uppercase tracking-[0.15em] text-offwhite transition-colors hover:border-gold hover:bg-gold sm:px-7 sm:tracking-[0.25em]"
-            >
-              Consulte o plano ideal pra você
-            </Link>
-          </Magnetic>
-          {/* No celular os dois ficam lado a lado, pra não esticar a abertura. */}
-          <div className="grid w-full grid-cols-2 gap-3 sm:flex sm:w-auto sm:gap-4">
-            {[
-              { href: "/local", label: "Local e Horários" },
-              { href: "/treino", label: "Monte seu Treino" },
-            ].map((link) => (
-              <Magnetic key={link.href} className="w-full sm:w-auto">
-                <Link
-                  href={link.href}
-                  data-cursor-hover
-                  className="flex h-full w-full items-center justify-center gap-2 rounded-sm border border-offwhite/30 px-3 py-3.5 text-center text-xs font-semibold uppercase tracking-[0.1em] text-offwhite transition-colors hover:border-orange hover:text-ember sm:px-7 sm:tracking-[0.25em]"
-                >
-                  {link.label}
-                </Link>
-              </Magnetic>
-            ))}
-          </div>
+        {/* Um embaixo do outro, todos iguais; no computador a coluna fica da
+            largura do botão mais comprido. */}
+        <div className="mt-9 grid w-full gap-3 sm:w-max">
+          {[
+            { href: "/planos", label: "Consulte o plano ideal pra você" },
+            { href: "/local", label: "Local e Horários" },
+            { href: "/treino", label: "Monte seu Treino" },
+          ].map((link) => (
+            <Magnetic key={link.href} className="w-full">
+              <Link
+                href={link.href}
+                data-cursor-hover
+                className="flex w-full items-center justify-center gap-2 rounded-sm border border-orange bg-orange px-5 py-3.5 text-center text-xs font-semibold uppercase tracking-[0.15em] text-offwhite transition-colors hover:border-gold hover:bg-gold sm:px-7 sm:tracking-[0.25em]"
+              >
+                {link.label}
+              </Link>
+            </Magnetic>
+          ))}
         </div>
       </div>
 
